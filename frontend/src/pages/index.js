@@ -2,8 +2,20 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import {
+  Menu,
+  Wrench,
+  FastForward,
+  Users,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { Image } from "antd";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 export default function Home() {
   // Mobile menu state
@@ -40,6 +52,78 @@ export default function Home() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const items = [
+    {
+      icon: <Wrench size={40} className="text-[#A0B73E]" />,
+      title: "Membangun Koperasi Baru",
+    },
+    {
+      icon: <FastForward size={40} className="text-[#A0B73E]" />,
+      title: "Mengembangkan yang Sudah Ada",
+    },
+    {
+      icon: <Users size={40} className="text-[#A0B73E]" />,
+      title: "Revitalisasi Koperasi",
+    },
+  ];
+
+  const manfaatList = [
+    {
+      image: "/images/nelayan.png",
+      title: "Pemberdayaan, pelibatan & kohesi sosial masyarakat",
+    },
+    {
+      image: "/images/pexels-photo-4445848.jpeg",
+      title: "Memperpendek supply chain (rantai pasok)",
+    },
+    {
+      image: "/images/pexels-photo-3226898.jpeg",
+      title: "Menekan harga di tingkat konsumen",
+    },
+    {
+      image: "/images/pexels-photo-2857587.jpeg",
+      title: "Mensejahterakan petani & produsen lokal",
+    },
+  ];
+
+  const jenisUsahaList = [
+    "Gerai Sembako (Embrio KopHub)",
+    "Apotek Desa",
+    "Gerai Kantor Koperasi",
+    "Gerai Unit Usaha Simpan Pinjam (Embrio Kop Bank)",
+    "Gerai Klinik Desa",
+    "Gerai Cold Storage/Cold Chain",
+    "Logistik (Distribusi)",
+  ];
+
+  const faqs = [
+    {
+      question: "Apakah semua koperasi wajib menggunakan domain .kop.id?",
+      answer:
+        "Baik Koperasi yang sudah memiliki website sendiri maupun yang belum, semua diwajibkan beralih ke domain .kop.id sebagai identitas koperasi di digital agar aktivitas digitalnya terhubung dalam Digitalisasi Koperasi.",
+    },
+    {
+      question: "Bagaimana cara mendaftar domain .kop.id?",
+      answer:
+        "Untuk mendaftar domain .kop.id, koperasi perlu mengajukan permohonan melalui platform resmi yang telah ditentukan oleh pemerintah.",
+    },
+    {
+      question: "Apakah ada biaya tahunan untuk domain ini?",
+      answer:
+        "Ya, terdapat biaya tahunan yang harus dibayarkan oleh koperasi untuk mempertahankan domain .kop.id agar tetap aktif.",
+    },
+  ];
+
+  const regulations = [
+    "Undang-Undang Nomor 25 Tahun 1992 tentang Perkoperasian",
+    "Undang-Undang Nomor 6 Tahun 2014 tentang Desa",
+    "Undang-Undang Nomor 59 Tahun 2024 tentang RPJPN Tahun 2025–2045",
+    "Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah",
+    "Peraturan Pemerintah Nomor 11 Tahun 2021 tentang Badan Usaha Milik Desa",
+    "Peraturan Presiden Nomor 12 tahun 2025 tentang RPJMN tahun 2025–2029",
+    "Peraturan Menteri Desa PDT No 7 Tahun 2023 tentang Prioritas Penggunaan Dana Desa tahun 2024",
+    "Rancangan Peraturan Menteri Koperasi tentang Koperasi Desa Merah Putih",
+  ];
   return (
     <main className="poppins-regular bg-gray-50 min-h-screen">
       {/* Navbar */}
@@ -59,37 +143,37 @@ export default function Home() {
           {/* Menu Items */}
           <div className="hidden md:flex justify-center space-x-10 items-center">
             <Link
-              href="/tentang"
+              href="#about"
               className="text-md text-gray-900 hover:text-[#A0B73E]"
             >
               Tentang
             </Link>
             <Link
-              href="/model"
+              href="#model"
               className="text-md text-gray-900 hover:text-[#A0B73E]"
             >
               Model
             </Link>
             <Link
-              href="/manfaat"
+              href="#benefit"
               className="text-md text-gray-900 hover:text-[#A0B73E]"
             >
               Manfaat
             </Link>
             <Link
-              href="/jenis"
+              href="#type"
               className="text-md text-gray-900 hover:text-[#A0B73E]"
             >
               Jenis
             </Link>
             <Link
-              href="/pertanyaan"
+              href="#faq"
               className="text-md text-gray-900 hover:text-[#A0B73E]"
             >
               Pertanyaan
             </Link>
             <Link
-              href="/regulasi"
+              href="#regulation"
               className="text-md text-gray-900 hover:text-[#A0B73E]"
             >
               Regulasi
@@ -309,7 +393,7 @@ export default function Home() {
       </div>
 
       {/* About Section (Desktop) */}
-      <div className="hidden md:flex bg-white shadow-2xl px-10 absolute top-[475px]  flex-col">
+      <div id="about" className="hidden md:flex bg-white shadow-2xl px-10 absolute top-[475px]  flex-col">
         <div className="flex">
           {/* Left Column (Text) */}
           <div className="w-1/2 flex flex-col justify-center mx-10">
@@ -364,6 +448,242 @@ export default function Home() {
             gotong royong.
           </p>
         </div>
+        <div id="model" className="py-10 bg-[#FBFEF5]">
+          <h2 className="text-center text-lg font-semibold text-[#0D3B66] mb-6">
+            Model Pembentukan
+          </h2>
+
+          <div className="flex flex-col md:flex-row justify-center items-center gap-6 px-4">
+            {items.map((item, index) => (
+              <div
+                key={index}
+                className="w-[250px] h-[150px] bg-[#FCFCFC] shadow-md rounded-xl flex flex-col items-center justify-center text-center p-4"
+              >
+                {item.icon}
+                <p className="mt-3 text-sm font-semibold text-[#0D3B66]">
+                  {item.title}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div id="benefit" className="bg-[#F9FBF3] py-10 px-6">
+          <div className="bg-[#F9FBF3] py-10 px-6">
+            <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-start gap-8">
+              {/* Bagian Kiri: Judul */}
+              <div className="lg:w-1/3">
+                <h2 className="text-left text-xl font-semibold text-[#0D3B66]">
+                  7 Manfaat Koperasi Desa Merah Putih <br /> Sebagai Pusat
+                  Produksi & Distribusi
+                </h2>
+              </div>
+
+              {/* Bagian Kanan: Carousel */}
+              <div className="lg:w-2/3 w-full">
+                <Swiper
+                  spaceBetween={16}
+                  slidesPerView={1.2}
+                  breakpoints={{
+                    640: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 },
+                  }}
+                  pagination={{ clickable: true }}
+                  modules={[Pagination]}
+                  className="pb-6"
+                >
+                  {manfaatList.map((item, index) => (
+                    <SwiperSlide key={index}>
+                      <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-[200px] object-cover"
+                        />
+                        <p className="p-4 text-sm font-semibold text-[#0D3B66]">
+                          {item.title}
+                        </p>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+        id="type"
+          className="relative w-full h-[800px] flex flex-col items-center justify-center bg-cover bg-center text-white"
+          style={{
+            backgroundImage: "url('/images/pexels-photo-6447910.jpeg')",
+          }} // Ganti dengan path gambar
+        >
+          {/* Overlay untuk lebih jelas */}
+          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+
+          {/* Konten */}
+          <div className="relative z-10 text-center">
+            <h2 className="text-lg font-semibold mb-4">Jenis Usaha</h2>
+            <div className="flex flex-wrap justify-center gap-3 px-4 max-w-3xl">
+              {jenisUsahaList.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg text-sm shadow-md"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div
+        id="faq"
+          className="relative flex justify-center items-center bg-cover bg-center py-48 px-4"
+          style={{ backgroundImage: "url('/images/v621.webp')" }} // Ganti dengan path gambar yang sesuai
+        >
+          {/* Container */}
+          <div className="bg-white shadow-lg rounded-xl w-full max-w-3xl p-6 relative">
+            <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">
+              Pertanyaan Umum
+            </h2>
+
+            {/* Swiper Carousel */}
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={20}
+              slidesPerView={1}
+              navigation={{
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              }}
+            >
+              {faqs.map((faq, index) => (
+                <SwiperSlide key={index}>
+                  <div className="p-4 bg-gray-100 rounded-lg">
+                    <h3 className="font-semibold text-gray-900">
+                      {faq.question}
+                    </h3>
+                    <p className="text-gray-700 mt-2">{faq.answer}</p>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            {/* Navigation Buttons */}
+            <div className="absolute top-1/2 left-0 transform -translate-y-1/2 swiper-button-prev cursor-pointer">
+              <ChevronLeft className="w-6 h-6 text-gray-600 hover:text-gray-800" />
+            </div>
+            <div className="absolute top-1/2 right-0 transform -translate-y-1/2 swiper-button-next cursor-pointer">
+              <ChevronRight className="w-6 h-6 text-gray-600 hover:text-gray-800" />
+            </div>
+          </div>
+        </div>
+        <div id="regulation" className="flex justify-center items-center px-6 py-12">
+          <div className="flex w-full max-w-5xl">
+            {/* Label Kiri */}
+            <div className="bg-[#A0B73E] text-white font-semibold text-lg p-6 rounded-l-lg flex items-center">
+              Regulasi atau Dasar Hukum <br /> Koperasi Desa Merah Putih
+            </div>
+
+            {/* Daftar Regulasi */}
+            <div className="bg-white shadow-lg rounded-r-lg p-6 w-full">
+              {regulations.map((item, index) => (
+                <div
+                  key={index}
+                  className="py-3 border-b last:border-none text-gray-800"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="relative w-full h-[400px] bg-[#0E4B5A] flex items-center justify-center px-8">
+          {/* Container */}
+          <div className="max-w-5xl w-full flex items-center justify-between">
+            {/* Text & Buttons */}
+            <div className="text-white">
+              <h1 className="text-3xl font-bold leading-snug">
+                Mari Bangun Negeri Dengan Jadi Bagian <br />
+                Dari Koperasi Desa Merah Putih
+              </h1>
+              <div className="mt-6 flex space-x-4">
+                <button className="bg-green-300 text-green-900 px-6 py-2 rounded-lg font-semibold shadow">
+                  Daftar
+                </button>
+                <button className="bg-white text-gray-900 px-6 py-2 rounded-lg font-semibold shadow">
+                  Masuk
+                </button>
+              </div>
+            </div>
+
+            {/* Background Image */}
+            <div className="absolute right-0 bottom-0 w-[300px] md:w-[400px]">
+              <img
+                src="/images/anak-anak.png"
+                alt="Anak membawa bendera Indonesia"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+        <footer className="bg-white border-t border-gray-300">
+          {/* Border Merah di Bagian Atas */}
+          <div className="border-t-4 border-[#8B2F2F]"></div>
+
+          {/* Kontainer Footer */}
+          <div className="container mx-auto flex flex-col md:flex-row items-center md:items-start justify-between px-8 py-6 space-y-6 md:space-y-0">
+            {/* Bagian Logo (Kiri) */}
+            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 items-center md:items-start w-full md:w-1/2">
+              <img
+                src="/images/logo-kemenkop.png"
+                alt="Kemenkop"
+                className="h-12"
+              />
+              <img
+                src="/images/logo-kemenkop.png"
+                alt="Coop 2025"
+                className="h-12"
+              />
+              <img
+                src="/images/logo-kemenkop.png"
+                alt="BerAKHLAK"
+                className="h-12"
+              />
+            </div>
+
+            {/* Bagian Address dan Social Icons (Kanan) */}
+            <div className="w-full md:w-1/2 flex flex-col items-center md:items-end text-center md:text-right space-y-4">
+              {/* Address Section */}
+              <div className="max-w-md">
+                <h2 className="text-lg font-semibold text-[#0E4B5A]">
+                  Kementerian Koperasi Republik Indonesia
+                </h2>
+                <p className="text-sm">
+                  Jl. H. R. Rasuna Said No.Kav. 3-4, RT.6/RW.7, Kuningan, Karet
+                  Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah
+                  Khusus Ibukota Jakarta 12940
+                </p>
+              </div>
+
+              {/* Social Media Icons */}
+              <div className="flex justify-center md:justify-end space-x-4">
+                <img
+                  src="/images/facebook.png"
+                  alt="Facebook"
+                  className="h-6"
+                />
+                <img src="/images/ig.png" alt="Instagram" className="h-6" />
+                <img src="/images/x.png" alt="Twitter" className="h-6" />
+                <img src="/images/yt.png" alt="YouTube" className="h-6" />
+              </div>
+            </div>
+          </div>
+
+          {/* Bagian Bawah Footer */}
+          <div className="bg-[#0E4B5A] text-white text-center py-3 text-sm">
+            Hakcipta © 2025. Kementerian Koperasi Republik Indonesia
+          </div>
+        </footer>
       </div>
 
       {/* About Section (Mobile) */}
