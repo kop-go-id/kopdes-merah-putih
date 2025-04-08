@@ -12,8 +12,8 @@ import { Pagination } from "swiper/modules";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import Link from "next/link";
 
 export default function Home() {
