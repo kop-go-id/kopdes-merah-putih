@@ -110,13 +110,10 @@ export default function SchemaRegistration() {
           type="primary"
           className="mt-8 w-full md:w-40 bg-primary"
           disabled={!value}
-          // router condition
           onClick={() => {
-            if (value === "baru") {
-              router.push("/daftar/pendaftaran-baru")
-            } else {
+            value === "baru" ? 
+              router.push("/daftar/pendaftaran-baru") : 
               router.push("/daftar/pengembangan-koperasi")
-            }
           }}
         >
           Berikutnya
