@@ -166,7 +166,7 @@ export default function Step3() {
               Kirim
             </button>
             <Link
-              href="/register/step-2"
+              href="/"
               className="text-sm text-gray-700 underline"
             >
               Kembali
