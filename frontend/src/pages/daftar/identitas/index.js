@@ -1,5 +1,3 @@
-// app/register/step-3/page.js
-
 'use client';
 
 import { useState } from 'react';
