@@ -79,7 +79,7 @@ export default function LoginForm() {
         </form>
 
         <div className="mt-6 text-center">
-          <Link href="/register/step-2" className="text-gray-600 text-sm hover:underline">
+          <Link href="/" className="text-gray-600 text-sm hover:underline">
             Kembali
           </Link>
         </div>
