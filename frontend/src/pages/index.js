@@ -12,8 +12,8 @@ import { Pagination } from "swiper/modules";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import Link from "next/link";
 
 export default function Home() {
@@ -403,7 +403,7 @@ export default function Home() {
               <Link href={'/accounts/login'} className="bg-white text-gray-900 px-6 py-2 rounded-lg font-semibold shadow">
                 Masuk
               </Link>
-              <Link href={'/accounts/register'} className="bg-[#A0B73E] text-white px-6 py-2 rounded-lg font-semibold shadow">
+              <Link href={'/daftar/daftar-baru'} className="bg-[#A0B73E] text-white px-6 py-2 rounded-lg font-semibold shadow">
                 Daftar
               </Link>
             </div>

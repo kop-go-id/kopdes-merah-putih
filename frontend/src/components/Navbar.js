@@ -46,13 +46,13 @@ const Navbar = () => {
         {/* Desktop Buttons */}
         <div className="hidden lg:flex space-x-4">
           <Link
-            href="/accounts/login"
+            href="/masuk"
             className="text-[#a0b73e] border border-[#a0b73e] px-4 py-2 rounded-md hover:bg-[#a0b73e] hover:text-white transition-colors"
           >
             Masuk
           </Link>
           <Link
-            href="/accounts/register"
+            href="/daftar/daftar-baru"
             className="text-[#025669] border border-[#025669] px-4 py-2 rounded-md hover:bg-[#025669] hover:text-white transition-colors"
           >
             Daftar
