@@ -162,6 +162,14 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
+
+                {/* CTA Button */}
+                <Link
+                href="/daftar/daftar-baru"
+                className="mt-6 inline-block bg-[#A0B73E] hover:bg-[#8CA531] text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300"
+                > 
+                  Daftar Sekarang
+                </Link>
               </div>
             </div>
           </div>
@@ -211,7 +219,7 @@ export default function Home() {
             </p>
             <p className="text-gray-600 text-justify mt-4">
               Pada Rapat Terbatas di Istana Negara pada 3 Maret 2025, Presiden
-              RI mengumumkan peluncuran 70.000 koperasi desa dengan nama
+              RI mengumumkan peluncuran 80.000 koperasi desa dengan nama
               Koperasi Desa Merah Putih, yang akan dilakukan pada Hari Koperasi
               Nasional pada 12 Juli 2025. Inisiatif ini bertujuan untuk
               memperkuat ekonomi desa dan meningkatkan kesejahteraan masyarakat
