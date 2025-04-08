@@ -7,4 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Subdistrict extends Model
 {
     //
+    protected $fillable = ['id', 'name', 'district_id'];
+    public $incrementing = false;
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function villages()
+    {
+        return $this->hasMany(Village::class);
+    }
 }
