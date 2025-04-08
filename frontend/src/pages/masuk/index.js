@@ -26,7 +26,7 @@ export default function LoginForm() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white text-[#121212] font-sans px-4">
       <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
-        <h2 className="text-xl md:text-2xl font-semibold text-[#025669] text-center mb-6">
+        <h2 className="text-xl md:text-2xl font-semibold text-primary text-center mb-6">
           Masuk Ke Akun Koperasi Desa Merah Putih
         </h2>
 
@@ -65,14 +65,14 @@ export default function LoginForm() {
               />
               Tetap Masuk
             </label>
-            <Link href="#" className="text-[#025669] hover:underline">
+            <Link href="#" className="text-primary hover:underline">
               Lupa Kata Sandi
             </Link>
           </div>
 
           <button
             type="submit"
-            className="bg-[#025669] text-white w-full py-2 rounded"
+            className="bg-primary text-white w-full py-2 rounded"
           >
             Kirim
           </button>

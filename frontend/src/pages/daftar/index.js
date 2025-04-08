@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Radio, Button } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
 
 const schemaList = [
   {
@@ -22,19 +23,22 @@ const schemaList = [
 ];
 
 export default function SchemaRegistration() {
+  const router = useRouter();
   const [value, setValue] = useState(null);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-white">
+    <div className="min-h-screen flex flex-col md:flex-row bg-white pt-7 mx-7">
       {/* Sidebar */}
-      <div className="md:w-[30%] w-full bg-[#003B49] text-white p-6 rounded-b-3xl md:rounded-none md:rounded-tr-3xl flex flex-col justify-between">
+      <div className="md:w-[30%] w-full bg-primary text-white flex flex-col justify-between rounded-tr-[40px]">
         <div>
-          <img
-            src="/images/logo-koperasi.png"
-            alt="Logo"
-            className="mb-6 w-40"
-          />
-          <div className="space-y-6">
+          <div className="rounded-br-xl lg:rounded-br-[40px] bg-white w-1/2">
+            <img
+              src="/images/logo.png"
+              alt="Logo"
+              className="mb-6 w-40"
+            />
+          </div>
+          <div className="space-y-6 p-6">
             <div className="flex items-start space-x-3">
               <div className="w-5 h-5 rounded-full border-2 border-white flex items-center justify-center">
                 <div className="w-3 h-3 rounded-full bg-white"></div>
@@ -49,7 +53,7 @@ export default function SchemaRegistration() {
             <div className="flex items-start space-x-3 opacity-70">
               <div className="w-5 h-5 rounded-full border-2 border-white"></div>
               <div>
-                <p className="font-semibold">Informasi Data Koperasi</p>
+                <p className="font-semibold">Informasi Data Koperasi & Penanggung Jawab</p>
                 <p className="text-sm text-gray-300">
                   Isi detail dari data koperasi anda
                 </p>
@@ -69,7 +73,7 @@ export default function SchemaRegistration() {
 
         <Button
           icon={<LeftOutlined />}
-          className="mt-10 text-white border-white"
+          className="mt-10 text-white border-white m-6"
           type="text"
         >
           Kembali ke halaman utama
@@ -87,31 +91,33 @@ export default function SchemaRegistration() {
           value={value}
           className="w-full space-y-4 flex flex-col"
         >
-          {schemaList.map((skema) => (
+          {schemaList.map((skema, index) => (
             <Radio
               key={skema.value}
               value={skema.value}
               className="p-4 rounded-lg border border-gray-300 flex flex-col md:flex-row md:items-start gap-4"
+              disabled={index === 2}
             >
               <div className="flex-grow">
                 <p className="font-semibold text-lg">{skema.title}</p>
-                <p className="text-gray-600 text-sm">{skema.desc}</p>
+                <p className={index === 2 ? "text-gray text-sm" : "text-gray-600 text-sm"} >{skema.desc}</p>
               </div>
-              {skema.avatar && (
-                <img
-                  src={skema.avatar}
-                  alt="avatar"
-                  className="w-12 h-12 rounded-full border-2 border-white shadow-md"
-                />
-              )}
             </Radio>
           ))}
         </Radio.Group>
 
         <Button
           type="primary"
-          className="mt-8 w-full md:w-40"
+          className="mt-8 w-full md:w-40 bg-primary"
           disabled={!value}
+          // router condition
+          onClick={() => {
+            if (value === "baru") {
+              router.push("/daftar/pendaftaran-baru")
+            } else {
+              router.push("/daftar/pengembangan-koperasi")
+            }
+          }}
         >
           Berikutnya
         </Button>

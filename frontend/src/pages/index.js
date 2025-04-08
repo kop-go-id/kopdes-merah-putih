@@ -168,10 +168,10 @@ export default function Home() {
           {/* Quote Section */}
           <div className="relative md:order-1">
             <div className="bg-[#FBFEF5] p-6 rounded-lg shadow-lg relative">
-              <p className="text-[#025669] font-bold text-lg md:text-xl lg:text-5xl text-center md:text-left">
+              <p className="text-primary font-bold text-lg md:text-xl lg:text-5xl text-center md:text-left">
                 "Koperasi Desa Sebagai Upaya Meningkatkan Ketahanan Pangan"
               </p>
-              <p className="text-[#025669] font-bold text-md mt-2 text-center md:text-left">
+              <p className="text-primary font-bold text-md mt-2 text-center md:text-left">
                 - Presiden Prabowo
               </p>
               <div className="absolute top-0 right-0 w-2 h-full bg-[#A52525]"></div>
@@ -187,7 +187,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row items-center gap-6">
           {/* Left Column (Text) */}
           <div className="w-full md:w-1/2">
-            <h2 className="text-2xl font-semibold text-[#025669] mb-4 md:mb-6">
+            <h2 className="text-2xl font-semibold text-primary mb-4 md:mb-6">
               Tentang Koperasi Desa Merah Putih
             </h2>
             <p className="text-gray-600 text-justify">

@@ -53,7 +53,7 @@ const Navbar = () => {
           </Link>
           <Link
             href="/daftar/daftar-baru"
-            className="text-[#025669] border border-[#025669] px-4 py-2 rounded-md hover:bg-[#025669] hover:text-white transition-colors"
+            className="text-primary border border-primary px-4 py-2 rounded-md hover:bg-primary hover:text-white transition-colors"
           >
             Daftar
           </Link>
@@ -98,7 +98,7 @@ const Navbar = () => {
               </Link>
               <Link
                 href="/daftar"
-                className="text-[#025669] border border-[#025669] px-4 py-2 rounded-md text-center hover:bg-[#025669] hover:text-white transition-colors"
+                className="text-primary border border-primary px-4 py-2 rounded-md text-center hover:bg-primary hover:text-white transition-colors"
               >
                 Daftar
               </Link>
