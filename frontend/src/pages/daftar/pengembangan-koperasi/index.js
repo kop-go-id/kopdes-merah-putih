@@ -1,5 +1,5 @@
 import { Form, Input, Select, Upload, Button, Divider, Checkbox } from "antd";
-import { InboxOutlined, LeftOutlined } from "@ant-design/icons";
+import { InboxOutlined } from "@ant-design/icons";
 import Stepper from "@/components/Stepper";
 
 const { Option } = Select;

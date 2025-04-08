@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Radio, Button } from "antd";
-import { LeftOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
-import { twMerge } from "tailwind-merge";
 import Stepper from "@/components/Stepper";
 
 const schemaList = [
@@ -20,7 +18,6 @@ const schemaList = [
     value: "revitalisasi",
     title: "Revitalisasi Koperasi",
     desc: "Dibentuk melalui pembentukan tim Revitalisasi internal Koperasi, terdiri dari perangkat organisasi (Pengurus, Pengawas, Anggota, dan Karyawan) dengan mempertimbangkan kualitas Sumber Daya Manusia/kompetensi.",
-    avatar: "/images/avatar.png", // ganti dengan path avatar kamu
   },
 ];
 
