@@ -165,7 +165,7 @@ export default function Home() {
 
                 {/* CTA Button Register */}
                 <Link
-                href="/daftar/daftar-baru"
+                href="/daftar"
                 className="mt-6 w-full max-w-md bg-[#A0B73E] hover:bg-[#8CA531] text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 text-center"
                 > 
                   Daftar Sekarang
@@ -173,7 +173,7 @@ export default function Home() {
 
                 {/* CTA Button Masuk*/}
                 <Link
-                href="/daftar/daftar-baru"
+                href="/masuk"
                 className="mt-6 w-full max-w-md bg-[#025669] hover:bg-[#024453] text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 text-center"
                 > 
                   Sudah Punya Akun? Masuk
@@ -416,10 +416,10 @@ export default function Home() {
               Dari Koperasi Desa Merah Putih
             </h1>
             <div className="mt-6 flex space-x-4">
-              <Link href={'/accounts/login'} className="bg-white text-gray-900 px-6 py-2 rounded-lg font-semibold shadow">
+              <Link href={'/masuk'} className="bg-white text-gray-900 px-6 py-2 rounded-lg font-semibold shadow">
                 Masuk
               </Link>
-              <Link href={'/daftar/daftar-baru'} className="bg-[#A0B73E] text-white px-6 py-2 rounded-lg font-semibold shadow">
+              <Link href={'/daftar'} className="bg-[#A0B73E] text-white px-6 py-2 rounded-lg font-semibold shadow">
                 Daftar
               </Link>
             </div>
