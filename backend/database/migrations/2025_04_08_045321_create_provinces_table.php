@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('provinces', function (Blueprint $table) {
             $table->id('province_id');
+            $table->char('code', 50)->unique(); 
             $table->char('name', 50);
             $table->timestamps();
-        });
+        });        
     }
 
     /**

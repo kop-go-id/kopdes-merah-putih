@@ -12,11 +12,12 @@ class Subdistrict extends Model
 
     public function district()
     {
-        return $this->belongsTo(District::class);
+        return $this->belongsTo(District::class, 'district_code', 'code');
     }
 
     public function villages()
     {
-        return $this->hasMany(Village::class);
+        return $this->hasMany(Village::class, 'subdistrict_code', 'code');
     }
+
 }

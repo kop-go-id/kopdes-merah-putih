@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('villages', function (Blueprint $table) {
             $table->id('village_id');
-            $table->unsignedBigInteger('subdistrictId');
+            $table->char('subdistrict_code', 50); 
+            $table->char('code', 50);
             $table->char('name', 50);
             $table->timestamps();
+    
 
-            $table->foreign('subdistrictId')->references('subdistrict_id')->on('subdistricts');
         });
+        
     }
 
     /**
