@@ -46,7 +46,7 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  const items = [
+  const modelData = [
     {
       icon: <Wrench size={40} className="text-[#A0B73E]" />,
       title: "Membangun Koperasi Baru",
@@ -61,7 +61,7 @@ export default function Home() {
     },
   ];
 
-  const manfaatList = [
+  const benefitsData = [
     {
       image: "/images/nelayan.png",
       title: "Pemberdayaan, pelibatan & kohesi sosial masyarakat",
@@ -80,7 +80,7 @@ export default function Home() {
     },
   ];
 
-  const jenisUsahaList = [
+  const bussinessTypeData = [
     "Gerai Sembako (Embrio KopHub)",
     "Apotek Desa",
     "Gerai Kantor Koperasi",
@@ -176,10 +176,10 @@ export default function Home() {
           {/* Quote Section */}
           <div className="relative md:order-1">
             <div className="bg-[#FBFEF5] p-6 rounded-lg shadow-lg relative">
-              <p className="text-[#025669] font-bold text-lg md:text-xl lg:text-5xl text-center md:text-left">
+              <p className="text-primary font-bold text-lg md:text-xl lg:text-5xl text-center md:text-left">
                 "Koperasi Desa Sebagai Upaya Meningkatkan Ketahanan Pangan"
               </p>
-              <p className="text-[#025669] font-bold text-md mt-2 text-center md:text-left">
+              <p className="text-primary font-bold text-md mt-2 text-center md:text-left">
                 - Presiden Prabowo
               </p>
               <div className="absolute top-0 right-0 w-2 h-full bg-[#A52525]"></div>
@@ -195,7 +195,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row items-center gap-6">
           {/* Left Column (Text) */}
           <div className="w-full md:w-1/2">
-            <h2 className="text-2xl font-semibold text-[#025669] mb-4 md:mb-6">
+            <h2 className="text-2xl font-semibold text-primary mb-4 md:mb-6">
               Tentang Koperasi Desa Merah Putih
             </h2>
             <p className="text-gray-600 text-justify">
@@ -252,7 +252,7 @@ export default function Home() {
         </h2>
 
         <div className="flex flex-col md:flex-row justify-center items-center gap-6 px-4">
-          {items.map((item, index) => (
+          {modelData.map((item, index) => (
             <div
               key={index}
               className="w-[250px] h-[150px] bg-[#FCFCFC] shadow-md rounded-xl flex flex-col items-center justify-center text-center p-4"
@@ -289,7 +289,7 @@ export default function Home() {
                 modules={[Pagination]}
                 className="pb-6"
               >
-                {manfaatList.map((item, index) => (
+                {benefitsData.map((item, index) => (
                   <SwiperSlide key={index}>
                     <div className="bg-white  shadow-lg overflow-hidden">
                       <img
@@ -322,7 +322,7 @@ export default function Home() {
         <div className="relative z-10 text-center">
           <h2 className="text-lg font-semibold mb-4">Jenis Usaha</h2>
           <div className="flex flex-wrap justify-center gap-3 px-4 max-w-3xl">
-            {jenisUsahaList.map((item, index) => (
+            {bussinessTypeData.map((item, index) => (
               <div
                 key={index}
                 className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg text-sm shadow-md"

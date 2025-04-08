@@ -30,7 +30,7 @@ export default function Step3() {
   return (
     <div className="min-h-screen flex bg-white text-[#121212] font-sans">
       {/* Sidebar */}
-      <div className="w-[300px] bg-[#025669] text-white p-6 rounded-tr-[2rem] rounded-br-[2rem] flex flex-col justify-between">
+      <div className="w-[300px] bg-primary text-white p-6 rounded-tr-[2rem] rounded-br-[2rem] flex flex-col justify-between">
         <div>
           <div className="mb-10">
             <h1 className="text-sm font-bold">KOPERASI DESA MERAH PUTIH</h1>
@@ -72,7 +72,7 @@ export default function Step3() {
 
       {/* Main Content */}
       <div className="flex-1 p-10">
-        <h2 className="text-2xl font-semibold text-[#025669] mb-6">
+        <h2 className="text-2xl font-semibold text-primary mb-6">
           Informasi Data Penanggung Jawab
         </h2>
 
@@ -161,7 +161,7 @@ export default function Step3() {
           <div className="flex flex-col md:flex-row items-center gap-4">
             <button
               type="submit"
-              className="bg-[#025669] text-white w-full md:w-40 py-2 rounded"
+              className="bg-primary text-white w-full md:w-40 py-2 rounded"
             >
               Kirim
             </button>

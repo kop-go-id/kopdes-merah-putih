@@ -25,25 +25,9 @@ export default function LoginForm() {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center px-4 sm:px-6 md:px-8"
-      style={{
-        backgroundImage: "url('/images/bg-login.jpeg')",
-      }}
-    >
-      <div className="bg-white shadow-lg rounded-2xl p-6 sm:p-8 w-full max-w-md">
-        {/* Logo */}
-        <div className="flex justify-center mb-4">
-          <Image
-            src="/images/logo.png"
-            alt="Logo Koperasi"
-            width={110}
-            height={110}
-            className="object-contain sm:w-[100px] sm:h-[100px]"
-          />
-        </div>
-
-        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#025669] text-center mb-6">
+    <div className="min-h-screen flex items-center justify-center bg-white text-[#121212] font-sans px-4">
+      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+        <h2 className="text-xl md:text-2xl font-semibold text-[#025669] text-center mb-6">
           Masuk Ke Akun Koperasi Desa Merah Putih
         </h2>
 
@@ -82,14 +66,14 @@ export default function LoginForm() {
               />
               Tetap Masuk
             </label>
-            <Link href="#" className="text-[#025669] hover:underline text-sm">
+            <Link href="#" className="text-[#025669] hover:underline">
               Lupa Kata Sandi
             </Link>
           </div>
 
           <button
             type="submit"
-            className="bg-[#025669] text-white w-full py-2 rounded text-sm sm:text-base"
+            className="bg-[#025669] text-white w-full py-2 rounded"
           >
             Kirim
           </button>
