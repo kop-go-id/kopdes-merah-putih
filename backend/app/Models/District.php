@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class District extends Model
 {
     //
-    protected $fillable = ['id', 'name', 'province_id'];
-    public $incrementing = false;
+
+    protected $primaryKey = 'district_id';
+    protected $fillable = ['province_code', 'name', 'code'];
 
     public function province()
     {
-        return $this->belongsTo(Province::class);
+        return $this->belongsTo(Province::class, 'province_code', 'code');
     }
 
     public function subdistricts()

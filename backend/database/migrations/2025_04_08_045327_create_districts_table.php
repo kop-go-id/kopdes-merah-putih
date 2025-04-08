@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('districts', function (Blueprint $table) {
             $table->id('district_id');
-            $table->unsignedBigInteger('provinceId');
+            $table->char('province_code', 50);
             $table->char('name', 50);
+            $table->char('code', 50)->unique(); // <- tambahkan ini!
             $table->timestamps();
-
-            $table->foreign('provinceId')->references('province_id')->on('provinces');
-        });
+        
+            $table->foreign('province_code')
+                ->references('code')
+                ->on('provinces')
+                ->onDelete('cascade');
+        });              
     }
 
     /**
