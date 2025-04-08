@@ -1,5 +1,6 @@
 import { Form, Input, Select, Upload, Button, Divider, Checkbox } from "antd";
 import { InboxOutlined, LeftOutlined } from "@ant-design/icons";
+import Stepper from "@/components/Stepper";
 
 const { Option } = Select;
 const { Dragger } = Upload;
@@ -8,24 +9,7 @@ export default function RegistrationExisting() {
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white">
       {/* Sidebar */}
-      <div className="md:w-[30%] w-full bg-[#003B49] text-white p-6 rounded-b-3xl md:rounded-none md:rounded-tr-3xl flex flex-col justify-between">
-        <div>
-          <img
-            src="/images/logo-koperasi.png"
-            alt="Logo"
-            className="mb-6 w-40"
-          />
-          <div className="space-y-6">
-            <StepItem active label="Pilih Skema" />
-            <StepItem active label="Informasi Data Koperasi" desc="Isi detail dari data koperasi anda" />
-            <StepItem label="Informasi Data Penanggung Jawab" />
-          </div>
-        </div>
-
-        <Button icon={<LeftOutlined />} type="text" className="text-white border-white mt-10">
-          Kembali ke halaman utama
-        </Button>
-      </div>
+      <Stepper />
 
       {/* Main Content */}
       <div className="md:w-[70%] w-full px-6 py-10">
@@ -192,20 +176,6 @@ export default function RegistrationExisting() {
             <Button className="w-full md:w-48">Kembali</Button>
           </div>
         </Form>
-      </div>
-    </div>
-  );
-}
-
-function StepItem({ label, desc, active = false }) {
-  return (
-    <div className={`flex items-start space-x-3 ${!active && "opacity-70"}`}>
-      <div className="w-5 h-5 rounded-full border-2 border-white flex items-center justify-center">
-        {active && <div className="w-3 h-3 rounded-full bg-white"></div>}
-      </div>
-      <div>
-        <p className="font-semibold">{label}</p>
-        {desc && <p className="text-sm text-gray-300">{desc}</p>}
       </div>
     </div>
   );

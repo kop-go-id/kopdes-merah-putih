@@ -12,6 +12,7 @@ class Village extends Model
 
     public function subdistrict()
     {
-        return $this->belongsTo(Subdistrict::class);
+        return $this->belongsTo(Subdistrict::class, 'subdistrict_code', 'code');
     }
+
 }
