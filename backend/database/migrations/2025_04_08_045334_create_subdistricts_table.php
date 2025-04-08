@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('subdistricts', function (Blueprint $table) {
             $table->id('subdistrict_id');
-            $table->unsignedBigInteger('districtId');
+            $table->char('district_code', 50); // ini foreign key ke districts.code
             $table->char('name', 50);
+            $table->char('code', 50);
             $table->timestamps();
-
-            $table->foreign('districtId')->references('district_id')->on('districts');
         });
+        
     }
 
     /**
