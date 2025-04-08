@@ -17,7 +17,7 @@ class LocationController extends Controller
         return response()->json([
             'message' => 'Data provinsi',
             'data' => $provinces,
-        ], 201);
+        ], 200);
     }
 
     public function districts(Request $request, $provinceCode)
@@ -26,7 +26,7 @@ class LocationController extends Controller
         return response()->json([
             'message' => 'Data district',
             'data' => $districts,
-        ], 201);
+        ], 200);
     }
 
     public function subDistricts(Request $request, $districtCode)
@@ -35,7 +35,7 @@ class LocationController extends Controller
         return response()->json([
             'message' => 'Data sub district',
             'data' => $subdistricts,
-        ], 201);
+        ], 200);
     }
 
     public function villages(Request $request, $subDistrictCode)
@@ -44,6 +44,6 @@ class LocationController extends Controller
         return response()->json([
             'message' => 'Data villages',
             'data' => $villages,
-        ], 201);
+        ], 200);
     }
 }
