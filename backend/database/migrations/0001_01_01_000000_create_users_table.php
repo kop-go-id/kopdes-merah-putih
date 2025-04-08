@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role')->default('administrator-koperasi');
+            $table->string('role')->default('Administrator koperasi');
             $table->rememberToken();
             $table->timestamps();
         });
