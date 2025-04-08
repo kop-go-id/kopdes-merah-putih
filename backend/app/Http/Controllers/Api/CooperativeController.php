@@ -40,7 +40,6 @@ class CooperativeController extends Controller
                     $data[$key] = $value;
                 }
             });
-            \Log::info($data);
 
             $fields = [
                 "Koperasi",
