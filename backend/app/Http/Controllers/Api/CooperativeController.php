@@ -31,7 +31,7 @@ class CooperativeController extends Controller
             $rows = $crawler->filter('table.styled-table tr');
 
             $data = [];
-
+            
             $rows->each(function ($row) use (&$data) {
                 $columns = $row->filter('td');
                 if ($columns->count() === 2) {
@@ -40,9 +40,12 @@ class CooperativeController extends Controller
                     $data[$key] = $value;
                 }
             });
+            \Log::info($data);
 
             $fields = [
                 "Koperasi",
+                "Nomor Badan Hukum Pendirian",
+                "Tanggal Badan Hukum Pendirian",
                 "Alamat",
                 "Desa / Kelurahan",
                 "Kecamatan",
@@ -52,11 +55,22 @@ class CooperativeController extends Controller
                 "Jenis Koperasi",
                 "Sektor Usaha",
                 "Kelompok Koperasi",
-                "Pola Pengelolaan"
+                "Pola Pengelolaan",
+                "Status NIK",
+                "Tanggal Berlaku Sertifikat",
+                "Grade",
+                "KUK",
+                "Jumlah Anggota Pria",
+                "Jumlah Anggota Wanita",
+                "Total Anggota",
+                "Total Karyawan",
+                "Total Manajer"
             ];
 
             $targetFields = [
                 "name",
+                "nbhp",
+                "nbhp_date",
                 "address",
                 "village",
                 "subdistrict",
@@ -66,7 +80,16 @@ class CooperativeController extends Controller
                 "jenis_koperasi",
                 "working_area",
                 "kelompok_koperasi",
-                "pola_pengelolaan"
+                "pola_pengelolaan",
+                "nik_status",
+                "certificate_valid_date",
+                "grade",
+                "kuk",
+                "male_members",
+                "female_members",
+                "members_total",
+                "employee_total",
+                "manager_total"
             ];
 
             $result = [];
