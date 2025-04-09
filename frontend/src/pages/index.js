@@ -320,17 +320,9 @@ export default function Home() {
                 {/* CTA Button Register */}
                 <Link
                 href="/daftar"
-                className="mt-6 w-full max-w-md bg-[#A0B73E] hover:bg-[#8CA531] text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 text-center"
+                className="mt-6 w-full max-w-md bg-[#A0B73E] hover:bg-[#8CA531] text-white font-semibold py-3 px-6 rounded-md shadow-md transition duration-300 text-center"
                 > 
                   Daftar Sekarang
-                </Link>
-
-                {/* CTA Button Masuk*/}
-                <Link
-                href="/daftar/daftar-baru"
-                className="mt-6 w-full max-w-md bg-[#025669] hover:bg-[#024453] text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 text-center"
-                > 
-                  Sudah Punya Akun? Masuk
                 </Link>
               </div>
             </div>
@@ -429,12 +421,11 @@ export default function Home() {
       </div>
       <div id="benefit" className="bg-[#F9FBF3] py-10 px-6">
         <div className="bg-[#F9FBF3] py-10 px-6">
-          <div className=" mx-auto flex flex-col lg:flex-row items-start gap-8">
+          <div className="mx-auto flex flex-col lg:flex-row items-start gap-8">
             {/* Bagian Kiri: Judul */}
-            <div className="lg:w-1/3">
-              <h2 className="text-left text-xl font-semibold text-[#0D3B66]">
-                11 Manfaat Koperasi Desa Merah Putih <br /> Sebagai Pusat
-                Produksi & Distribusi
+            <div className="lg:w-1/3 flex items-center">
+              <h2 className="text-xl lg:text-2xl font-bold text-[#0D3B66] text-left leading-snug">
+                11 Manfaat Koperasi Desa Merah Putih <br /> Sebagai Pusat Produksi & Distribusi
               </h2>
             </div>
 
@@ -449,7 +440,7 @@ export default function Home() {
                 }}
                 pagination={{ clickable: true }}
                 modules={[Pagination]}
-                className="!pb-16" // tambahkan jarak bawah agar pagination tidak tabrakan
+                className="!pb-16"
               >
                 {benefitsData.map((item, index) => (
                   <SwiperSlide key={index}>
@@ -459,7 +450,7 @@ export default function Home() {
                         alt={item.title}
                         className="w-full h-[200px] object-cover"
                       />
-                      <div className="p-4 flex-1">
+                      <div className="p-4 flex-1 flex items-center">
                         <p className="text-sm font-semibold text-[#0D3B66]">
                           {item.title}
                         </p>
@@ -487,23 +478,27 @@ export default function Home() {
                 }
               `}</style>
             </div>
-
-
           </div>
         </div>
       </div>
+
       <div
         id="type"
-        className="relative w-full h-[600px] flex flex-col items-center justify-center bg-cover bg-center text-white"
-        style={{
-          backgroundImage: "url('/images/pexels-photo-6447910.jpeg')",
-        }} // Ganti dengan path gambar
+        className="relative w-full h-[600px] flex flex-col items-center justify-center overflow-hidden group"
       >
-        {/* Overlay untuk lebih jelas */}
+        {/* Zoomable background image layer */}
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 scale-100 group-hover:scale-110"
+          style={{
+            backgroundImage: "url('/images/pexels-photo-6447910.jpeg')",
+          }}
+        ></div>
+
+        {/* Overlay untuk memperjelas teks */}
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
         {/* Konten */}
-        <div className="relative z-10 text-center">
+        <div className="relative z-10 text-center text-white">
           <h2 className="text-lg font-semibold mb-4">Jenis Usaha</h2>
           <div className="flex flex-wrap justify-center gap-3 px-4 max-w-3xl">
             {bussinessTypeData.map((item, index) => (
@@ -517,14 +512,23 @@ export default function Home() {
           </div>
         </div>
       </div>
+
       <div
         id="faq"
-        className="relative flex justify-center items-center bg-cover bg-center py-48 px-4"
-        style={{ backgroundImage: "url('/images/faq.png')" }} // Ganti dengan path gambar yang sesuai
+        className="relative flex justify-center items-center py-48 px-4 overflow-hidden group"
       >
-        {/* Container */}
-        <div className="bg-white shadow-lg rounded-xl w-full max-w-3xl p-6 relative">
-          <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">
+        {/* Background layer yang bisa di-zoom */}
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 scale-100 group-hover:scale-110"
+          style={{ backgroundImage: "url('/images/faq.png')" }}
+        ></div>
+
+        {/* Container Utama */}
+        <div className="bg-white shadow-lg rounded-xl w-full max-w-3xl p-6 relative z-10">
+          <h2
+            className="text-center text-lg font-semibold mb-4"
+            style={{ color: "#025669" }}
+          >
             Pertanyaan Umum
           </h2>
 
@@ -541,9 +545,7 @@ export default function Home() {
             {faqs.map((faq, index) => (
               <SwiperSlide key={index}>
                 <div className="p-4 bg-gray-100 rounded-lg">
-                  <h3 className="font-semibold text-gray-900">
-                    {faq.question}
-                  </h3>
+                  <h3 className="font-semibold text-gray-900">{faq.question}</h3>
                   <p className="text-gray-700 mt-2">{faq.answer}</p>
                 </div>
               </SwiperSlide>
@@ -551,14 +553,19 @@ export default function Home() {
           </Swiper>
 
           {/* Navigation Buttons */}
-          <div className="absolute top-1/2 left-0 transform -translate-y-1/2 swiper-button-prev cursor-pointer">
-            <ChevronLeft className="w-6 h-6 text-gray-600 hover:text-gray-800" />
+          <div className="absolute top-1/2 -left-12 transform -translate-y-1/2 swiper-button-prev cursor-pointer z-10">
+            <div className="bg-white hover:bg-[#E6E6E6] shadow-md rounded-full w-10 h-10 flex items-center justify-center">
+              <ChevronLeft className="w-6 h-6 text-[#025669]" />
+            </div>
           </div>
-          <div className="absolute top-1/2 right-0 transform -translate-y-1/2 swiper-button-next cursor-pointer">
-            <ChevronRight className="w-6 h-6 text-gray-600 hover:text-gray-800" />
+          <div className="absolute top-1/2 -right-12 transform -translate-y-1/2 swiper-button-next cursor-pointer z-10">
+            <div className="bg-white hover:bg-[#E6E6E6] shadow-md rounded-full w-10 h-10 flex items-center justify-center">
+              <ChevronRight className="w-6 h-6 text-[#025669]" />
+            </div>
           </div>
         </div>
       </div>
+
       <div
         id="regulation"
         className="flex justify-center items-center px-6 py-12"
