@@ -262,15 +262,15 @@ export default function Home() {
   ];  
 
   const regulations = [
-    "Undang-Undang Nomor 25 Tahun 1992 tentang Perkoperasian",
-    "Undang-Undang Nomor 6 Tahun 2014 tentang Desa",
-    "Undang-Undang Nomor 59 Tahun 2024 tentang RPJPN Tahun 2025–2045",
-    "Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah",
-    "Peraturan Pemerintah Nomor 11 Tahun 2021 tentang Badan Usaha Milik Desa",
-    "Peraturan Presiden Nomor 12 tahun 2025 tentang RPJMN tahun 2025–2029",
-    "Instruksi Presiden Republik Indonesia Nomor 9 Tahun 2025 tentang percepatan pembentukan Koperasi Desa Merah Putih",
-    "Peraturan Menteri Desa PDT No 7 Tahun 2023 tentang Prioritas Penggunaan Dana Desa tahun 2024",
-    "Rancangan Peraturan Menteri Koperasi tentang Koperasi Desa Merah Putih",
+    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Undang-Undang Nomor 25 Tahun 1992 tentang Perkoperasian</a>,
+    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah</a>,
+    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Undang-Undang Nomor 59 Tahun 2024 tentang RPJPN Tahun 2025–2045</a>,
+    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah</a>,
+    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Pemerintah Nomor 11 Tahun 2021 tentang Badan Usaha Milik Desa</a>,
+    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Presiden Nomor 12 tahun 2025 tentang RPJMN tahun 2025–2029</a>,
+    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Instruksi Presiden Republik Indonesia Nomor 9 Tahun 2025 tentang percepatan pembentukan Koperasi Desa Merah Putih</a>,
+    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Menteri Desa PDT No 7 Tahun 2023 tentang Prioritas Penggunaan Dana Desa tahun 2024</a>,
+    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Rancangan Peraturan Menteri Koperasi tentang Koperasi Desa Merah Putih</a>,
   ];
   return (
     <div className="poppins-regular bg-gray-50 min-h-screen">
