@@ -13,6 +13,12 @@ export default function RegistrationExisting() {
   const router = useRouter();
   const [provinces, setProvinces] = useState([]);
   const [provinceCode, setProvinceCode] = useState();
+  const [districts, setDistricts] = useState();
+  const [districtCode, setDistrictCode] = useState();
+  const [subDistricts, setSubDistricts] = useState();
+  const [subDistrictCode, setSubDistrictCode] = useState();
+  const [villages, setVillages] = useState();
+  const [villageCode, setVillageCode] = useState();
 
   const fetchProvince = async () => {
     try {
@@ -24,15 +30,43 @@ export default function RegistrationExisting() {
 
   const fetchDistrict = async () => {
     try {
-      const endpoint = getAPIEndpoint(`districts/by-province-code/${provinceCode}`, 'GET');
+      const endpoint = getAPIEndpoint(`/districts/by-province-code/${provinceCode}`, 'GET');
       const response = await callApi(endpoint);
-      setProvinces(response?.data);
+      setDistricts(response?.data);
+    } catch (err) {}
+  };
+
+  const fetchSubDistrict = async () => {
+    try {
+      const endpoint = getAPIEndpoint(`/sub-districts/by-district-code/${districtCode}`, 'GET');
+      const response = await callApi(endpoint);
+      setSubDistricts(response?.data);
+    } catch (err) {}
+  };
+
+  const fetchVillage = async () => {
+    try {
+      const endpoint = getAPIEndpoint(`/villages/by-sub-district-code/${subDistrictCode}`, 'GET');
+      const response = await callApi(endpoint);
+      setVillages(response?.data);
     } catch (err) {}
   };
 
   useEffect(() => {
     fetchProvince();
   }, []);
+
+  useEffect(() => {
+    fetchDistrict();
+  }, [provinceCode]);
+
+  useEffect(() => {
+    fetchSubDistrict();
+  }, [districtCode]);
+
+  useEffect(() => {
+    fetchVillage();
+  }, [subDistrictCode]);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white">
@@ -63,24 +97,48 @@ export default function RegistrationExisting() {
           </Form.Item>
 
           <Form.Item label="Provinsi" name="provinsi" className="mb-4">
-            <Select placeholder="Pilih Provinsi">
-              <Option value="jakarta">DKI Jakarta</Option>
-            </Select>
+            <Select
+              placeholder="Pilih Provinsi" 
+              options={provinces.map((province) => ({
+                label: province.name,
+                value: province.code,
+              }))}
+              onChange={(val) => setProvinceCode(val)}
+            />
           </Form.Item>
 
           <Form.Item label="Kabupaten/Kota" name="kabupaten" className="mb-4">
-            <Select placeholder="Pilih Kabupaten/Kota">
-              <Option value="jaksel">Jakarta Selatan</Option>
-            </Select>
+            <Select
+              placeholder="Pilih Kabupaten/Kota" 
+              options={districts?.map((district) => ({
+                label: district.name,
+                value: district.code,
+              }))}
+              onChange={(val) => setDistrictCode(val)}
+            />
           </Form.Item>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <Form.Item label="Desa / Kelurahan" name="desa">
-              <Input />
+            <Form.Item label="Kecamatan" name="kecamatan">
+            <Select
+              placeholder="Pilih Kecamatan" 
+              options={subDistricts?.map((val) => ({
+                label: val.name,
+                value: val.code,
+              }))}
+              onChange={(val) => setSubDistrictCode(val)}
+            />
             </Form.Item>
 
-            <Form.Item label="Kecamatan" name="kecamatan">
-              <Input />
+            <Form.Item label="Desa / Kelurahan" name="desa">
+              <Select
+                placeholder="Pilih Desa / Kelurahan" 
+                options={villages?.map((val) => ({
+                  label: val.name,
+                  value: val.code,
+                }))}
+                onChange={(val) => setVillageCode(val)}
+              />
             </Form.Item>
           </div>
 
