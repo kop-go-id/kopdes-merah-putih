@@ -27,5 +27,5 @@ Route::get('/cooperative/by-nik/{nik}', [CooperativeController::class, 'getByNIK
 Route::get('/cooperative/types', [CooperativeController::class, 'getCooperativeTypes']);
 
 Route::get('/npak', [NPAKController::class, 'npaks']);
-Route::get('/npak/by-district-id/{districtId}', [NPAKController::class, 'getByDistrict']);
-Route::get('/npak/by-province-id/{provinceId}', [NPAKController::class, 'getByProvince']);
+Route::get('/npak/by-district-code/{districtCode}', [NPAKController::class, 'getByDistrict']);
+Route::get('/npak/by-province-code/{provinceCode}', [NPAKController::class, 'getByProvince']);
