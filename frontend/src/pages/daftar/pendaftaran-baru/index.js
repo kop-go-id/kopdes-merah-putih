@@ -3,7 +3,7 @@ import { Input, Select, Upload, Button, Form, Divider, Checkbox } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import Stepper from "@/components/Stepper";
 import { useRouter } from "next/router";
-import { callApi, getAPIEndpoint } from "@/pages/utils/endpoint";
+import { callApi, getAPIEndpoint } from "@/utils/endpoint";
 
 const { Dragger } = Upload;
 const { Option } = Select;
