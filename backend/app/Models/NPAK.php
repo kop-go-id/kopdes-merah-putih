@@ -7,4 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class NPAK extends Model
 {
     protected $table = 'npaks';
+
+    public function province()
+    {
+        return $this->hasOne(Province::class, 'province_id', 'provinceId');
+    }
+
+    public function district()
+    {
+        return $this->hasOne(District::class, 'district_id', 'districtId');
+    }
 }

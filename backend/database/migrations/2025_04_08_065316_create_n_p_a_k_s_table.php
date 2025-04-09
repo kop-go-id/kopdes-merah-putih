@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->foreign('provinceId')
                 ->references('province_id')
-                ->on('provinces') // pastikan kamu punya tabel ini
+                ->on('provinces')
                 ->onDelete('cascade');
         });
     }
