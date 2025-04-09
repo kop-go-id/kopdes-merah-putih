@@ -44,4 +44,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function cooperative()
+    {
+        return $this->hasOne(Cooverative::class, 'userId');
+    }
+
 }
