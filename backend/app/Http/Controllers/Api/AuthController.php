@@ -88,6 +88,30 @@ class AuthController extends Controller
         ]);
     }
 
+    public function me(Request $request)
+    {
+        try {
+            $user = $request->user();
+
+            if (!$user) {
+                return response()->json([
+                    'message' => 'Pengguna tidak ditemukan.',
+                ], 404);
+            }
+
+            return response()->json([
+                'message' => 'Profil pengguna',
+                'user' => $user
+            ], 200);
+            
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat mengambil data profil.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
 
 
 }
