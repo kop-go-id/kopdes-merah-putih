@@ -86,19 +86,20 @@ export default function TermsSection() {
           </div>
         ))}
 
-      <div className="text-center text-sm text-gray-500 mt-10">
-        <p>
-          Terakhir diperbarui: <strong>8 April 2025</strong>
-        </p>
-        <p>
-          Kontak:{" "}
-          <a
-            href="mailto:kopdes@merahputih.kop.id"
-            className="text-[#025669] underline"
-          >
-            kopdes@merahputih.kop.id
-          </a>
-        </p>
+        <div className="text-center text-sm text-gray-500 pt-4 border-t border-gray-200">
+          <p>
+            Terakhir diperbarui: <strong>8 April 2025</strong>
+          </p>
+          <p>
+            Kontak:{" "}
+            <a
+              href="mailto:kopdes@merahputih.kop.id"
+              className="text-[#025669] underline"
+            >
+              kopdes@merahputih.kop.id
+            </a>
+          </p>
+        </div>
       </div>
     </section>
   );
