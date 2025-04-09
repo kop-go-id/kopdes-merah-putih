@@ -34,7 +34,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Menu di pojok kanan */}
-          <div className="hidden lg:flex justify-end items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item, index) => (
               <Link
                 key={index}
@@ -44,6 +44,14 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
+
+            {/* Tombol Masuk */}
+            <Link
+              href="/masuk"
+              className="ml-4 text-[#a0b73e] border border-[#a0b73e] px-4 py-2 rounded-md hover:bg-[#a0b73e] hover:text-white transition-colors"
+            >
+              Masuk
+            </Link>
           </div>
 
           {/* Hamburger Icon */}
@@ -69,6 +77,15 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
+
+              {/* Tombol Masuk di Mobile */}
+              <Link
+                href="/masuk"
+                className="text-[#a0b73e] border border-[#a0b73e] px-4 py-2 rounded-md text-center hover:bg-[#a0b73e] hover:text-white transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Masuk
+              </Link>
             </div>
           </div>
         )}

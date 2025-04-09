@@ -60,12 +60,21 @@ const termsData = [
 
 export default function TermsSection() {
   return (
-    <section className="bg-white px-4 py-10 md:px-6 lg:px-8 max-w-5xl mx-auto">
-      <h1 className="text-3xl md:text-4xl font-bold text-[#025669] text-center mb-10">
-        Syarat dan Ketentuan Penggunaan Layanan
-      </h1>
+    <section
+      className="relative bg-cover bg-center bg-no-repeat py-20 px-4 md:px-6 lg:px-8"
+      style={{
+        backgroundImage: "url('/images/pexels-photo-4445848.jpeg')", // Ganti path gambar sesuai kebutuhan
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-0"></div>
 
-      <div className="space-y-8">
+      {/* Wrapper Card */}
+      <div className="relative z-10 max-w-5xl mx-auto bg-white shadow-2xl rounded-2xl p-8 md:p-10 space-y-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-[#025669] text-center">
+          Syarat dan Ketentuan Penggunaan Layanan
+        </h1>
+
         {termsData.map((item, index) => (
           <div key={index}>
             <h2 className="text-xl md:text-2xl font-semibold text-[#025669] mb-2">
@@ -76,7 +85,6 @@ export default function TermsSection() {
             </p>
           </div>
         ))}
-      </div>
 
       <div className="text-center text-sm text-gray-500 mt-10">
         <p>
@@ -85,10 +93,10 @@ export default function TermsSection() {
         <p>
           Kontak:{" "}
           <a
-            href="mailto:dev@satu.kop.idd"
+            href="mailto:kopdes@merahputih.kop.id"
             className="text-[#025669] underline"
           >
-            dev@satu.kop.id
+            kopdes@merahputih.kop.id
           </a>
         </p>
       </div>
