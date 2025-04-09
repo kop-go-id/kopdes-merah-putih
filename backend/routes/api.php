@@ -21,6 +21,8 @@ Route::get('/districts/by-province-code/{provinceCode}', [LocationController::cl
 Route::get('/sub-districts/by-district-code/{districtCode}', [LocationController::class, 'subDistricts']);
 Route::get('/villages/by-sub-district-code/{subDistrictCode}', [LocationController::class, 'villages']);
 
+Route::get('/cooperative', [CooperativeController::class, 'index']);
+Route::post('/cooperative', [CooperativeController::class, 'store']);
 Route::get('/cooperative/by-nik/{nik}', [CooperativeController::class, 'getByNIK']);
 Route::get('/cooperative/types', [CooperativeController::class, 'getCooperativeTypes']);
 
