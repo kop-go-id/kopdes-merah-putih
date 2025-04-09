@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class NPAK extends Model
 {
-    //
+    protected $table = 'npaks';
 }
