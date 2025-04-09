@@ -6,13 +6,6 @@ import {
   MenuUnfoldOutlined,
   DashboardOutlined,
   AppstoreOutlined,
-  EnvironmentOutlined,
-  DatabaseOutlined,
-  ShoppingOutlined,
-  BarcodeOutlined,
-  ImportOutlined,
-  ExportOutlined,
-  RetweetOutlined,
   UserOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
@@ -29,10 +22,10 @@ import 'tailwindcss/tailwind.css';
 
 const { Header, Sider, Content } = Layout;
 
-const items = [
-  { icon: <DashboardOutlined />, label: 'Dashboard', path: '/dashboard' },
-  { icon: <AppstoreOutlined />, label: 'Koperasi', path: '/koperasi' },
-  { icon: <AppstoreOutlined />, label: 'Notaris', path: '/notaris' },
+const cooperatives = [
+  { icon: <DashboardOutlined />, label: 'Dashboard', path: '/koperasi/dashboard' },
+  { icon: <DashboardOutlined />, label: 'Pendaftaran', path: '/koperasi/pendaftaran' },
+  { icon: <AppstoreOutlined />, label: 'Anggota', path: '/koperasi/anggota' },
 ];
 
 const profileMenu = (
@@ -63,8 +56,8 @@ export default function LayoutWrapper({ children }) {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['3']} // 🟡 Set default selected item here
-          items={items.map((item, index) => ({
+          defaultSelectedKeys={['0']}
+          items={cooperatives.map((item, index) => ({
             key: `${index + 1}`,
             icon: item.icon,
             label: <Link href={item.path}>{item.label}</Link>,
