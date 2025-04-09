@@ -1,49 +1,55 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   DashboardOutlined,
   AppstoreOutlined,
-  EnvironmentOutlined,
-  DatabaseOutlined,
-  ShoppingOutlined,
-  BarcodeOutlined,
-  ImportOutlined,
-  ExportOutlined,
-  RetweetOutlined,
   UserOutlined,
   LogoutOutlined,
-} from '@ant-design/icons';
-import {
-  Layout,
-  Menu,
-  Button,
-  Dropdown,
-  Avatar,
-  Space,
-} from 'antd';
-import Link from 'next/link';
-import 'tailwindcss/tailwind.css';
+} from "@ant-design/icons";
+import { Layout, Menu, Button, Dropdown, Avatar, Space } from "antd";
+import Link from "next/link";
+import "tailwindcss/tailwind.css";
 
 const { Header, Sider, Content } = Layout;
 
-const items = [
-  { icon: <DashboardOutlined />, label: 'Dashboard', path: '/dashboard' },
-  { icon: <AppstoreOutlined />, label: 'Koperasi', path: '/koperasi' },
-  { icon: <AppstoreOutlined />, label: 'Notaris', path: '/notaris' },
+const cooperatives = [
+  {
+    icon: <DashboardOutlined />,
+    label: "Dashboard",
+    path: "/koperasi/dashboard",
+  },
+  {
+    icon: <DashboardOutlined />,
+    label: "Pendaftaran",
+    path: "/koperasi/pendaftaran",
+  },
+  { icon: <AppstoreOutlined />, label: "Anggota", path: "/koperasi/anggota" },
+];
+const administrators = [
+  {
+    icon: <DashboardOutlined />,
+    label: "Dashboard",
+    path: "/administrator/dashboard",
+  },
 ];
 
 const profileMenu = (
   <Menu>
-    <Menu.Item key="profile" icon={<UserOutlined />}>Profil</Menu.Item>
-    <Menu.Item key="logout" icon={<LogoutOutlined />}>Logout</Menu.Item>
+    <Menu.Item key="profile" icon={<UserOutlined />}>
+      Profil
+    </Menu.Item>
+    <Menu.Item key="logout" icon={<LogoutOutlined />}>
+      Logout
+    </Menu.Item>
   </Menu>
 );
 
 export default function LayoutWrapper({ children }) {
   const [collapsed, setCollapsed] = useState(true);
+  let role = "PENGURUS KOPERASI1";
 
   return (
     <Layout className="min-h-screen">
@@ -55,21 +61,48 @@ export default function LayoutWrapper({ children }) {
         collapsed={collapsed}
         onBreakpoint={(broken) => setCollapsed(broken)}
         trigger={null}
-        className="bg-[#001529]"
+        className="bg-[#01566a]"
       >
-        <div className="text-white text-lg font-bold px-4 py-3 hidden lg:block">
-          Logo
+        <div className="px-4 py-3 hidden lg:flex items-center">
+          <img
+            src="/images/logo.png"
+            alt="Logo"
+            className="h-10 w-30 p-1 rounded-full bg-white shadow"
+          />
         </div>
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={['3']} // 🟡 Set default selected item here
-          items={items.map((item, index) => ({
-            key: `${index + 1}`,
-            icon: item.icon,
-            label: <Link href={item.path}>{item.label}</Link>,
-          }))}
-        />
+        {role === "PENGURUS KOPERASI" ? (
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={["2"]}
+            rootClassName="bg-[#01566a] border-none"
+            className="custom-menu"
+            items={cooperatives.map((item, index) => ({
+              key: `${index + 1}`,
+              icon: <span className="text-white">{item.icon}</span>,
+              label: (
+                <Link href={item.path}>
+                  <span className="text-white">{item.label}</span>
+                </Link>
+              ),
+            }))}
+          />
+        ) : (
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={["2"]}
+            rootClassName="bg-[#01566a] border-none"
+            className="custom-menu"
+            items={administrators.map((item, index) => ({
+              key: `${index + 1}`,
+              icon: <span className="text-white">{item.icon}</span>,
+              label: (
+                <Link href={item.path}>
+                  <span className="text-white">{item.label}</span>
+                </Link>
+              ),
+            }))}
+          />
+        )}
       </Sider>
 
       <Layout>
@@ -83,9 +116,12 @@ export default function LayoutWrapper({ children }) {
             />
           </div>
 
-          <Dropdown overlay={profileMenu} trigger={['click']}>
+          <Dropdown overlay={profileMenu} trigger={["click"]}>
             <Space className="cursor-pointer">
-              <Avatar style={{ backgroundColor: '#025669' }} icon={<UserOutlined />} />
+              <Avatar
+                style={{ backgroundColor: "#025669" }}
+                icon={<UserOutlined />}
+              />
               <span className="hidden md:inline text-gray-700">Admin</span>
             </Space>
           </Dropdown>

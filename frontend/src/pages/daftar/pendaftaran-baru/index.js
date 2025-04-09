@@ -6,11 +6,23 @@ import { useRouter } from "next/router";
 import { callApi, getAPIEndpoint } from "@/utils/endpoint";
 
 const { Dragger } = Upload;
-const { Option, OptGroup} = Select;
+const { Option, OptGroup } = Select;
 
 export default function RegistrationExisting() {
   const [form] = Form.useForm();
   const router = useRouter();
+
+  const [agreementStatus, setAgreementStatus] = useState({
+    agreement_1: false,
+    agreement_2: false,
+  });
+
+  const handleCheckboxChange = (e, name) => {
+    setAgreementStatus((prev) => ({
+      ...prev,
+      [name]: e.target.checked,
+    }));
+  };
   const [provinces, setProvinces] = useState([]);
   const [provinceCode, setProvinceCode] = useState();
   const [districts, setDistricts] = useState();
@@ -18,15 +30,12 @@ export default function RegistrationExisting() {
   const [subDistricts, setSubDistricts] = useState();
   const [subDistrictCode, setSubDistrictCode] = useState();
   const [villages, setVillages] = useState();
-  const [villageCode, setVillageCode] = useState();
-  const [selectedCoopTypes, setSelectedCoopTypes] = useState();
   const [cooperativeTypes, setCooperativeTypes] = useState();
-  const [selectedNotary, setSelectedNotary] = useState();
   const [notaryNumbers, setNotaryNumbers] = useState();
 
   const fetchProvince = async () => {
     try {
-      const endpoint = getAPIEndpoint('/provinces', 'GET');
+      const endpoint = getAPIEndpoint("/provinces", "GET");
       const response = await callApi(endpoint);
       setProvinces(response?.data);
     } catch (err) {}
@@ -34,7 +43,10 @@ export default function RegistrationExisting() {
 
   const fetchDistrict = async () => {
     try {
-      const endpoint = getAPIEndpoint(`/districts/by-province-code/${provinceCode}`, 'GET');
+      const endpoint = getAPIEndpoint(
+        `/districts/by-province-code/${provinceCode}`,
+        "GET"
+      );
       const response = await callApi(endpoint);
       setDistricts(response?.data);
     } catch (err) {}
@@ -42,7 +54,10 @@ export default function RegistrationExisting() {
 
   const fetchSubDistrict = async () => {
     try {
-      const endpoint = getAPIEndpoint(`/sub-districts/by-district-code/${districtCode}`, 'GET');
+      const endpoint = getAPIEndpoint(
+        `/sub-districts/by-district-code/${districtCode}`,
+        "GET"
+      );
       const response = await callApi(endpoint);
       setSubDistricts(response?.data);
     } catch (err) {}
@@ -50,7 +65,10 @@ export default function RegistrationExisting() {
 
   const fetchVillage = async () => {
     try {
-      const endpoint = getAPIEndpoint(`/villages/by-sub-district-code/${subDistrictCode}`, 'GET');
+      const endpoint = getAPIEndpoint(
+        `/villages/by-sub-district-code/${subDistrictCode}`,
+        "GET"
+      );
       const response = await callApi(endpoint);
       setVillages(response?.data);
     } catch (err) {}
@@ -58,25 +76,28 @@ export default function RegistrationExisting() {
 
   const getCooperativeTypes = async () => {
     try {
-      const endpoint = getAPIEndpoint(`/cooperative/types`, 'GET');
+      const endpoint = getAPIEndpoint(`/cooperative/types`, "GET");
       const response = await callApi(endpoint);
       setCooperativeTypes(response?.data);
     } catch (err) {}
-  }
+  };
 
   const getNPAKByProvince = async () => {
     try {
-      const endpoint = getAPIEndpoint(`/npak/by-province-id/${provinceCode}`, 'GET');
+      const endpoint = getAPIEndpoint(
+        `/npak/by-province-code/${provinceCode}`,
+        "GET"
+      );
       const response = await callApi(endpoint);
       setNotaryNumbers(response?.data);
     } catch (err) {}
-  }
+  };
 
   useEffect(() => {
     fetchProvince();
     getCooperativeTypes();
     getNPAKByProvince();
-  }, []);
+  }, [provinceCode]);
 
   useEffect(() => {
     fetchDistrict();
@@ -109,134 +130,209 @@ export default function RegistrationExisting() {
         >
           <Form.Item
             label="Nama Koperasi Baru"
-            name="namaKoperasi"
+            name="name"
             className="mb-4"
-            rules={[{ required: true, message: "Masukkan nama koperasi" }]}
+            rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
           >
             <Input
               addonBefore="Koperasi Desa Merah Putih"
-              placeholder="Masukkan nama koperasi, yaitu nama desa"
+              onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
+              placeholder="Masukkan nama koperasi, yaitu nama desa. contoh DUREN TIGA"
             />
           </Form.Item>
 
-          <Form.Item label="Provinsi" name="provinsi" className="mb-4" rules={[{ required: true, message: "Provinsi wajib dipilih." }]}>
+          <Form.Item
+            label="Provinsi"
+            name="province"
+            className="mb-4"
+            rules={[{ required: true, message: "Provinsi wajib dipilih." }]}
+          >
             <Select
               placeholder="Pilih Provinsi"
               options={provinces.map((province) => ({
                 label: province.name,
                 value: province.code,
               }))}
+              showSearch
+              filterOption={(input, option) =>
+                option?.label?.toLowerCase().includes(input.toLowerCase())
+              }
               onChange={(val) => setProvinceCode(val)}
             />
           </Form.Item>
 
-          <Form.Item label="Kabupaten/Kota" name="kabupaten" className="mb-4" rules={[{ required: true, message: "Kabupaten/Kota wajib dipilih." }]}>
+          <Form.Item
+            label="Kabupaten/Kota"
+            name="district"
+            className="mb-4"
+            rules={[
+              { required: true, message: "Kabupaten/Kota wajib dipilih." },
+            ]}
+          >
             <Select
-              placeholder="Pilih Kabupaten/Kota" 
+              placeholder="Pilih Kabupaten/Kota"
               options={districts?.map((district) => ({
                 label: district.name,
                 value: district.code,
               }))}
+              showSearch
+              filterOption={(input, option) =>
+                option?.label?.toLowerCase().includes(input.toLowerCase())
+              }
               onChange={(val) => setDistrictCode(val)}
             />
           </Form.Item>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <Form.Item label="Kecamatan" name="kecamatan" rules={[{ required: true, message: "Kecamatan wajib dipilih." }]}>
-            <Select
-              placeholder="Pilih Kecamatan" 
-              options={subDistricts?.map((val) => ({
-                label: val.name,
-                value: val.code,
-              }))}
-              onChange={(val) => setSubDistrictCode(val)}
-            />
+            <Form.Item
+              label="Kecamatan"
+              name="subdistrict"
+              rules={[{ required: true, message: "Kecamatan wajib dipilih." }]}
+            >
+              <Select
+                placeholder="Pilih Kecamatan"
+                options={subDistricts?.map((val) => ({
+                  label: val.name,
+                  value: val.code,
+                }))}
+                showSearch
+                filterOption={(input, option) =>
+                  option?.label?.toLowerCase().includes(input.toLowerCase())
+                }
+                onChange={(val) => setSubDistrictCode(val)}
+              />
             </Form.Item>
 
-            <Form.Item label="Desa / Kelurahan" name="desa" rules={[{ required: true, message: "Desa/Kelurahan wajib dipilih." }]}>
+            <Form.Item
+              label="Desa / Kelurahan"
+              name="village"
+              rules={[
+                { required: true, message: "Desa/Kelurahan wajib dipilih." },
+              ]}
+            >
               <Select
-                placeholder="Pilih Desa / Kelurahan" 
+                placeholder="Pilih Desa / Kelurahan"
                 options={villages?.map((val) => ({
                   label: val.name,
                   value: val.code,
                 }))}
-                onChange={(val) => setVillageCode(val)}
+                showSearch
+                filterOption={(input, option) =>
+                  option?.label?.toLowerCase().includes(input.toLowerCase())
+                }
               />
             </Form.Item>
           </div>
 
           <Form.Item
             label="Notaris Pembuat Akta Koperasi"
-            name="notaris"
+            name="npakId"
             className="mb-4"
+            rules={[{ required: true, message: "Notaris wajib dipilih." }]}
           >
             <Select
               placeholder="Pilih Notaris"
               options={notaryNumbers?.map((notary) => ({
                 label: notary.name,
-                value: district.notary_id,
+                value: notary.notary_id,
               }))}
-              onChange={(val) => setSelectedNotary(val)}
             />
           </Form.Item>
 
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-1">
-              <label className="font-medium">
-                Berita Acara Musyawarah Desa
-              </label>
-              <Button type="primary" size="small">
-                Unduh Template Musyawarah Desa
-              </Button>
-            </div>
-            <Form.Item name="beritaMusyawarah">
-              <Dragger className="!bg-white">
-                <p className="ant-upload-drag-icon">
-                  <InboxOutlined />
-                </p>
-                <p className="ant-upload-text">
-                  Unggah atau tarik dokumen ke sini
-                </p>
-              </Dragger>
-            </Form.Item>
-          </div>
+          <Form.Item
+            label={
+              <div className="flex flex-col gap-1">
+                <span className="font-medium">
+                  Berita Acara Musyawarah Desa
+                </span>
+                <Button
+                  type="link"
+                  size="small"
+                  className="text-blue-600 p-0 self-start"
+                  onClick={() => {
+                    // Ganti dengan link file yang sebenarnya
+                    window.open(
+                      "/templates/musyawarah-desa-template.pdf",
+                      "_blank"
+                    );
+                  }}
+                >
+                  Unduh Template Berita Acara Musyawarah Desa
+                </Button>
+              </div>
+            }
+            name="bamd"
+            rules={[
+              {
+                required: true,
+                message: "Dokumen Musyawarah Desa wajib diunggah.",
+              },
+            ]}
+          >
+            <Dragger className="!bg-white">
+              <p className="ant-upload-drag-icon">
+                <InboxOutlined />
+              </p>
+              <p className="ant-upload-text">
+                Unggah atau tarik dokumen Berita Acara Musyawarah Desa ke sini
+              </p>
+            </Dragger>
+          </Form.Item>
 
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-1">
-              <label className="font-medium">Berita Acara Rapat Anggota</label>
-              <Button type="primary" size="small">
-                Unduh Template Rapat Anggota
-              </Button>
-            </div>
-            <Form.Item name="beritaRapat">
-              <Dragger className="!bg-white">
-                <p className="ant-upload-drag-icon">
-                  <InboxOutlined />
-                </p>
-                <p className="ant-upload-text">
-                  Unggah atau tarik dokumen ke sini
-                </p>
-              </Dragger>
-            </Form.Item>
-          </div>
+          <Form.Item
+            label={
+              <div className="flex flex-col gap-1">
+                <span className="font-medium">Berita Acara Rapat Anggota</span>
+                <Button
+                  type="link"
+                  size="small"
+                  className="text-blue-600 p-0 self-start"
+                  onClick={() => {
+                    window.open(
+                      "/templates/rapat-anggota-template.pdf",
+                      "_blank"
+                    );
+                  }}
+                >
+                  Unduh Template Berita Acara Rapat Anggota
+                </Button>
+              </div>
+            }
+            name="bara"
+            rules={[
+              {
+                required: true,
+                message: "Dokumen Rapat Anggota wajib diunggah.",
+              },
+            ]}
+          >
+            <Dragger className="!bg-white">
+              <p className="ant-upload-drag-icon">
+                <InboxOutlined />
+              </p>
+              <p className="ant-upload-text">
+                Unggah atau tarik dokumen Berita Acara Rapat Anggota ke sini
+              </p>
+            </Dragger>
+          </Form.Item>
 
           <Form.Item
             label="Jenis Usaha Koperasi"
-            name="jenisUsaha"
+            name="klu"
             className="mb-4 w-full"
+            rules={[{ required: true, message: "Jenis Usaha Koperasi wajib dipilih." }]}
           >
             <Select
               mode="multiple"
               allowClear
               placeholder="Pilih Jenis Usaha"
-              value={selectedCoopTypes}
-              onChange={(val) => console.log('multi', val)}
+              onChange={(val) => console.log("multi", val)}
               className="w-full"
               popupMatchSelectWidth={true}
             >
-              {cooperativeTypes?.map(type => (
+              {cooperativeTypes?.map((type) => (
                 <OptGroup key={type.cooperative_type_id} label={type.name}>
-                  {type.klus.map(option => (
+                  {type.klus.map((option) => (
                     <Option key={option.klu_id} value={option.code_kbli}>
                       <span className="whitespace-normal break-words">{`${option.code_kbli} - ${option.name}`}</span>
                     </Option>
@@ -250,31 +346,41 @@ export default function RegistrationExisting() {
             label="Pendaftaran Nama Domain"
             name="domain"
             className="mb-6"
+            rules={[{ required: true, message: "Nama domain koperasi wajib diisi." }]}
           >
-            <Input addonAfter=".kop.id" />
+            <Input
+              onInput={(e) => (e.target.value = e.target.value.toLowerCase())}
+              addonAfter=".kop.id"
+              placeholder="contoh: durentiga"
+            />
           </Form.Item>
 
           <Divider>Penanggung Jawab</Divider>
           <Form.Item
             label="Nama Penanggung Jawab"
-            name="nama"
-            rules={[
-              { required: true, message: "Masukkan nama penanggung jawab" },
-            ]}
+            name="name"
+            rules={[{ required: true, message: "Nama penanggung jawab wajib diisi." }]}
           >
-            <Input />
+            <Input
+              onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
+              placeholder="Masukan nama penanggung jawab atau ketua koperasi"
+            />
           </Form.Item>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Form.Item
               label="Alamat Email"
               name="email"
-              rules={[{ type: "email", message: "Email tidak valid" }]}
+              rules={[{ required: true, type: "email", message: "Alamat email tidak valid atau kosong." }]}
             >
-              <Input />
+              <Input placeholder="Masukan email koperasi" />
             </Form.Item>
 
-            <Form.Item label="Nomor HP" name="phone">
+            <Form.Item
+              label="Nomor HP"
+              name="phone"
+              rules={[{ required: true, message: "Nomor HP wajib diisi." }]}
+            >
               <Input addonBefore="+62" placeholder="812345678" />
             </Form.Item>
           </div>
@@ -283,9 +389,9 @@ export default function RegistrationExisting() {
             <Form.Item
               label="Buat Kata Sandi"
               name="password"
-              rules={[{ required: true, message: "Masukkan kata sandi" }]}
+              rules={[{ required: true, message: "Kata sandi wajib diisi." }]}
             >
-              <Input.Password />
+              <Input.Password placeholder="Masukan kata sandi" />
             </Form.Item>
 
             <Form.Item
@@ -293,7 +399,7 @@ export default function RegistrationExisting() {
               name="confirmPassword"
               dependencies={["password"]}
               rules={[
-                { required: true, message: "Ulangi kata sandi" },
+                { required: true, message: "Konfirmasi kata sandi wajib diisi." },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
                     if (!value || getFieldValue("password") === value) {
@@ -304,12 +410,12 @@ export default function RegistrationExisting() {
                 }),
               ]}
             >
-              <Input.Password />
+              <Input.Password placeholder="Masukan ulang kata sandi" />
             </Form.Item>
           </div>
 
           <Form.Item
-            name="agreement"
+            name="agreement_1"
             valuePropName="checked"
             rules={[
               {
@@ -320,22 +426,49 @@ export default function RegistrationExisting() {
               },
             ]}
           >
-            <Checkbox>
+            <Checkbox onChange={(e) => handleCheckboxChange(e, "agreement_1")}>
               Saya menyatakan data yang saya berikan adalah benar, jika
               dikemudian hari ternyata terdapat ketidaksesuaian atau kekeliruan,
               saya bersedia menerima segala konsekuensi hukum serta sanksi
               administratif yang berlaku.
             </Checkbox>
           </Form.Item>
+          <Form.Item
+            name="agreement_2"
+            valuePropName="checked"
+            rules={[
+              {
+                validator: (_, value) =>
+                  value
+                    ? Promise.resolve()
+                    : Promise.reject("Harus menyetujui pernyataan"),
+              },
+            ]}
+          >
+            <Checkbox onChange={(e) => handleCheckboxChange(e, "agreement_2")}>
+              Saya menyatakan bahwa seluruh anggota koperasi berdomisili
+              diwilayah yang sama.
+            </Checkbox>
+          </Form.Item>
 
           <div className="flex flex-col md:flex-row justify-between gap-4">
-            <Button onClick={() => router.back()} type="default" block className="md:w-1/2">
+            <Button
+              onClick={() => router.back()}
+              type="default"
+              block
+              className="md:w-1/2"
+            >
               Kembali
             </Button>
             <Button
               type="primary"
               htmlType="submit"
               block
+              disabled={
+                agreementStatus.agreement_1 && agreementStatus.agreement_2
+                  ? false
+                  : true
+              }
               className="md:w-1/2 bg-teal-800 hover:bg-teal-900"
             >
               Daftar Sekarang
