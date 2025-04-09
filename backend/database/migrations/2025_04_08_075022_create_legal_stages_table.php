@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('legal_stages', function (Blueprint $table) {
             $table->id('legal_stage_id');
-            $table->char('name', 50)->nullable(false);
-            $table->char('sequence', 50)->nullable(false);
+            $table->string('name', 50)->nullable(false);
+            $table->string('sequence', 50)->nullable(false);
             $table->timestamps();
         });
     }

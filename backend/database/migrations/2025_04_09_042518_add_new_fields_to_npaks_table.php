@@ -12,14 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('npaks', function (Blueprint $table) {
-            $table->char('districtId', 50)->nullable(false);
-            $table->char('ahu_number', 50)->nullable(false);
-            $table->char('sk_number', 50)->nullable(false);
-            $table->char('certificate_training', 50)->nullable(false);
-            $table->char('email', 50)->nullable(false);
-            $table->char('primary_phone', 50)->nullable(false);
-            $table->char('secondary_phone', 50)->nullable(false);
-            $table->char('office_telephone', 50)->nullable(false);
+            $table->unsignedBigInteger('districtId'); // FK ke tabel provinsi
+
+            $table->foreign('districtId')
+                ->references('district_id')
+                ->on('districts')
+                ->onDelete('cascade');
+
+            $table->string('ahu_number', 50)->nullable(false);
+            $table->string('sk_number', 50)->nullable(false);
+            $table->string('certificate_training', 50)->nullable(false);
+            $table->string('email', 50)->nullable(false);
+            $table->string('primary_phone', 50)->nullable(false);
+            $table->string('secondary_phone', 50)->nullable(false);
+            $table->string('office_telephone', 50)->nullable(false);
         });
     }
 

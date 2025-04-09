@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('cooperative_legal_stages', function (Blueprint $table) {
             $table->id('cooperative_legal_stage_id');
-            $table->char('cooperativeId', 50)->nullable(false);
-            $table->char('legalStageId', 50)->nullable(false);
+            $table->string('cooperativeId', 50)->nullable(false);
+            $table->string('legalStageId', 50)->nullable(false);
             $table->timestamps();
         });
     }
