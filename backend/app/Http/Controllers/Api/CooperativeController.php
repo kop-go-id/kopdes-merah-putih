@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Http\Request;
 use App\Models\CooperativeType;
+use App\Models\Cooverative;
 
 class CooperativeController extends Controller
 {
@@ -118,4 +119,77 @@ class CooperativeController extends Controller
             'data' => $cooperativeTypes,
         ], 201);
     }
+
+    // public function index()
+    // {
+    //     $cooperatives = Cooverative::with([
+    //         'province:id,name',
+    //         'district:id,name',
+    //         'subdistrict:id,name',
+    //         'village:id,name',
+    //         'npak:id,name',
+    //         'user:id,name,email'
+    //     ])->get();
+
+    //     return response()->json([
+    //         'message' => 'List of cooperatives',
+    //         'data' => $cooperatives
+    //     ]);
+    // }
+
+    // public function store(Request $request)
+    // {
+    //     try {
+    //         $request->validate([
+    //             'name'              => 'required|string|max:50',
+    //             'display_name'      => 'nullable|string|max:50',
+    //             'working_area'      => 'nullable|string|max:50',
+    //             'form'              => 'required|string|max:50',
+    //             'management_pattern'=> 'required|string|max:50',
+    //             'timeframe'         => 'nullable|date',
+    //             'provinceId'        => 'required|exists:provinces,province_id',
+    //             'districtId'        => 'required|exists:districts,district_id',
+    //             'subdistrictId'     => 'required|exists:subdistricts,subdistrict_id',
+    //             'villageId'         => 'required|exists:villages,village_id',
+    //             'address'           => 'nullable|string|max:50',
+    //             'rt'                => 'nullable|string|max:50',
+    //             'rw'                => 'nullable|string|max:50',
+    //             'postal_code'       => 'nullable|string|max:50',
+    //             'phone'             => 'required|string|max:50',
+    //             'email'             => 'required|email|max:50',
+    //             'npakId'            => 'required|exists:npaks,notary_id',
+    //             'napk'              => 'nullable|string|max:50',
+    //             'establishment_date'=> 'nullable|string|max:50',
+    //             'meeting_date'      => 'nullable|string|max:50',
+    //             'meeting_address'   => 'nullable|string|max:50',
+    //             'meeting_participant'=> 'nullable|string|max:50',
+    //             'capital'           => 'nullable|string|max:50',
+    //             'principal_saving'  => 'nullable|string|max:50',
+    //             'mandatory_saving'  => 'nullable|string|max:50',
+    //             'grant_fund'        => 'nullable|string|max:50',
+    //             'bamd'              => 'required|string|max:50',
+    //             'bara'              => 'required|string|max:50',
+    //             'subdomain'         => 'required|string|max:50|unique:cooperatives,subdomain',
+    //             'nik'               => 'required|numeric',
+    //             'userId'            => 'required|exists:users,id',
+    //             'request_name'      => 'nullable|numeric',
+    //             'old_name'          => 'nullable|numeric',
+    //             'registration_type' => 'required|string|max:50',
+    //         ]);
+
+    //         $cooperative = Cooverative::create($request->all());
+
+    //         return response()->json([
+    //             'message' => 'Cooperative created successfully.',
+    //             'data' => $cooperative
+    //         ], 201);
+
+    //     } catch (\Throwable $e) {
+    //         return response()->json([
+    //             'message' => 'Failed to create cooperative.',
+    //             'error' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
+
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cooperative_klus', function (Blueprint $table) {
             $table->id('cooperative_klu_id');
             $table->unsignedBigInteger('cooperativeId');
-            $table->char('kluId', 50)->nullable(false);
+            $table->string('kluId', 50)->nullable(false);
 
             $table->foreign('cooperativeId')->references('cooperative_id')->on('cooperatives')->onDelete('cascade');
             $table->timestamps();

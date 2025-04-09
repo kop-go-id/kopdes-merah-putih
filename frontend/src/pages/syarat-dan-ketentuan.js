@@ -63,7 +63,7 @@ export default function TermsSection() {
     <section
       className="relative bg-cover bg-center bg-no-repeat py-20 px-4 md:px-6 lg:px-8"
       style={{
-        backgroundImage: "url('/images/pexels-photo-4445848.jpeg')", // Ganti path gambar sesuai kebutuhan
+        backgroundImage: "url('/images/pexels-photo-11505049.jpeg')",
       }}
     >
       {/* Overlay */}

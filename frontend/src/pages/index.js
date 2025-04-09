@@ -23,7 +23,7 @@ export default function Home() {
     minutes: 0,
     seconds: 0,
   });
-
+  
   useEffect(() => {
     const targetDate = new Date("July 12, 2025 00:00:00").getTime();
     const timer = setInterval(() => {
@@ -103,7 +103,7 @@ export default function Home() {
       title: "Menjadi Konsolidator UMKM",
     },
     {
-      image: "/images/petani-hore.jpg",
+      image: "/images/pexels-photo-11505049.jpeg",
       title: "Perwujudan Pemerataan Ekonomi",
     },
   ];
@@ -268,9 +268,9 @@ export default function Home() {
     "Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah",
     "Peraturan Pemerintah Nomor 11 Tahun 2021 tentang Badan Usaha Milik Desa",
     "Peraturan Presiden Nomor 12 tahun 2025 tentang RPJMN tahun 2025–2029",
+    "Instruksi Presiden Republik Indonesia Nomor 9 Tahun 2025 tentang percepatan pembentukan Koperasi Desa Merah Putih",
     "Peraturan Menteri Desa PDT No 7 Tahun 2023 tentang Prioritas Penggunaan Dana Desa tahun 2024",
     "Rancangan Peraturan Menteri Koperasi tentang Koperasi Desa Merah Putih",
-    "Instruksi Presiden Republik Indonesia Nomor 9 Tahun 2025 tentang percepatan pembentukan Koperasi Desa Merah Putih setelah Peraturan Presiden Nomor 12 tahun 2025 tentang RPJMN tahun 2025–2029",
   ];
   return (
     <div className="poppins-regular bg-gray-50 min-h-screen">
