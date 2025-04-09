@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "kopdes-merah-putih",
+  "private_key_id": "2f81d9bcde23bb68571ecc8125133a44c860abbc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDZVwGPTm8lzSGu\nnF+VjuUiRbcRMhbBydQ/cadePwThv3iJCUWFpnPAazBwtq8aP2Z7Jmhx7GRkyjAx\nkTn8Muxj6deK+q7XgafnyUyXtB/9iKNA1EDanbeEMxyNmkIsWp1vSV6h09ItOgTm\nU9yNe7j0e7aQKBBNrOGZd9sBK80RGjDENACmcPkL14t8r+3FQSfglXEGR8DamqGq\nhLv5JflWe95icFPfpBNLWSWWlzhok1IyuivQAMnZ2TrkaDUtrh6e2PRwBSrgvDLE\nfh706U5vzI4TZ6YGkMwTZ2RJrzpwM3rfE421dL4opzGphPZtITPjPio4CxqcIF2I\n0jvZI87LAgMBAAECggEACun2lxauOCy740PQ/PanBPiRP9jPEb4r3V+8stvhR+DQ\nkbkYd6SrLV90mERkOKI0aDy+g/IF/JW2o9aSHdsEyeOlQkJiY0oMf3Q5V2jhLl8d\nK5U9CH1hCM90QJwddJK8UylRCjlT1ZeTRWmyqpwq5oQL3+NTJkNnNMizA7UKYDBj\nyerQHjpHLuzmRKnDoH8H7oXsDUQSCdW/f8eI8P17xaP1NQCMOTaNNWbfoQh/oly1\nullDwg/awGnEGUC3SigDTzy07EVt2bYvstZXiWJi3iNegHmlgqNDZwQXHzxBmM+W\n3Br34y8ZbHmnze7AGISg9aiLr1i3IE94pF2MHLU6WQKBgQD2i6kBv43Ak9PYkUCg\niH1purg7S9BKJY03GLoROmXFb6f5KHelhFr8z0kHtctgByO0mGJfCEPUJd+DdhCR\nCQR0aWIkrm4v0A6f7LjrPH/7LsAd6AqWx2xOgYlnCiMJNkF3i7IMzENtN3f9b3/W\np345VGJ09unqkHyxRHStf4icNwKBgQDhrKIse4Jroy4n8lr5++qGkHHlR/QOZqin\nq3WCzJBhtYf8fPdDarR66ZT53pu4a61fSky+6JhCJdESSSyVD/KX/K175w5gLbCn\nOLDezBkHStTZCiLz/69qpUaabqhdU629pshq4pTqS5FZwKCynV0qc/trNW4pMrhe\nQiwzjTsgDQKBgQCTgk31INHEFe5bFdTv95npp3DQ8XRG2J7cByxUYHdBoKOEfITR\ngBYcSj0sosVyx/LB+6Znq39BsANCGWKiFB4ZNHAm+EIu0zHc13pwLDt6YqdJfWrQ\nebLAadp2zubVfSPATdGSvKfe8aAV/x8ipAXucSGTT6P21sn0GbwhjjuDEwKBgQDd\nT70ivmTiRf7nsebCLOiL2m+3mF6hGM/gzmbJRO96wtl/JNYfyS8BMrykZkh0DTTS\ntDybI+LdS9TCh/wumpsfre48ChWxAF2zQAdEFwecfShLSIOKoX5XqYmZvVdjXsKN\nsFfvahD7y+vZBu0Q/P32uhMfyiAkStc/qMlMLP6EqQKBgQC+AZ908qOzcZlq4PXf\nOdzU2ZJAoa83w2bdGeyeZQYpD9Wcag6dLYgEWF/SWpUymzUc+38waNllTj6QkAZ6\nJcWgNb3iadHavgZMcSegCnHG46hGusQzMDRa5VUVUU5f9YbbBJuLNsTTYclRYQiS\nbcLlQMD4eE1yKCdQBal0o3kRvg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "kopdes-merah-putih@kopdes-merah-putih.iam.gserviceaccount.com",
+  "client_id": "117251198884427904002",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kopdes-merah-putih%40kopdes-merah-putih.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

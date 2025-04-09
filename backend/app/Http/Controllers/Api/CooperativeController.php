@@ -3,11 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\CooperativeKLU;
+use App\Models\CooperativeManagement;
+use Hash;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Http\Request;
 use App\Models\CooperativeType;
 use App\Models\Cooverative;
+use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Http\UploadedFile;
 
 class CooperativeController extends Controller
 {
@@ -33,7 +41,7 @@ class CooperativeController extends Controller
             $rows = $crawler->filter('table.styled-table tr');
 
             $data = [];
-            
+
             $rows->each(function ($row) use (&$data) {
                 $columns = $row->filter('td');
                 if ($columns->count() === 2) {
@@ -94,7 +102,7 @@ class CooperativeController extends Controller
             ];
 
             $result = [];
-            for ($i=0; $i < count($fields); $i++) { 
+            for ($i = 0; $i < count($fields); $i++) {
                 $result[$targetFields[$i]] = $data[$fields[$i]] ?? null;
             }
 
@@ -120,76 +128,108 @@ class CooperativeController extends Controller
         ], 201);
     }
 
-    // public function index()
-    // {
-    //     $cooperatives = Cooverative::with([
-    //         'province:id,name',
-    //         'district:id,name',
-    //         'subdistrict:id,name',
-    //         'village:id,name',
-    //         'npak:id,name',
-    //         'user:id,name,email'
-    //     ])->get();
+    public function register(Request $request)
+    {
+        try {
+            $request->validate([
+                'cooperative_name' => 'required|string|max:50|unique:cooperatives,name',
+                'province_id' => 'required|exists:provinces,province_id',
+                'district_id' => 'required|exists:districts,district_id',
+                'subdistrict_id' => 'required|exists:subdistricts,subdistrict_id',
+                'village_id' => 'required|exists:villages,village_id',
+                'npak_id' => 'required|exists:npaks,notary_id',
+                'bamd' => 'required|file|mimes:pdf,docx',
+                'bara' => 'required|file|mimes:pdf,docx',
+                'klu_ids' => 'required|string',
+                'subdomain' => 'required|string|max:50|unique:cooperatives,subdomain',
+                'name' => 'required|string|min:3|max:50',
+                'email' => 'required|string|email|min:3|max:50',
+                'phone' => 'required|string|min:3|max:50',
+                'password' => 'required|min:8|max:50|confirmed',
+            ]);
+    
+            $user = User::create([
+                'name'=> $request->input('name'),
+                'email' => $request->input('email'),
+                'phone'=> $request->input('phone'),
+                'password'=> Hash::make($request->input('password')),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
 
-    //     return response()->json([
-    //         'message' => 'List of cooperatives',
-    //         'data' => $cooperatives
-    //     ]);
-    // }
+            $bamd = $request->file('bamd');
+            $bamd_file_name = time() . '_' . $bamd->getClientOriginalName();
+            $bara_file_name = time() . '_' . $bamd->getClientOriginalName();
+            $storeBamd = $bamd->storeAs("test", $bamd_file_name, "gcs");
+            $storeBara = $bamd->storeAs("test", $bara_file_name, "gcs");
+            $disk = Storage::disk('gcs');
+            $fetchBamd = $disk->url($storeBamd);
+            $fetchBara = $disk->url($storeBamd);
 
-    // public function store(Request $request)
-    // {
-    //     try {
-    //         $request->validate([
-    //             'name'              => 'required|string|max:50',
-    //             'display_name'      => 'nullable|string|max:50',
-    //             'working_area'      => 'nullable|string|max:50',
-    //             'form'              => 'required|string|max:50',
-    //             'management_pattern'=> 'required|string|max:50',
-    //             'timeframe'         => 'nullable|date',
-    //             'provinceId'        => 'required|exists:provinces,province_id',
-    //             'districtId'        => 'required|exists:districts,district_id',
-    //             'subdistrictId'     => 'required|exists:subdistricts,subdistrict_id',
-    //             'villageId'         => 'required|exists:villages,village_id',
-    //             'address'           => 'nullable|string|max:50',
-    //             'rt'                => 'nullable|string|max:50',
-    //             'rw'                => 'nullable|string|max:50',
-    //             'postal_code'       => 'nullable|string|max:50',
-    //             'phone'             => 'required|string|max:50',
-    //             'email'             => 'required|email|max:50',
-    //             'npakId'            => 'required|exists:npaks,notary_id',
-    //             'napk'              => 'nullable|string|max:50',
-    //             'establishment_date'=> 'nullable|string|max:50',
-    //             'meeting_date'      => 'nullable|string|max:50',
-    //             'meeting_address'   => 'nullable|string|max:50',
-    //             'meeting_participant'=> 'nullable|string|max:50',
-    //             'capital'           => 'nullable|string|max:50',
-    //             'principal_saving'  => 'nullable|string|max:50',
-    //             'mandatory_saving'  => 'nullable|string|max:50',
-    //             'grant_fund'        => 'nullable|string|max:50',
-    //             'bamd'              => 'required|string|max:50',
-    //             'bara'              => 'required|string|max:50',
-    //             'subdomain'         => 'required|string|max:50|unique:cooperatives,subdomain',
-    //             'nik'               => 'required|numeric',
-    //             'userId'            => 'required|exists:users,id',
-    //             'request_name'      => 'nullable|numeric',
-    //             'old_name'          => 'nullable|numeric',
-    //             'registration_type' => 'required|string|max:50',
-    //         ]);
+            $cooperative = Cooverative::create([
+                'name' => $request->input('cooperative_name'),
+                'provinceId' => $request->input('province_id'),
+                'districtId' => $request->input('district_id'),
+                'subdistrictId' => $request->input('subdistrict_id'),
+                'villageId' => $request->input('village_id'),
+                'userId' => $user->id,
+                'npakId' => 1,
+                'subdomain' => $request->input('subdomain'),
+                'email' => $request->input('email'),
+                'phone'=> $request->input('phone'),
+                'bamd' => $fetchBamd,
+                'bara' => $fetchBara
+            ]);
+    
+            $klus = $request->input('klu_ids');
+            foreach (explode(',', $klus) as $klu) {
+                CooperativeKLU::create([
+                    'cooperativeId' => $cooperative->cooperative_id,
+                    'kluId' => $klu,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+            }
+    
+            $management = CooperativeManagement::create([
+                'status' => 'active',
+                'nik' => '',
+                'name' => $request->input('name'),
+                'role' => 'Administrator koperasi',
+                'npwp' => '',
+                'phone' => $request->input('phone'),
+                'gender' => 'male',
+                'cooperativeId' => $cooperative->cooperative_id,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+    
+            return response()->json([
+                'message' => 'Cooperative created successfully.',
+                'data' => [
+                    'user' => $user,
+                    'cooperative' => $cooperative,
+                    'management' => $management
+                ]
+            ], 200);
 
-    //         $cooperative = Cooverative::create($request->all());
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Failed to create cooperative.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 
-    //         return response()->json([
-    //             'message' => 'Cooperative created successfully.',
-    //             'data' => $cooperative
-    //         ], 201);
+    public function uploadFile(UploadedFile $file, $folder = null, $filename = null)
+    {
+        $name = !is_null($filename) ? $filename : Str::random(25);
 
-    //     } catch (\Throwable $e) {
-    //         return response()->json([
-    //             'message' => 'Failed to create cooperative.',
-    //             'error' => $e->getMessage()
-    //         ], 500);
-    //     }
-    // }
+        return $file->storeAs(
+            $folder,
+            $name . "." . $file->getClientOriginalExtension(),
+            'gcs'
+        );
+    }
 
 }
