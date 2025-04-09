@@ -9,7 +9,9 @@ const IAPIEndpointMethod = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'];
  * Create a full API endpoint object
  */
 const getAPIEndpoint = (path, method = 'GET', headers = {}) => {
-    const url = `${API_ENDPOINT}/${path}`;
+    const cleanedPath = path.startsWith('/') ? path.slice(1) : path;
+    const cleanedBase = API_ENDPOINT.endsWith('/') ? API_ENDPOINT.slice(0, -1) : API_ENDPOINT;
+    const url = `${cleanedBase}/${cleanedPath}`;
     
     return {
       url,
