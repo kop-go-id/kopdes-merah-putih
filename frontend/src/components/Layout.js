@@ -32,6 +32,7 @@ const { Header, Sider, Content } = Layout;
 const items = [
   { icon: <DashboardOutlined />, label: 'Dashboard', path: '/dashboard' },
   { icon: <AppstoreOutlined />, label: 'Koperasi', path: '/koperasi' },
+  { icon: <AppstoreOutlined />, label: 'Notaris', path: '/notaris' },
 ];
 
 const profileMenu = (
