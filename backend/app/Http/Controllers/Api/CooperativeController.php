@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Http\Request;
+use App\Models\CooperativeType;
 
 class CooperativeController extends Controller
 {
@@ -15,8 +16,8 @@ class CooperativeController extends Controller
 
         if (!$nik) {
             return response()->json([
-                'message' => 'Terjadi kesalahan saat mendapatkan data koperasi.',
-                'error' => 'NIK tidak tersedia',
+                'message' => 'Something wrong',
+                'error' => 'NIK is mandatory',
             ], 500);
         }
 
@@ -97,15 +98,24 @@ class CooperativeController extends Controller
             }
 
             return response()->json([
-                'message' => 'Data koperasi',
+                'message' => 'Success',
                 'data' => $result,
             ], 201);
 
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Terjadi kesalahan saat mendapatkan data koperasi.',
+                'message' => 'Something wrong',
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function getCooperativeTypes()
+    {
+        $cooperativeTypes = CooperativeType::with('klus')->get();
+        return response()->json([
+            'message' => 'Success',
+            'data' => $cooperativeTypes,
+        ], 201);
     }
 }

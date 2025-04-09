@@ -8,6 +8,9 @@ use App\Http\Controllers\Api\CooperativeController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:sanctum')->get('/profile', [AuthController::class, 'profile']);
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -20,3 +23,4 @@ Route::get('/sub-districts/by-district-code/{districtCode}', [LocationController
 Route::get('/villages/by-sub-district-code/{subDistrictCode}', [LocationController::class, 'villages']);
 
 Route::get('/cooperative/by-nik/{nik}', [CooperativeController::class, 'getByNIK']);
+Route::get('/cooperative/types', [CooperativeController::class, 'getCooperativeTypes']);

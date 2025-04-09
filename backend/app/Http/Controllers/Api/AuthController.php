@@ -33,14 +33,14 @@ class AuthController extends Controller
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
-                'message' => 'Registrasi berhasil!',
+                'message' => 'Registration successfull!',
                 'user' => $user,
                 'token' => $token
             ], 201);
 
         } catch (\Throwable $e) {
             return response()->json([
-                'message' => 'Terjadi kesalahan saat registrasi.',
+                'message' => 'An error occurred during registration.',
                 'error' => $e->getMessage(),
             ], 500);
         }
@@ -50,7 +50,7 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
-                'email'    => 'required|email',
+                'email' => 'required|email',
                 'password' => 'required|string',
             ]);
 
@@ -58,36 +58,60 @@ class AuthController extends Controller
 
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json([
-                    'message' => 'Email atau password salah.',
+                    'message' => 'Invalid credentials.',
                 ], 401);
             }
+
+            $cooperative = $user->cooperative;
 
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
-                'message' => 'Login berhasil!',
-                'user'    => $user,
-                'token'   => $token,
+                'message' => 'Login successful.',
+                'user' => $user,
+                'cooperative' => $cooperative,
+                'token' => $token
             ], 200);
 
         } catch (\Throwable $e) {
             return response()->json([
-                'message' => 'Terjadi kesalahan saat login.',
-                'error'   => $e->getMessage(),
+                'message' => 'An error occurred during login.',
+                'error' => $e->getMessage()
             ], 500);
         }
     }
-
 
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
 
         return response()->json([
-            'message' => 'Logout berhasil.',
+            'message' => 'Logout successfull.',
         ]);
     }
 
+    public function profile(Request $request)
+    {
+        try {
+            $user = $request->user();
 
+            if (!$user) {
+                return response()->json([
+                    'message' => 'User not found.',
+                ], 404);
+            }
+
+            return response()->json([
+                'message' => 'User profile retrieved successfully.',
+                'user' => $user
+            ], 200);
+            
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'An error occurred while retrieving the profile.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 
 }
