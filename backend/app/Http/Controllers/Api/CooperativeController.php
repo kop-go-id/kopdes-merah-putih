@@ -144,7 +144,7 @@ class CooperativeController extends Controller
                 'subdomain' => 'required|string|max:50|unique:cooperatives,subdomain',
                 'name' => 'required|string|min:3|max:50',
                 'email' => 'required|string|email|min:3|max:50|unique:users,email',
-                'phone' => 'required|string|min:3|max:50',
+                'phone' => 'required|string|min:3|max:50|unique:users,phone',
                 'password' => 'required|min:8|max:50|confirmed',
             ]);
     
