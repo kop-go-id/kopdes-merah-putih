@@ -16,4 +16,22 @@ class NPAKController extends Controller
             'data' => $npaks,
         ], 201);
     }
+
+    public function getByDistrict($districtId)
+    {
+        $npaks = NPAK::where('districtId', $districtId)->with(['province', 'district'])->orderBy('name', 'asc')->get();
+        return response()->json([
+            'message' => 'Success',
+            'data' => $npaks,
+        ], 201);
+    }
+
+    public function getByProvince($provinceId)
+    {
+        $npaks = NPAK::where('provinceId', $provinceId)->with(['province', 'district'])->orderBy('name', 'asc')->get();
+        return response()->json([
+            'message' => 'Success',
+            'data' => $npaks,
+        ], 201);
+    }
 }
