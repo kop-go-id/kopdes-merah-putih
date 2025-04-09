@@ -5,7 +5,7 @@ import Stepper from "@/components/Stepper";
 import { useRouter } from "next/router";
 import { callApi, getAPIEndpoint } from "@/utils/endpoint";
 
-const { Option } = Select;
+const { Option, OptGroup } = Select;
 const { Dragger } = Upload;
 
 export default function RegistrationExisting() {
@@ -18,6 +18,9 @@ export default function RegistrationExisting() {
   const [subDistrictCode, setSubDistrictCode] = useState();
   const [villages, setVillages] = useState();
   const [villageCode, setVillageCode] = useState();
+  const [notaryNumbers, setNotaryNumbers] = useState();
+  const [selectedCoopTypes, setSelectedCoopTypes] = useState();
+  const [cooperativeTypes, setCooperativeTypes] = useState();
 
   const fetchProvince = async () => {
     try {
@@ -51,12 +54,30 @@ export default function RegistrationExisting() {
     } catch (err) {}
   };
 
+  const getCooperativeTypes = async () => {
+    try {
+      const endpoint = getAPIEndpoint(`/cooperative/types`, 'GET');
+      const response = await callApi(endpoint);
+      setCooperativeTypes(response?.data);
+    } catch (err) {}
+  }
+
+  const getNPAKByProvince = async () => {
+      try {
+        const endpoint = getAPIEndpoint(`/npak/by-province-id/${provinceCode}`, 'GET');
+        const response = await callApi(endpoint);
+        setNotaryNumbers(response?.data);
+      } catch (err) {}
+  }
+
   useEffect(() => {
     fetchProvince();
   }, []);
 
   useEffect(() => {
     fetchDistrict();
+    getCooperativeTypes();
+    getNPAKByProvince();
   }, [provinceCode]);
 
   useEffect(() => {
@@ -132,9 +153,14 @@ export default function RegistrationExisting() {
           </div>
 
           <Form.Item label="Notaris Pembuat Akta Koperasi" name="notaris">
-            <Select placeholder="Pilih Notaris">
-              <Option value="notaris1">Notaris 1</Option>
-            </Select>
+            <Select
+              placeholder="Pilih Notaris"
+              options={notaryNumbers?.map((notary) => ({
+                label: notary.name,
+                value: district.notary_id,
+              }))}
+              onChange={(val) => setSelectedNotary(val)}
+            />
           </Form.Item>
 
           {/* Upload Musyawarah Desa */}
@@ -181,9 +207,29 @@ export default function RegistrationExisting() {
             </Dragger>
           </Form.Item>
 
-          <Form.Item label="Jenis Usaha Koperasi" name="jenisUsaha">
-            <Select placeholder="Pilih jenis usaha">
-              <Option value="pertanian">Pertanian</Option>
+          <Form.Item
+            label="Jenis Usaha Koperasi"
+            name="jenisUsaha"
+            className="mb-4 w-full"
+          >
+            <Select
+              mode="multiple"
+              allowClear
+              placeholder="Pilih Jenis Usaha"
+              value={selectedCoopTypes}
+              onChange={(val) => console.log('multi', val)}
+              className="w-full"
+              popupMatchSelectWidth={true}
+            >
+              {cooperativeTypes?.map(type => (
+                <OptGroup key={type.cooperative_type_id} label={type.name}>
+                  {type.klus.map(option => (
+                    <Option key={option.klu_id} value={option.code_kbli}>
+                      <span className="whitespace-normal break-words">{`${option.code_kbli} - ${option.name}`}</span>
+                    </Option>
+                  ))}
+                </OptGroup>
+              ))}
             </Select>
           </Form.Item>
 
