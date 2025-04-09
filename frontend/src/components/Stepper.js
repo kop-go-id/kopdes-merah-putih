@@ -4,7 +4,6 @@ import { LeftOutlined } from "@ant-design/icons";
 import { twMerge } from "tailwind-merge";
 
 export default function Stepper(activeIndexParams) {
-  console.log(activeIndexParams);
   const [activeIndex, setActiveIndex] = useState(0);
   useEffect(() => {
     setActiveIndex(activeIndexParams.activeIndex);
