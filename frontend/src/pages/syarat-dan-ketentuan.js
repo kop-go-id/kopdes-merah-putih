@@ -93,10 +93,10 @@ export default function TermsSection() {
           <p>
             Kontak:{" "}
             <a
-              href="mailto:kopdes@merahputih.kop.id"
+              href="mailto:dev@satu.kop.id"
               className="text-[#025669] underline"
             >
-              kopdes@merahputih.kop.id
+              dev@satu.kop.id
             </a>
           </p>
         </div>
