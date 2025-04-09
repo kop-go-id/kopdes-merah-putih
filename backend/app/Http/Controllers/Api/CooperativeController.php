@@ -16,8 +16,8 @@ class CooperativeController extends Controller
 
         if (!$nik) {
             return response()->json([
-                'message' => 'Terjadi kesalahan saat mendapatkan data koperasi.',
-                'error' => 'NIK tidak tersedia',
+                'message' => 'Something wrong',
+                'error' => 'NIK is mandatory',
             ], 500);
         }
 
@@ -98,13 +98,13 @@ class CooperativeController extends Controller
             }
 
             return response()->json([
-                'message' => 'Data koperasi',
+                'message' => 'Success',
                 'data' => $result,
             ], 201);
 
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Terjadi kesalahan saat mendapatkan data koperasi.',
+                'message' => 'Something wrong',
                 'error' => $e->getMessage(),
             ], 500);
         }
@@ -114,7 +114,7 @@ class CooperativeController extends Controller
     {
         $cooperativeTypes = CooperativeType::with('klus')->get();
         return response()->json([
-            'message' => 'Data tipe koperasi',
+            'message' => 'Success',
             'data' => $cooperativeTypes,
         ], 201);
     }
