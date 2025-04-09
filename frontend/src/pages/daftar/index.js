@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Radio, Button } from "antd";
-import { LeftOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
-import { twMerge } from "tailwind-merge";
 import Stepper from "@/components/Stepper";
 
 const schemaList = [
@@ -20,7 +18,6 @@ const schemaList = [
     value: "revitalisasi",
     title: "Revitalisasi Koperasi",
     desc: "Dibentuk melalui pembentukan tim Revitalisasi internal Koperasi, terdiri dari perangkat organisasi (Pengurus, Pengawas, Anggota, dan Karyawan) dengan mempertimbangkan kualitas Sumber Daya Manusia/kompetensi.",
-    avatar: "/images/avatar.png", // ganti dengan path avatar kamu
   },
 ];
 
@@ -29,9 +26,9 @@ export default function SchemaRegistration() {
   const [value, setValue] = useState(null);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-white pt-7 mx-7">
+    <div className="min-h-screen flex flex-col md:flex-row bg-white">
       {/* Sidebar */}
-      <Stepper />
+      <Stepper activeIndex={0} />
 
       {/* Main Content */}
       <div className="md:w-[70%] w-full px-6 py-10">
@@ -53,7 +50,13 @@ export default function SchemaRegistration() {
             >
               <div className="flex-grow">
                 <p className="font-semibold text-lg">{skema.title}</p>
-                <p className={index === 2 ? "text-gray text-sm" : "text-gray-600 text-sm"} >{skema.desc}</p>
+                <p
+                  className={
+                    index === 2 ? "text-gray text-sm" : "text-gray-600 text-sm"
+                  }
+                >
+                  {skema.desc}
+                </p>
               </div>
             </Radio>
           ))}
@@ -61,12 +64,12 @@ export default function SchemaRegistration() {
 
         <Button
           type="primary"
-          className="mt-8 w-full md:w-40"
+          className="mt-8 md:w-1/2 bg-teal-800 hover:bg-teal-900"
           disabled={!value}
           onClick={() => {
-            value === "baru" ? 
-              router.push("/daftar/pendaftaran-baru") : 
-              router.push("/daftar/pengembangan-koperasi")
+            value === "baru"
+              ? router.push("/daftar/pendaftaran-baru")
+              : router.push("/daftar/pengembangan-koperasi");
           }}
         >
           Berikutnya

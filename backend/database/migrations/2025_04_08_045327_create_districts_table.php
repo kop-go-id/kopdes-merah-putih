@@ -15,13 +15,9 @@ return new class extends Migration
             $table->id('district_id');
             $table->char('province_code', 50);
             $table->char('name', 50);
-            $table->char('code', 50)->unique(); // <- tambahkan ini!
+            $table->char('code', 50)->unique(); 
             $table->timestamps();
         
-            $table->foreign('province_code')
-                ->references('code')
-                ->on('provinces')
-                ->onDelete('cascade');
         });              
     }
 

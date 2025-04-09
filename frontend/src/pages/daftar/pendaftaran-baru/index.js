@@ -1,115 +1,141 @@
-import React from 'react';
-import { Input, Select, Upload, Button, Form, Divider, Checkbox } from 'antd';
-import { InboxOutlined } from '@ant-design/icons';
-import Stepper from '@/components/Stepper';
+import React from "react";
+import { Input, Select, Upload, Button, Form, Divider, Checkbox } from "antd";
+import { InboxOutlined } from "@ant-design/icons";
+import Stepper from "@/components/Stepper";
+import { useRouter } from "next/router";
 
 const { Dragger } = Upload;
 const { Option } = Select;
 
 export default function RegistrationExisting() {
-    const [form] = Form.useForm();
+  const [form] = Form.useForm();
+  const router = useRouter();
 
-    return (
-        <div className="min-h-screen flex flex-col md:flex-row bg-white">
-        {/* Sidebar */}
-        <Stepper />
+  return (
+    <div className="min-h-screen flex flex-col md:flex-row bg-white">
+      {/* Sidebar */}
+      <Stepper activeIndex={1} />
 
-        {/* Main Content */}
-        <div className="md:w-[70%] w-full px-6 py-10">
-            <h2 className="text-2xl font-semibold text-[#003B49] mb-1">
-            Informasi Data Koperasi
-            </h2>
-            <p className="text-[#7CAF3C] mb-6">Membangun Koperasi Baru</p>
+      {/* Main Content */}
+      <div className="md:w-[70%] w-full px-6 py-10">
+        <h2 className="text-2xl font-semibold text-[#003B49] mb-1">
+          Informasi Data Koperasi
+        </h2>
+        <p className="text-[#7CAF3C] mb-6">Membangun Koperasi Baru</p>
 
-            <Form
-            form={form}
-            layout="vertical"
-            onFinish={(values) => console.log('Form Values:', values)}
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={(values) => console.log("Form Values:", values)}
         >
-            <Form.Item
+          <Form.Item
             label="Nama Koperasi Baru"
             name="namaKoperasi"
             className="mb-4"
-            >
+          >
             <Input
-                addonBefore="Koperasi Desa Merah Putih"
-                placeholder="Masukkan nama koperasi, yaitu nama desa"
+              addonBefore="Koperasi Desa Merah Putih"
+              placeholder="Masukkan nama koperasi, yaitu nama desa"
             />
-            </Form.Item>
+          </Form.Item>
 
-            <Form.Item label="Provinsi" name="provinsi" className="mb-4">
+          <Form.Item label="Provinsi" name="provinsi" className="mb-4">
             <Select placeholder="Pilih Provinsi">
-                <Option value="jakarta">DKI Jakarta</Option>
+              <Option value="jakarta">DKI Jakarta</Option>
             </Select>
-            </Form.Item>
+          </Form.Item>
 
-            <Form.Item label="Kabupaten/Kota" name="kabupaten" className="mb-4">
+          <Form.Item label="Kabupaten/Kota" name="kabupaten" className="mb-4">
             <Select placeholder="Pilih Kabupaten/Kota">
-                <Option value="jaksel">Jakarta Selatan</Option>
+              <Option value="jaksel">Jakarta Selatan</Option>
             </Select>
-            </Form.Item>
+          </Form.Item>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <Form.Item label="Desa / Kelurahan" name="desa">
-                <Input />
+              <Input />
             </Form.Item>
 
             <Form.Item label="Kecamatan" name="kecamatan">
-                <Input />
+              <Input />
             </Form.Item>
-            </div>
+          </div>
 
-            <Form.Item label="Notaris Pembuat Akta Koperasi" name="notaris" className="mb-4">
+          <Form.Item
+            label="Notaris Pembuat Akta Koperasi"
+            name="notaris"
+            className="mb-4"
+          >
             <Select placeholder="Pilih Notaris">
-                <Option value="notaris1">Notaris A</Option>
+              <Option value="notaris1">Notaris A</Option>
             </Select>
-            </Form.Item>
+          </Form.Item>
 
-            <div className="mb-6">
+          <div className="mb-6">
             <div className="flex items-center justify-between mb-1">
-                <label className="font-medium">Berita Acara Musyawarah Desa</label>
-                <Button type="primary" size="small">Unduh Template Musyawarah Desa</Button>
+              <label className="font-medium">
+                Berita Acara Musyawarah Desa
+              </label>
+              <Button type="primary" size="small">
+                Unduh Template Musyawarah Desa
+              </Button>
             </div>
             <Form.Item name="beritaMusyawarah">
-                <Dragger className="!bg-white">
+              <Dragger className="!bg-white">
                 <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
+                  <InboxOutlined />
                 </p>
-                <p className="ant-upload-text">Unggah atau tarik dokumen ke sini</p>
-                </Dragger>
+                <p className="ant-upload-text">
+                  Unggah atau tarik dokumen ke sini
+                </p>
+              </Dragger>
             </Form.Item>
-            </div>
+          </div>
 
-            <div className="mb-6">
+          <div className="mb-6">
             <div className="flex items-center justify-between mb-1">
-                <label className="font-medium">Berita Acara Rapat Anggota</label>
-                <Button type="primary" size="small">Unduh Template Rapat Anggota</Button>
+              <label className="font-medium">Berita Acara Rapat Anggota</label>
+              <Button type="primary" size="small">
+                Unduh Template Rapat Anggota
+              </Button>
             </div>
             <Form.Item name="beritaRapat">
-                <Dragger className="!bg-white">
+              <Dragger className="!bg-white">
                 <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
+                  <InboxOutlined />
                 </p>
-                <p className="ant-upload-text">Unggah atau tarik dokumen ke sini</p>
-                </Dragger>
+                <p className="ant-upload-text">
+                  Unggah atau tarik dokumen ke sini
+                </p>
+              </Dragger>
             </Form.Item>
-            </div>
+          </div>
 
-            <Form.Item label="Jenis Usaha Koperasi" name="jenisUsaha" className="mb-4">
+          <Form.Item
+            label="Jenis Usaha Koperasi"
+            name="jenisUsaha"
+            className="mb-4"
+          >
             <Select placeholder="Pilih jenis usaha">
-                <Option value="perdagangan">Perdagangan</Option>
+              <Option value="perdagangan">Perdagangan</Option>
             </Select>
-            </Form.Item>
+          </Form.Item>
 
-            <Form.Item label="Pendaftaran Nama Domain" name="domain" className="mb-6">
+          <Form.Item
+            label="Pendaftaran Nama Domain"
+            name="domain"
+            className="mb-6"
+          >
             <Input addonAfter=".kop.id" />
-            </Form.Item>
+          </Form.Item>
 
-            <Divider>Penanggung Jawab</Divider>
+          <Divider>Penanggung Jawab</Divider>
           <Form.Item
             label="Nama Penanggung Jawab"
             name="nama"
-            rules={[{ required: true, message: "Masukkan nama penanggung jawab" }]}
+            rules={[
+              { required: true, message: "Masukkan nama penanggung jawab" },
+            ]}
           >
             <Input />
           </Form.Item>
@@ -170,17 +196,28 @@ export default function RegistrationExisting() {
             ]}
           >
             <Checkbox>
-              Saya menyatakan data yang saya berikan adalah benar, jika dikemudian hari ternyata terdapat ketidaksesuaian atau kekeliruan, saya bersedia menerima segala konsekuensi hukum serta sanksi administratif yang berlaku.
+              Saya menyatakan data yang saya berikan adalah benar, jika
+              dikemudian hari ternyata terdapat ketidaksesuaian atau kekeliruan,
+              saya bersedia menerima segala konsekuensi hukum serta sanksi
+              administratif yang berlaku.
             </Checkbox>
           </Form.Item>
 
-
-            <div className="flex flex-col md:flex-row justify-between gap-4">
-            <Button type="default" block className="md:w-1/2">Kembali</Button>
-            <Button type="primary" htmlType="submit" block className="md:w-1/2 bg-teal-800 hover:bg-teal-900">Berikutnya</Button>
-            </div>
+          <div className="flex flex-col md:flex-row justify-between gap-4">
+            <Button onClick={() => router.back()} type="default" block className="md:w-1/2">
+              Kembali
+            </Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              className="md:w-1/2 bg-teal-800 hover:bg-teal-900"
+            >
+              Daftar Sekarang
+            </Button>
+          </div>
         </Form>
-        </div>
-        </div>
+      </div>
+    </div>
   );
 }

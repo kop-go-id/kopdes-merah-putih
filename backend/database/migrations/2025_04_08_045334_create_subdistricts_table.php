@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('subdistricts', function (Blueprint $table) {
             $table->id('subdistrict_id');
-            $table->char('district_code', 50); // ini foreign key ke districts.code
+            $table->char('district_code', 50); 
             $table->char('name', 50);
             $table->char('code', 50);
             $table->timestamps();
