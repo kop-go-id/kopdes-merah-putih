@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Province extends Model
 {
-    //
+    
     protected $primaryKey = 'province_id'; // karena bukan default 'id'
     protected $fillable = ['code', 'name'];
 
