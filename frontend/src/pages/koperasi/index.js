@@ -41,7 +41,7 @@ export default function CooperativePage() {
     <LayoutWrapper>
       <div className="flex justify-between items-center mb-4 flex-wrap gap-2">
         <h2 className="text-lg font-semibold">Koperasi</h2>
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-2 flex-wrap bg-[01566a]">
           <Button type="primary">Export Location To Excel</Button>
           <Button type="primary">New Location</Button>
         </div>

@@ -6,13 +6,6 @@ import {
   MenuUnfoldOutlined,
   DashboardOutlined,
   AppstoreOutlined,
-  EnvironmentOutlined,
-  DatabaseOutlined,
-  ShoppingOutlined,
-  BarcodeOutlined,
-  ImportOutlined,
-  ExportOutlined,
-  RetweetOutlined,
   UserOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
@@ -25,6 +18,7 @@ import {
   Space,
 } from 'antd';
 import Link from 'next/link';
+import Image from 'next/image';
 import 'tailwindcss/tailwind.css';
 
 const { Header, Sider, Content } = Layout;
@@ -55,19 +49,29 @@ export default function LayoutWrapper({ children }) {
         collapsed={collapsed}
         onBreakpoint={(broken) => setCollapsed(broken)}
         trigger={null}
-        className="bg-[#001529]"
+        className="bg-[#01566a]"
       >
-        <div className="text-white text-lg font-bold px-4 py-3 hidden lg:block">
-          Logo
+        <div className="px-4 py-3 hidden lg:flex items-center">
+          <img
+            src="/images/logo.png"
+            alt="Logo"
+            className="h-10 w-30 p-1 rounded-full bg-white shadow"
+          />
         </div>
+
         <Menu
-          theme="dark"
           mode="inline"
-          defaultSelectedKeys={['3']} // 🟡 Set default selected item here
+          defaultSelectedKeys={['2']}
+          rootClassName="bg-[#01566a] border-none"
+          className="custom-menu"
           items={items.map((item, index) => ({
             key: `${index + 1}`,
-            icon: item.icon,
-            label: <Link href={item.path}>{item.label}</Link>,
+            icon: <span className="text-white">{item.icon}</span>,
+            label: (
+              <Link href={item.path}>
+                <span className="text-white">{item.label}</span>
+              </Link>
+            ),
           }))}
         />
       </Sider>
