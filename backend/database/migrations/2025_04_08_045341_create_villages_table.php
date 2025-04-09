@@ -17,8 +17,6 @@ return new class extends Migration
             $table->char('code', 50);
             $table->char('name', 50);
             $table->timestamps();
-    
-
         });
         
     }

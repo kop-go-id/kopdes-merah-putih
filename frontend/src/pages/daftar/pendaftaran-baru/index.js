@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Select, Upload, Button, Form, Divider, Checkbox } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import Stepper from "@/components/Stepper";
 import { useRouter } from "next/router";
+import { callApi, getAPIEndpoint } from "@/pages/utils/endpoint";
 
 const { Dragger } = Upload;
 const { Option } = Select;
@@ -10,6 +11,28 @@ const { Option } = Select;
 export default function RegistrationExisting() {
   const [form] = Form.useForm();
   const router = useRouter();
+  const [provinces, setProvinces] = useState([]);
+  const [provinceCode, setProvinceCode] = useState();
+
+  const fetchProvince = async () => {
+    try {
+      const endpoint = getAPIEndpoint('/provinces', 'GET');
+      const response = await callApi(endpoint);
+      setProvinces(response?.data);
+    } catch (err) {}
+  };
+
+  const fetchDistrict = async () => {
+    try {
+      const endpoint = getAPIEndpoint(`districts/by-province-code/${provinceCode}`, 'GET');
+      const response = await callApi(endpoint);
+      setProvinces(response?.data);
+    } catch (err) {}
+  };
+
+  useEffect(() => {
+    fetchProvince();
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white">
