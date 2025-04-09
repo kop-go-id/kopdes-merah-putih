@@ -19,13 +19,13 @@ return new class extends Migration
                 ->on('districts')
                 ->onDelete('cascade');
 
-            $table->char('ahu_number', 50)->nullable(false);
-            $table->char('sk_number', 50)->nullable(false);
-            $table->char('certificate_training', 50)->nullable(false);
-            $table->char('email', 50)->nullable(false);
-            $table->char('primary_phone', 50)->nullable(false);
-            $table->char('secondary_phone', 50)->nullable(false);
-            $table->char('office_telephone', 50)->nullable(false);
+            $table->string('ahu_number', 50)->nullable(false);
+            $table->string('sk_number', 50)->nullable(false);
+            $table->string('certificate_training', 50)->nullable(false);
+            $table->string('email', 50)->nullable(false);
+            $table->string('primary_phone', 50)->nullable(false);
+            $table->string('secondary_phone', 50)->nullable(false);
+            $table->string('office_telephone', 50)->nullable(false);
         });
     }
 
