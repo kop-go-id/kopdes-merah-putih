@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Select, Upload, Button, Divider, Checkbox } from "antd";
+import { Form, Input, Select, Upload, Button, Divider, Checkbox, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import Stepper from "@/components/Stepper";
 import { useRouter } from "next/router";
 import { callApi, getAPIEndpoint } from "@/utils/endpoint";
+import axios from "axios";
 
 const { Option, OptGroup } = Select;
 const { Dragger } = Upload;
@@ -23,6 +24,7 @@ export default function RegistrationExisting() {
       [name]: e.target.checked,
     }));
   };
+  const [loadingCheckNIK, setLoadingCheckNIK] = useState(false);
   const [provinces, setProvinces] = useState([]);
   const [provinceCode, setProvinceCode] = useState();
   const [districts, setDistricts] = useState();
@@ -137,6 +139,21 @@ export default function RegistrationExisting() {
             <Input.Search
               onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
               placeholder="Masukkan Nomor Induk Koperasi"
+              onChange={(e) => {
+                setLoadingCheckNIK(true);
+                axios.get(`https://api.merahputih.kop.id/api/cooperative/by-nik/${e.target.value}`).then((res) => {
+                  console.log(res.data.data);
+                  setLoadingCheckNIK(false);
+                  form.setFieldsValue({
+                    name: res.data.data.name
+                  })
+                }).catch((err) => {
+                  message.error("Something went wrong");
+                  setLoadingCheckNIK(false);
+                });
+              }}
+              enterButton
+              loading={loadingCheckNIK}
             />
           </Form.Item>
           <Form.Item
