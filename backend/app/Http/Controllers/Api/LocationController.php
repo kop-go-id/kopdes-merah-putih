@@ -15,7 +15,7 @@ class LocationController extends Controller
     {
         $provinces = Province::orderBy('name', 'asc')->get();
         return response()->json([
-            'message' => 'Data provinsi',
+            'message' => 'Success',
             'data' => $provinces,
         ], 200);
     }
@@ -24,7 +24,7 @@ class LocationController extends Controller
     {
         $districts = District::where('province_code', $provinceCode)->orderBy('name', 'asc')->get();
         return response()->json([
-            'message' => 'Data district',
+            'message' => 'Success',
             'data' => $districts,
         ], 200);
     }
@@ -33,7 +33,7 @@ class LocationController extends Controller
     {
         $subdistricts = Subdistrict::where('district_code', $districtCode)->orderBy('name', 'asc')->get();
         return response()->json([
-            'message' => 'Data sub district',
+            'message' => 'Success',
             'data' => $subdistricts,
         ], 200);
     }
@@ -42,7 +42,7 @@ class LocationController extends Controller
     {
         $villages = Village::where('subdistrict_code', $subDistrictCode)->orderBy('name', 'asc')->get();
         return response()->json([
-            'message' => 'Data villages',
+            'message' => 'Success',
             'data' => $villages,
         ], 200);
     }
