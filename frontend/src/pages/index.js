@@ -63,20 +63,48 @@ export default function Home() {
 
   const benefitsData = [
     {
-      image: "/images/nelayan.png",
-      title: "Pemberdayaan, pelibatan & kohesi sosial masyarakat",
+      image: "/images/rupiah.jpg",
+      title: "Menekan Inflasi",
     },
     {
       image: "/images/pexels-photo-4445848.jpeg",
-      title: "Memperpendek supply chain (rantai pasok)",
+      title: "Memberikan Service Request Intake",
     },
     {
       image: "/images/pexels-photo-3226898.jpeg",
       title: "Menekan harga di tingkat konsumen",
     },
     {
-      image: "/images/pexels-photo-2857587.jpeg",
-      title: "Mensejahterakan petani & produsen lokal",
+      image: "/images/bg-login.jpeg",
+      title: "Meningkatkan Kesejahteraan Petani",
+    },
+    {
+      image: "/images/kerja.png",
+      title: "Menciptakan Lapangan Kerja",
+    },
+    {
+      image: "/images/berdaya.jpeg",
+      title: "Meningkatkan Pemberdayaan Masyarakat",
+    },
+    {
+      image: "/images/tengkulak.jpg",
+      title: "Menekan Pergerakan Tengkulak",
+    },
+    {
+      image: "/images/nelayan.png",
+      title: "Katup Penyelamat Guncangan Ekonomi",
+    },
+    {
+      image: "/images/inklusi.jpg",
+      title: "Meningkatkan Inklusi Keuangan",
+    },
+    {
+      image: "/images/umkm.png",
+      title: "Menjadi Konsolidator UMKM",
+    },
+    {
+      image: "/images/petani-hore.jpg",
+      title: "Perwujudan Pemerataan Ekonomi",
     },
   ];
 
@@ -106,7 +134,132 @@ export default function Home() {
       answer:
         "Ya, terdapat biaya tahunan yang harus dibayarkan oleh koperasi untuk mempertahankan domain .kop.id agar tetap aktif.",
     },
-  ];
+    {
+      question: "Apa itu Koperasi Desa Merah Putih?",
+      answer:
+        "Koperasi Desa Merah Putih adalah lembaga ekonomi beranggotakan masyarakat desa yang dibentuk untuk meningkatkan kesejahteraan melalui prinsip gotong royong, kekeluargaan, dan partisipasi bersama.",
+    },
+    {
+      question: "Apa tujuan utama pembentukan Kopdes Merah Putih?",
+      answer:
+        "Tujuannya antara lain memperkuat perekonomian desa, meningkatkan nilai tukar petani, menekan inflasi, menciptakan lapangan kerja, dan meningkatkan inklusi keuangan.",
+    },
+    {
+      question: "Apa dasar hukum pembentukan koperasi ini?",
+      answer:
+        "Pembentukan koperasi didasarkan pada berbagai peraturan, seperti Undang-Undang Nomor 25 Tahun 1992 tentang Perkoperasian (yang telah diubah beberapa kali), Peraturan Pemerintah, Peraturan Presiden, dan peraturan menteri terkait.",
+    },
+    {
+      question: "Apa saja mekanisme pembentukan Kopdes Merah Putih?",
+      answer:
+        "Mekanismenya meliputi tiga pendekatan: pendirian koperasi baru, pengembangan koperasi yang telah ada, dan revitalisasi koperasi tidak aktif.",
+    },
+    {
+      question: "Bagaimana cara penamaan Koperasi Desa Merah Putih?",
+      answer:
+        "Nama harus diawali dengan kata “Koperasi”, diikuti dengan frasa “Desa Merah Putih”, dan diakhiri dengan nama desa setempat (misalnya, “Koperasi Desa Merah Putih Karangrejo”). Untuk kegiatan usaha berbasis Syariah, harus ditambahkan kata “Syariah”.",
+    },
+    {
+      question: "Apa yang dimaksud dengan pra pendirian koperasi?",
+      answer:
+        "Pra pendirian mencakup tahap awal di mana calon pendiri bersama Badan Permusyawaratan Desa mengadakan musyawarah untuk menyusun rancangan usaha, menentukan kebutuhan modal, dan menyepakati partisipasi modal.",
+    },
+    {
+      question: "Siapa saja yang dapat menjadi pendiri koperasi?",
+      answer:
+        "Pendiri adalah masyarakat desa yang memenuhi persyaratan keanggotaan, hadir dalam rapat pendirian, dan menyatakan kesediaan untuk bergabung dalam koperasi.",
+    },
+    {
+      question: "Bagaimana proses musyawarah desa dalam pembentukan koperasi?",
+      answer:
+        "Musyawarah desa dilakukan untuk membahas rencana pendirian, menyampaikan rancangan usaha, model bisnis, mitigasi risiko, dan menentukan kebutuhan modal yang akan ditetapkan melalui simpanan pokok dan simpanan wajib.",
+    },
+    {
+      question: "Apa itu rapat pendirian koperasi?",
+      answer:
+        "Rapat pendirian adalah pertemuan minimal yang dihadiri oleh 9 pendiri untuk membahas dan menetapkan pokok-pokok pendirian, seperti nama, alamat, maksud dan tujuan, permodalan, dan susunan pengurus.",
+    },
+    {
+      question: "Bagaimana tata cara pendirian koperasi baru?",
+      answer:
+        "Pendirian koperasi baru dimulai dari musyawarah desa, dilanjutkan dengan rapat pendirian, penyusunan notulen rapat, dan pengajuan pembuatan serta pengesahan Akta Pendirian melalui Notaris Pembuat Akta Koperasi (NPAK).",
+    },
+    {
+      question: "Apa peran Notaris Pembuat Akta Koperasi (NPAK)?",
+      answer:
+        "NPAK berperan membuat dan mengesahkan akta pendirian, perubahan anggaran dasar, serta dokumen hukum lain yang diperlukan dalam pendirian dan pengelolaan koperasi.",
+    },
+    {
+      question: "Apa itu Simpanan Pokok dan Simpanan Wajib?",
+      answer:
+        "Simpanan Pokok adalah sejumlah uang yang wajib disetor saat menjadi anggota dan tidak dapat diambil kembali, sedangkan Simpanan Wajib adalah simpanan berkala yang juga tidak dapat dicairkan selama keanggotaan.",
+    },
+    {
+      question: "Bagaimana proses pengesahan Akta Pendirian Koperasi?",
+      answer:
+        "Pengesahan dilakukan oleh NPAK melalui sistem SABH dengan menyerahkan dokumen seperti notulen rapat, berita acara pendirian, bukti penyetoran modal, dan rencana kerja koperasi.",
+    },
+    {
+      question: "Apa itu SABH?",
+      answer:
+        "SABH (Sistem Administrasi Badan Hukum) adalah platform layanan elektronik untuk pengesahan akta pendirian, perubahan anggaran dasar, dan pembubaran koperasi.",
+    },
+    {
+      question: "Bagaimana mekanisme pengembangan koperasi yang telah ada?",
+      answer:
+        "Pengembangan dilakukan dengan rapat anggota untuk perubahan anggaran dasar, penyesuaian nama dan jenis usaha sesuai dengan program Kopdes Merah Putih, serta pengajuan perubahan melalui NPAK.",
+    },
+    {
+      question: "Apa yang dimaksud dengan revitalisasi koperasi?",
+      answer:
+        "Revitalisasi adalah proses mengaktifkan kembali koperasi yang tidak aktif dengan pendampingan, identifikasi potensi, dan penyelenggaraan rapat anggota untuk mengembalikan status aktifnya.",
+    },
+    {
+      question: "Bagaimana tahapan penggabungan koperasi?",
+      answer:
+        "Penggabungan dilakukan dalam beberapa tahap, dimulai dari pertemuan awal dan musyawarah, rapat anggota untuk persetujuan, penyusunan perjanjian, hingga pengesahan perubahan anggaran dasar dan pembubaran koperasi yang bergabung.",
+    },
+    {
+      question: "Apa saja dokumen pendukung yang diperlukan dalam rapat pendirian?",
+      answer:
+        "Dokumen pendukung meliputi daftar hadir, fotokopi KTP pendiri, surat rekomendasi dari Kantor Desa, notulen rapat, dan berita acara pendirian.",
+    },
+    {
+      question: "Bagaimana koperasi mengurus NPWP dan NIB?",
+      answer:
+        "Setelah akta pendirian disahkan, koperasi mengurus Nomor Pokok Wajib Pajak (NPWP) di Kantor Pelayanan Pajak dan mendaftarkan hak akses pada Online Single Submission (OSS) untuk memperoleh Nomor Induk Berusaha (NIB).",
+    },
+    {
+      question: "Bagaimana tata cara memperoleh izin usaha bagi koperasi?",
+      answer:
+        "Koperasi mengajukan izin usaha berdasarkan KBLI yang sesuai dengan jenis kegiatan usaha yang dijalankan, dengan mengikuti ketentuan peraturan perundang-undangan dan melalui instansi terkait.",
+    },
+    {
+      question: "Apa saja jenis usaha yang dapat dijalankan oleh Kopdes Merah Putih?",
+      answer:
+        "Jenis usaha meliputi outlet gerai sembako, apotek desa, kantor koperasi, unit simpan pinjam, klinik desa, cold storage, logistik, serta usaha lain sesuai dengan potensi dan kebutuhan masyarakat desa.",
+    },
+    {
+      question: "Bagaimana koperasi memanfaatkan teknologi digital?",
+      answer:
+        "Koperasi dianjurkan mengoptimalkan teknologi digital, misalnya dengan memiliki situs web ber-domain “kop.id”, untuk memperkuat identitas dan integrasi dalam ekosistem koperasi.",
+    },
+    {
+      question: "Bagaimana tata cara penyelenggaraan rapat anggota dalam koperasi?",
+      answer:
+        "Rapat anggota diselenggarakan untuk mengambil keputusan penting, seperti perubahan anggaran dasar, pengesahan laporan keuangan, pembagian sisa hasil usaha, dengan ketentuan kuorum dan tata tertib yang telah ditetapkan.",
+    },
+    {
+      question: "Bagaimana proses pembagian Sisa Hasil Usaha (SHU) dilakukan?",
+      answer:
+        "SHU dibagikan kepada anggota secara sebanding dengan simpanan dan transaksi usaha masing-masing, berdasarkan keputusan rapat anggota dan diatur dalam anggaran dasar serta anggaran rumah tangga.",
+    },
+    {
+      question: "Apa peran musyawarah desa dalam pembentukan dan pengembangan koperasi?",
+      answer:
+        "Musyawarah desa berfungsi sebagai forum konsultasi awal untuk mendapatkan dukungan dan kesepakatan dari masyarakat serta menyusun rancangan usaha yang mendasari pendirian dan pengembangan koperasi.",
+    },
+  ];  
 
   const regulations = [
     "Undang-Undang Nomor 25 Tahun 1992 tentang Perkoperasian",
@@ -117,6 +270,7 @@ export default function Home() {
     "Peraturan Presiden Nomor 12 tahun 2025 tentang RPJMN tahun 2025–2029",
     "Peraturan Menteri Desa PDT No 7 Tahun 2023 tentang Prioritas Penggunaan Dana Desa tahun 2024",
     "Rancangan Peraturan Menteri Koperasi tentang Koperasi Desa Merah Putih",
+    "Instruksi Presiden Republik Indonesia Nomor 9 Tahun 2025 tentang percepatan pembentukan Koperasi Desa Merah Putih setelah Peraturan Presiden Nomor 12 tahun 2025 tentang RPJMN tahun 2025–2029",
   ];
   return (
     <div className="poppins-regular bg-gray-50 min-h-screen">
@@ -169,14 +323,6 @@ export default function Home() {
                 className="mt-6 w-full max-w-md bg-[#A0B73E] hover:bg-[#8CA531] text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 text-center"
                 > 
                   Daftar Sekarang
-                </Link>
-
-                {/* CTA Button Masuk*/}
-                <Link
-                href="/daftar/daftar-baru"
-                className="mt-6 w-full max-w-md bg-[#025669] hover:bg-[#024453] text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 text-center"
-                > 
-                  Sudah Punya Akun? Masuk
                 </Link>
               </div>
             </div>
@@ -295,24 +441,46 @@ export default function Home() {
                 }}
                 pagination={{ clickable: true }}
                 modules={[Pagination]}
-                className="pb-6"
+                className="!pb-16" // tambahkan jarak bawah agar pagination tidak tabrakan
               >
                 {benefitsData.map((item, index) => (
                   <SwiperSlide key={index}>
-                    <div className="bg-white  shadow-lg overflow-hidden">
+                    <div className="rounded-xl overflow-hidden shadow-md bg-white max-w-sm mx-auto h-full flex flex-col">
                       <img
                         src={item.image}
                         alt={item.title}
                         className="w-full h-[200px] object-cover"
                       />
-                      <p className="p-4 text-sm font-semibold text-[#0D3B66]">
-                        {item.title}
-                      </p>
+                      <div className="p-4 flex-1">
+                        <p className="text-sm font-semibold text-[#0D3B66]">
+                          {item.title}
+                        </p>
+                      </div>
                     </div>
                   </SwiperSlide>
                 ))}
               </Swiper>
+
+              {/* Custom Pagination Style */}
+              <style jsx global>{`
+                .swiper-pagination {
+                  bottom: 0px !important;
+                  text-align: center;
+                }
+
+                .swiper-pagination-bullet {
+                  background-color: #ccc;
+                  opacity: 1;
+                  margin: 0 4px !important;
+                }
+
+                .swiper-pagination-bullet-active {
+                  background-color: #025669 !important;
+                }
+              `}</style>
             </div>
+
+
           </div>
         </div>
       </div>
