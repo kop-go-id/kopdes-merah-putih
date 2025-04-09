@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Http\Request;
+use App\Models\CooperativeType;
 
 class CooperativeController extends Controller
 {
@@ -107,5 +108,14 @@ class CooperativeController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function getCooperativeTypes()
+    {
+        $cooperativeTypes = CooperativeType::with('klus')->get();
+        return response()->json([
+            'message' => 'Data tipe koperasi',
+            'data' => $cooperativeTypes,
+        ], 201);
     }
 }
