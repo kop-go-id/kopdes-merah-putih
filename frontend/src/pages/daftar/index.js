@@ -78,3 +78,9 @@ export default function SchemaRegistration() {
     </div>
   );
 }
+
+/* TODO: [Maintenance]
+  Register Form (pendaftaran baru & mengembangkan yang sudah ada) could to be one form in different page
+  Add conditional logic to create share form.
+  Also, create share layout on the left side.
+*/
