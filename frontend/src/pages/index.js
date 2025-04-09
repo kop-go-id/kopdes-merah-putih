@@ -103,7 +103,7 @@ export default function Home() {
       title: "Menjadi Konsolidator UMKM",
     },
     {
-      image: "/images/petani-hore.jpg",
+      image: "/images/pexels-photo-11505049.jpeg",
       title: "Perwujudan Pemerataan Ekonomi",
     },
   ];
