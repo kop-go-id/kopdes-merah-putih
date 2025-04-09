@@ -9,7 +9,7 @@ class CooperativeManagement extends Model
     //
     protected $table = 'cooperative_management';
     protected $primaryKey = 'cooperative_management_id';
-    protected $guarded = 'cooperative_management_id';
+    protected $guarded = ['cooperative_management_id'];
 
     public function cooperative()
     {

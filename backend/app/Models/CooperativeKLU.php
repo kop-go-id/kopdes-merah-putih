@@ -8,7 +8,7 @@ class CooperativeKLU extends Model
 {
     protected $table = 'cooperative_klus';
     protected $primaryKey = 'cooperative_klu_id';
-    protected $guarded = 'cooperative_klu_id';
+    protected $guarded = ['cooperative_klu_id'];
 
     //
     public function cooperative()
