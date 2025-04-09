@@ -6,13 +6,23 @@ import { useRouter } from "next/router";
 import { callApi, getAPIEndpoint } from "@/utils/endpoint";
 
 const { Dragger } = Upload;
-const { Option } = Select;
+const { Option, OptGroup} = Select;
 
 export default function RegistrationExisting() {
   const [form] = Form.useForm();
   const router = useRouter();
   const [provinces, setProvinces] = useState([]);
   const [provinceCode, setProvinceCode] = useState();
+  const [districts, setDistricts] = useState();
+  const [districtCode, setDistrictCode] = useState();
+  const [subDistricts, setSubDistricts] = useState();
+  const [subDistrictCode, setSubDistrictCode] = useState();
+  const [villages, setVillages] = useState();
+  const [villageCode, setVillageCode] = useState();
+  const [selectedCoopTypes, setSelectedCoopTypes] = useState();
+  const [cooperativeTypes, setCooperativeTypes] = useState();
+  const [selectedNotary, setSelectedNotary] = useState();
+  const [notaryNumbers, setNotaryNumbers] = useState();
 
   const fetchProvince = async () => {
     try {
@@ -24,15 +34,61 @@ export default function RegistrationExisting() {
 
   const fetchDistrict = async () => {
     try {
-      const endpoint = getAPIEndpoint(`districts/by-province-code/${provinceCode}`, 'GET');
+      const endpoint = getAPIEndpoint(`/districts/by-province-code/${provinceCode}`, 'GET');
       const response = await callApi(endpoint);
-      setProvinces(response?.data);
+      setDistricts(response?.data);
     } catch (err) {}
   };
 
+  const fetchSubDistrict = async () => {
+    try {
+      const endpoint = getAPIEndpoint(`/sub-districts/by-district-code/${districtCode}`, 'GET');
+      const response = await callApi(endpoint);
+      setSubDistricts(response?.data);
+    } catch (err) {}
+  };
+
+  const fetchVillage = async () => {
+    try {
+      const endpoint = getAPIEndpoint(`/villages/by-sub-district-code/${subDistrictCode}`, 'GET');
+      const response = await callApi(endpoint);
+      setVillages(response?.data);
+    } catch (err) {}
+  };
+
+  const getCooperativeTypes = async () => {
+    try {
+      const endpoint = getAPIEndpoint(`/cooperative/types`, 'GET');
+      const response = await callApi(endpoint);
+      setCooperativeTypes(response?.data);
+    } catch (err) {}
+  }
+
+  const getNPAKByProvince = async () => {
+    try {
+      const endpoint = getAPIEndpoint(`/npak/by-province-id/${provinceCode}`, 'GET');
+      const response = await callApi(endpoint);
+      setNotaryNumbers(response?.data);
+    } catch (err) {}
+  }
+
   useEffect(() => {
     fetchProvince();
+    getCooperativeTypes();
+    getNPAKByProvince();
   }, []);
+
+  useEffect(() => {
+    fetchDistrict();
+  }, [provinceCode]);
+
+  useEffect(() => {
+    fetchSubDistrict();
+  }, [districtCode]);
+
+  useEffect(() => {
+    fetchVillage();
+  }, [subDistrictCode]);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white">
@@ -55,6 +111,7 @@ export default function RegistrationExisting() {
             label="Nama Koperasi Baru"
             name="namaKoperasi"
             className="mb-4"
+            rules={[{ required: true, message: "Masukkan nama koperasi" }]}
           >
             <Input
               addonBefore="Koperasi Desa Merah Putih"
@@ -62,25 +119,49 @@ export default function RegistrationExisting() {
             />
           </Form.Item>
 
-          <Form.Item label="Provinsi" name="provinsi" className="mb-4">
-            <Select placeholder="Pilih Provinsi">
-              <Option value="jakarta">DKI Jakarta</Option>
-            </Select>
+          <Form.Item label="Provinsi" name="provinsi" className="mb-4" rules={[{ required: true, message: "Provinsi wajib dipilih." }]}>
+            <Select
+              placeholder="Pilih Provinsi"
+              options={provinces.map((province) => ({
+                label: province.name,
+                value: province.code,
+              }))}
+              onChange={(val) => setProvinceCode(val)}
+            />
           </Form.Item>
 
-          <Form.Item label="Kabupaten/Kota" name="kabupaten" className="mb-4">
-            <Select placeholder="Pilih Kabupaten/Kota">
-              <Option value="jaksel">Jakarta Selatan</Option>
-            </Select>
+          <Form.Item label="Kabupaten/Kota" name="kabupaten" className="mb-4" rules={[{ required: true, message: "Kabupaten/Kota wajib dipilih." }]}>
+            <Select
+              placeholder="Pilih Kabupaten/Kota" 
+              options={districts?.map((district) => ({
+                label: district.name,
+                value: district.code,
+              }))}
+              onChange={(val) => setDistrictCode(val)}
+            />
           </Form.Item>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <Form.Item label="Desa / Kelurahan" name="desa">
-              <Input />
+            <Form.Item label="Kecamatan" name="kecamatan" rules={[{ required: true, message: "Kecamatan wajib dipilih." }]}>
+            <Select
+              placeholder="Pilih Kecamatan" 
+              options={subDistricts?.map((val) => ({
+                label: val.name,
+                value: val.code,
+              }))}
+              onChange={(val) => setSubDistrictCode(val)}
+            />
             </Form.Item>
 
-            <Form.Item label="Kecamatan" name="kecamatan">
-              <Input />
+            <Form.Item label="Desa / Kelurahan" name="desa" rules={[{ required: true, message: "Desa/Kelurahan wajib dipilih." }]}>
+              <Select
+                placeholder="Pilih Desa / Kelurahan" 
+                options={villages?.map((val) => ({
+                  label: val.name,
+                  value: val.code,
+                }))}
+                onChange={(val) => setVillageCode(val)}
+              />
             </Form.Item>
           </div>
 
@@ -89,9 +170,14 @@ export default function RegistrationExisting() {
             name="notaris"
             className="mb-4"
           >
-            <Select placeholder="Pilih Notaris">
-              <Option value="notaris1">Notaris A</Option>
-            </Select>
+            <Select
+              placeholder="Pilih Notaris"
+              options={notaryNumbers?.map((notary) => ({
+                label: notary.name,
+                value: district.notary_id,
+              }))}
+              onChange={(val) => setSelectedNotary(val)}
+            />
           </Form.Item>
 
           <div className="mb-6">
@@ -137,10 +223,26 @@ export default function RegistrationExisting() {
           <Form.Item
             label="Jenis Usaha Koperasi"
             name="jenisUsaha"
-            className="mb-4"
+            className="mb-4 w-full"
           >
-            <Select placeholder="Pilih jenis usaha">
-              <Option value="perdagangan">Perdagangan</Option>
+            <Select
+              mode="multiple"
+              allowClear
+              placeholder="Pilih Jenis Usaha"
+              value={selectedCoopTypes}
+              onChange={(val) => console.log('multi', val)}
+              className="w-full"
+              popupMatchSelectWidth={true}
+            >
+              {cooperativeTypes?.map(type => (
+                <OptGroup key={type.cooperative_type_id} label={type.name}>
+                  {type.klus.map(option => (
+                    <Option key={option.klu_id} value={option.code_kbli}>
+                      <span className="whitespace-normal break-words">{`${option.code_kbli} - ${option.name}`}</span>
+                    </Option>
+                  ))}
+                </OptGroup>
+              ))}
             </Select>
           </Form.Item>
 
