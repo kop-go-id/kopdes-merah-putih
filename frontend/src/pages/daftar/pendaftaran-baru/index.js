@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import { Input, Select, Upload, Button, Form, Divider, Checkbox } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import Stepper from "@/components/Stepper";
 import { useRouter } from "next/router";
 import { fetchDistrict, fetchProvince, fetchSubDistrict, fetchVillage } from "@/services/region";
-import { getCooperativeTypes, getNPAKByProvince } from "@/services/cooperative";
+import { getCooperativeTypes, getNPAKByProvince, registerNewCooperative } from "@/services/cooperative";
 
 const { Dragger } = Upload;
 const { Option, OptGroup } = Select;
@@ -33,6 +33,7 @@ export default function RegistrationExisting() {
   const [villages, setVillages] = useState([]);
   const [cooperativeTypes, setCooperativeTypes] = useState();
   const [notaryNumbers, setNotaryNumbers] = useState([]);
+  
 
   useEffect(() => {
     fetchProvince().then(setProvinces);
@@ -54,6 +55,18 @@ export default function RegistrationExisting() {
     fetchVillage(subDistrictCode).then(setVillages);
   }, [subDistrictCode]);
 
+  const onFinish = (val) => {
+    const registerInput = {
+      ...val,
+      klu_ids: val.klu_ids?.join(','),
+      bamd: val.bamd.file,
+      bara: val.bara.file,
+    };
+    console.log("registerInput", registerInput);
+
+    registerNewCooperative(registerInput);
+  }
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white">
       {/* Sidebar */}
@@ -69,11 +82,11 @@ export default function RegistrationExisting() {
         <Form
           form={form}
           layout="vertical"
-          onFinish={(values) => console.log("Form Values:", values)}
+          onFinish={onFinish}
         >
           <Form.Item
             label="Nama Koperasi Baru"
-            name="name"
+            name="cooperative_name"
             className="mb-4"
             rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
           >
@@ -86,7 +99,7 @@ export default function RegistrationExisting() {
 
           <Form.Item
             label="Provinsi"
-            name="province"
+            name="province_code"
             className="mb-4"
             rules={[{ required: true, message: "Provinsi wajib dipilih." }]}
           >
@@ -100,13 +113,13 @@ export default function RegistrationExisting() {
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
               }
-              onChange={(val) => setProvinceCode(val)}
+              onChange={setProvinceCode}
             />
           </Form.Item>
 
           <Form.Item
             label="Kabupaten/Kota"
-            name="district"
+            name="district_code"
             className="mb-4"
             rules={[
               { required: true, message: "Kabupaten/Kota wajib dipilih." },
@@ -122,14 +135,14 @@ export default function RegistrationExisting() {
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
               }
-              onChange={(val) => setDistrictCode(val)}
+              onChange={setDistrictCode}
             />
           </Form.Item>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <Form.Item
               label="Kecamatan"
-              name="subdistrict"
+              name="subdistrict_code"
               rules={[{ required: true, message: "Kecamatan wajib dipilih." }]}
             >
               <Select
@@ -142,13 +155,13 @@ export default function RegistrationExisting() {
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
                 }
-                onChange={(val) => setSubDistrictCode(val)}
+                onChange={setSubDistrictCode}
               />
             </Form.Item>
 
             <Form.Item
               label="Desa / Kelurahan"
-              name="village"
+              name="village_code"
               rules={[
                 { required: true, message: "Desa/Kelurahan wajib dipilih." },
               ]}
@@ -169,9 +182,9 @@ export default function RegistrationExisting() {
 
           <Form.Item
             label="Notaris Pembuat Akta Koperasi"
-            name="npakId"
+            name="npak_id"
             className="mb-4"
-            rules={[{ required: true, message: "Notaris wajib dipilih." }]}
+            rules={[{ required: false, message: "Notaris wajib dipilih." }]}
           >
             <Select
               placeholder="Pilih Notaris"
@@ -179,7 +192,8 @@ export default function RegistrationExisting() {
                 label: notary.name,
                 value: notary.notary_id,
               }))}
-              onChange={(val) => console.log(val)}
+              defaultActiveFirstOption={true}
+              // defaultValue={}
             />
           </Form.Item>
 
@@ -194,9 +208,8 @@ export default function RegistrationExisting() {
                   size="small"
                   className="text-blue-600 p-0 self-start"
                   onClick={() => {
-                    // Ganti dengan link file yang sebenarnya
                     window.open(
-                      "/templates/musyawarah-desa-template.pdf",
+                      "/docs/Template_Berita_Acara_Musyawarah_Desa.docx",
                       "_blank"
                     );
                   }}
@@ -213,7 +226,11 @@ export default function RegistrationExisting() {
               },
             ]}
           >
-            <Dragger className="!bg-white">
+            <Dragger className="!bg-white" 
+              accept=".doc,.docx,.pdf,application/msword" 
+              multiple={false}
+              maxCount={1}
+            >
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />
               </p>
@@ -233,7 +250,7 @@ export default function RegistrationExisting() {
                   className="text-blue-600 p-0 self-start"
                   onClick={() => {
                     window.open(
-                      "/templates/rapat-anggota-template.pdf",
+                      "/docs/Template_Berita_Acara_Rapat_Anggota.docx",
                       "_blank"
                     );
                   }}
@@ -250,7 +267,11 @@ export default function RegistrationExisting() {
               },
             ]}
           >
-            <Dragger className="!bg-white">
+            <Dragger className="!bg-white"
+              accept=".doc,.docx,.pdf,application/msword" 
+              multiple={false}
+              maxCount={1}
+            >
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />
               </p>
@@ -262,7 +283,7 @@ export default function RegistrationExisting() {
 
           <Form.Item
             label="Jenis Usaha Koperasi"
-            name="klu"
+            name="klu_ids"
             className="mb-4 w-full"
             rules={[{ required: true, message: "Jenis Usaha Koperasi wajib dipilih." }]}
           >
@@ -277,7 +298,7 @@ export default function RegistrationExisting() {
               {cooperativeTypes?.map((type) => (
                 <OptGroup key={type.cooperative_type_id} label={type.name}>
                   {type.klus.map((option) => (
-                    <Option key={option.klu_id} value={option.code_kbli}>
+                    <Option key={option.klu_id} value={option.klu_id}>
                       <span className="whitespace-normal break-words">{`${option.code_kbli} - ${option.name}`}</span>
                     </Option>
                   ))}
@@ -288,7 +309,7 @@ export default function RegistrationExisting() {
 
           <Form.Item
             label="Pendaftaran Nama Domain"
-            name="domain"
+            name="subdomain"
             className="mb-6"
             rules={[{ required: true, message: "Nama domain koperasi wajib diisi." }]}
           >
@@ -325,7 +346,7 @@ export default function RegistrationExisting() {
               name="phone"
               rules={[{ required: true, message: "Nomor HP wajib diisi." }]}
             >
-              <Input addonBefore="+62" placeholder="812345678" />
+              <Input addonBefore="+62" placeholder="812345678" type="number" />
             </Form.Item>
           </div>
 
@@ -340,7 +361,7 @@ export default function RegistrationExisting() {
 
             <Form.Item
               label="Ulangi Kata Sandi"
-              name="confirmPassword"
+              name="password_confirmation"
               dependencies={["password"]}
               rules={[
                 { required: true, message: "Konfirmasi kata sandi wajib diisi." },
