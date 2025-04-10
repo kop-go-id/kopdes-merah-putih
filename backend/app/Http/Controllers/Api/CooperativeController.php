@@ -154,6 +154,7 @@ class CooperativeController extends Controller
                 'name'=> $request->input('name'),
                 'email' => $request->input('email'),
                 'phone'=> $request->input('phone'),
+                'role' => 'Pengurus koperasi',
                 'password'=> Hash::make($request->input('password')),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -204,7 +205,7 @@ class CooperativeController extends Controller
                 'status' => 'active',
                 'nik' => '',
                 'name' => $request->input('name'),
-                'role' => 'Administrator koperasi',
+                'role' => 'Pengurus',
                 'npwp' => '',
                 'phone' => $request->input('phone'),
                 'gender' => 'male',
