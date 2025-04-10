@@ -12,10 +12,18 @@ class NPAKController extends Controller
 {
     public function npaks()
     {
-        $npaks = NPAK::with(['province', 'district'])->orderBy('name', 'asc')->get();
+        $npaks = NPAK::with(['province', 'district'])
+            ->where('provinceId', '!=', 0)
+            ->orderBy('name', 'asc')
+            ->get();
+
+        $defaultNPAK = NPAK::with(['province', 'district'])
+            ->where('provinceId', 0)
+            ->orderBy('name', 'asc')
+            ->get();
         return response()->json([
             'message' => 'Success',
-            'data' => $npaks,
+            'data' => [...$defaultNPAK, ...$npaks],
         ], 201);
     }
 
@@ -29,10 +37,19 @@ class NPAKController extends Controller
             ], 500);
         }
 
-        $npaks = NPAK::where('districtId', $district->district_id)->with(['province', 'district'])->orderBy('name', 'asc')->get();
+        $npaks = NPAK::where('districtId', $district->district_id)
+            ->where('provinceId', '!=', 0)
+            ->with(['province', 'district'])
+            ->orderBy('name', 'asc')
+            ->get();
+
+        $defaultNPAK = NPAK::where('provinceId', 0)
+            ->with(['province', 'district'])
+            ->orderBy('name', 'asc')
+            ->get();
         return response()->json([
             'message' => 'Success',
-            'data' => $npaks,
+            'data' => [...$defaultNPAK, ...$npaks],
         ], 201);
     }
 
@@ -46,10 +63,19 @@ class NPAKController extends Controller
             ], 500);
         }
 
-        $npaks = NPAK::where('provinceId', $province->province_id)->with(['province', 'district'])->orderBy('name', 'asc')->get();
+        $npaks = NPAK::where('provinceId', $province->province_id)
+            ->where('provinceId', '!=', 0)
+            ->with(['province', 'district'])
+            ->orderBy('name', 'asc')
+            ->get();
+
+        $defaultNPAK = NPAK::where('provinceId', 0)
+            ->with(['province', 'district'])
+            ->orderBy('name', 'asc')
+            ->get();
         return response()->json([
             'message' => 'Success',
-            'data' => $npaks,
+            'data' => [...$defaultNPAK, ...$npaks],
         ], 201);
     }
 }

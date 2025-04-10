@@ -13,7 +13,9 @@ class LocationController extends Controller
 {
     public function provinces()
     {
-        $provinces = Province::orderBy('name', 'asc')->get();
+        $provinces = Province::orderBy('name', 'asc')
+            ->where('province_id', '!=', 0)
+            ->get();
         return response()->json([
             'message' => 'Success',
             'data' => $provinces,
@@ -22,7 +24,10 @@ class LocationController extends Controller
 
     public function districts(Request $request, $provinceCode)
     {
-        $districts = District::where('province_code', $provinceCode)->orderBy('name', 'asc')->get();
+        $districts = District::where('province_code', $provinceCode)
+            ->where('district_id', '!=', 0)
+            ->orderBy('name', 'asc')
+            ->get();
         return response()->json([
             'message' => 'Success',
             'data' => $districts,
@@ -31,7 +36,10 @@ class LocationController extends Controller
 
     public function subDistricts(Request $request, $districtCode)
     {
-        $subdistricts = Subdistrict::where('district_code', $districtCode)->orderBy('name', 'asc')->get();
+        $subdistricts = Subdistrict::where('district_code', $districtCode)
+            ->where('subdistrict_id', '!=', 0)
+            ->orderBy('name', 'asc')
+            ->get();
         return response()->json([
             'message' => 'Success',
             'data' => $subdistricts,
@@ -40,7 +48,10 @@ class LocationController extends Controller
 
     public function villages(Request $request, $subDistrictCode)
     {
-        $villages = Village::where('subdistrict_code', $subDistrictCode)->orderBy('name', 'asc')->get();
+        $villages = Village::where('subdistrict_code', $subDistrictCode)
+            ->where('village_id', '!=', 0)
+            ->orderBy('name', 'asc')
+            ->get();
         return response()->json([
             'message' => 'Success',
             'data' => $villages,

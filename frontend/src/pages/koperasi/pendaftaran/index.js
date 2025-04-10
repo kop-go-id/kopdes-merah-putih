@@ -2,69 +2,55 @@
 
 import React from "react";
 import { Timeline } from "antd";
-import "tailwindcss/tailwind.css";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 import LayoutWrapper from "@/components/Layout";
-import { SmileOutlined } from "@ant-design/icons";
 
 export default function CooperativePage() {
+  const timelineItems = [
+    {
+      title: "Status Pendaftaran",
+      date: "08 April 2025",
+      status: "done",
+    },
+    {
+      title: "Diproses Notaris",
+      date: "10 April 2025",
+      status: "done",
+    },
+    {
+      title: "Selesai",
+      date: "Unduh Surat",
+      status: "done",
+      link: "#", // Ganti dengan link unduhan surat
+    },
+  ];
+
   return (
     <LayoutWrapper>
-      <Timeline
-        items={[
-          {
+      <div className="bg-[#f6f8fa] p-6 rounded-xl shadow-md">
+        <h2 className="text-2xl font-semibold text-[#004c5a] mb-6">Status Pendaftaran</h2>
+        <Timeline
+          items={timelineItems.map((item) => ({
             color: "green",
-            children: "Create a services site 2015-09-01",
-          },
-          {
-            color: "green",
-            children: "Create a services site 2015-09-01",
-          },
-          {
-            color: "red",
+            dot: <CheckCircleTwoTone twoToneColor="#99c221" style={{ fontSize: 22 }} />,
             children: (
-              <>
-                <p>Solve initial network problems 1</p>
-                <p>Solve initial network problems 2</p>
-                <p>Solve initial network problems 3 2015-09-01</p>
-              </>
+              <div className="ml-2">
+                <p className="font-semibold text-black">{item.title}</p>
+                {item.link ? (
+                  <a
+                    href={item.link}
+                    className="text-sm text-[#004c5a] underline font-medium"
+                  >
+                    {item.date}
+                  </a>
+                ) : (
+                  <p className="text-sm text-gray-600">{item.date}</p>
+                )}
+              </div>
             ),
-          },
-          {
-            children: (
-              <>
-                <p>Technical testing 1</p>
-                <p>Technical testing 2</p>
-                <p>Technical testing 3 2015-09-01</p>
-              </>
-            ),
-          },
-          {
-            color: "gray",
-            children: (
-              <>
-                <p>Technical testing 1</p>
-                <p>Technical testing 2</p>
-                <p>Technical testing 3 2015-09-01</p>
-              </>
-            ),
-          },
-          {
-            color: "gray",
-            children: (
-              <>
-                <p>Technical testing 1</p>
-                <p>Technical testing 2</p>
-                <p>Technical testing 3 2015-09-01</p>
-              </>
-            ),
-          },
-          {
-            color: "#00CCFF",
-            dot: <SmileOutlined />,
-            children: <p>Custom color testing</p>,
-          },
-        ]}
-      />
+          }))}
+        />
+      </div>
     </LayoutWrapper>
   );
 }
