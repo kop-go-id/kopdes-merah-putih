@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export default function LoginFormAntd() {
   const [form] = Form.useForm();
+  const router = useRouter();
 
   const handleSubmit = (values) => {
     console.log('Form values:', values);
@@ -64,7 +66,8 @@ export default function LoginFormAntd() {
           <Form.Item>
             <Button
               type="primary"
-              htmlType="submit"
+              // htmlType="submit"
+              onClick={() => router.push('/koperasi/pendaftaran')}
               className="bg-[#025669] w-full hover:opacity-90"
             >
               Masuk

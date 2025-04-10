@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Button } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { twMerge } from "tailwind-merge";
+import { useRouter } from "next/router";
 
 export default function Stepper(activeIndexParams) {
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
   useEffect(() => {
     setActiveIndex(activeIndexParams.activeIndex);
@@ -66,6 +68,9 @@ export default function Stepper(activeIndexParams) {
         icon={<LeftOutlined />}
         className="text-white border-white mx-4 my-6 md:mx-6 md:my-10 w-fit"
         type="text"
+        onClick={()=>{
+          router.push("/");
+        }}
       >
         Halaman utama
       </Button>
