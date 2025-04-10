@@ -62,11 +62,8 @@ class AuthController extends Controller
                 ], 401);
             }
 
-<<<<<<< HEAD
             $cooperative = $user->cooperative;
 
-=======
->>>>>>> a733c2b (logout)
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
@@ -116,16 +113,5 @@ class AuthController extends Controller
             ], 500);
         }
     }
-
-    public function logout(Request $request)
-    {
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json([
-            'message' => 'Logout berhasil.',
-        ]);
-    }
-
-
 
 }
