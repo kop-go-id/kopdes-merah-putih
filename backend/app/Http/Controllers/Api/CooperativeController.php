@@ -151,7 +151,7 @@ class CooperativeController extends Controller
                 'password' => 'required|min:8|max:50|confirmed',
             ]);
 
-            $existingName = Cooperative::where('name', strtoupper($request->input('name')))->first();
+            $existingName = Cooperative::where('name', strtoupper($request->input('cooperative_name')))->first();
             if ($existingName) {
                 return response()->json([
                     'message' => 'Failed to create cooperative.',
