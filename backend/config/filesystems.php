@@ -62,8 +62,7 @@ return [
 
         'gcs' => [
             'driver' => 'gcs',
-            // 'key_file_path' => base_path('kopdes-merah-putih-2f81d9bcde23.json'),
-            'key_file_path' => base_path('kopdes-merah-putih-72f171b3faf9.json'),
+            'key_file_path' => storage_path(env('GOOGLE_CLOUD_KEY_FILENAME', '')),
             'project_id' => env('GOOGLE_CLOUD_PROJECT_ID', ''),
             'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET', ''),
             'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX', ''),
