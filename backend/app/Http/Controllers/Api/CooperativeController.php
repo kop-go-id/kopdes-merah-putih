@@ -169,7 +169,7 @@ class CooperativeController extends Controller
             $fetchBara = $disk->url($storeBara);
 
             $cooperative = Cooverative::create([
-                'name' => $request->input('cooperative_name'),
+                'name' => strtoupper($request->input('cooperative_name')),
                 'provinceId' => $request->input('province_id'),
                 'districtId' => $request->input('district_id'),
                 'subdistrictId' => $request->input('subdistrict_id'),
