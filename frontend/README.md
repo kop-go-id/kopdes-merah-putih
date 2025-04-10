@@ -1,5 +1,5 @@
 # kopdes-merah-putih
-Repository website Koperasi Desa Merah Putih (https://merahputih.kop.id).
+Repository website Koperasi Desa/Kelurahan Merah Putih (https://merahputih.kop.id).
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

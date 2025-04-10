@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <link rel="icon" href="favicon.ico" />
-        <title>Koperasi Desa Merah Putih</title>
+        <title>Koperasi Desa/Kelurahan Merah Putih</title>
       <body>
         <Main />
         <NextScript />

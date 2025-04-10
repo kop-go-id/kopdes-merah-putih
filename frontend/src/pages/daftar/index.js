@@ -7,12 +7,12 @@ const schemaList = [
   {
     value: "baru",
     title: "Membangun Koperasi Baru",
-    desc: "Dibentuk melalui musyawarah desa dengan calon anggota koperasi minimal 9 orang membentuk Koperasi Desa Merah Putih. Jumlah anggota dapat dikembangkan lebih banyak.",
+    desc: "Dibentuk melalui musyawarah desa dengan melibatkan calon anggota koperasi sebanyak-banyaknya dari masyarakat desa untuk membentuk Koperasi Desa/Kelurahan Merah Putih. Jumlah anggota dapat dikembangkan lebih banyak.",
   },
   {
     value: "pengembangan",
     title: "Mengembangkan Yang Sudah Ada",
-    desc: "Dibentuk melalui rapat Perubahan Anggaran Dasar melibatkan masyarakat desa untuk membentuk Koperasi Desa Merah Putih.",
+    desc: "Dibentuk melalui rapat Perubahan Anggaran Dasar melibatkan masyarakat desa untuk membentuk Koperasi Desa/Kelurahan Merah Putih.",
   },
   {
     value: "revitalisasi",
@@ -46,7 +46,6 @@ export default function SchemaRegistration() {
               key={skema.value}
               value={skema.value}
               className="p-4 rounded-lg border border-gray-300 flex flex-col md:flex-row md:items-start gap-4"
-              disabled={index === 2}
             >
               <div className="flex-grow">
                 <p className="font-semibold text-lg">{skema.title}</p>
@@ -67,9 +66,13 @@ export default function SchemaRegistration() {
           className="mt-8 md:w-1/2 bg-teal-800 hover:bg-teal-900"
           disabled={!value}
           onClick={() => {
-            value === "baru"
-              ? router.push("/daftar/pendaftaran-baru")
-              : router.push("/daftar/pengembangan-koperasi");
+            if(value === "pengembangan"){
+              router.push("/daftar/pengembangan-koperasi")
+            } else if(value === "revitalisasi"){
+              router.push("/daftar/revitalisasi-koperasi")
+            } else if(value === "baru"){
+              router.push("/daftar/pendaftaran-baru")
+            }
           }}
         >
           Berikutnya

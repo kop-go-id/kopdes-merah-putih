@@ -84,11 +84,12 @@ export default function RegistrationExisting() {
           layout="vertical"
           onFinish={(values) => console.log("Form Values:", values)}
         >
+                    <Divider>Kedudukan</Divider>
           <Form.Item
             label="Nomor Induk Koperasi"
             name="nik"
             className="mb-4"
-            rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
+            rules={[{ required: true, message: "Nomor Induk Koperasi wajib diisi." }]}
           >
             <Input.Search
               onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
@@ -118,7 +119,7 @@ export default function RegistrationExisting() {
             />
           </Form.Item>
           <Form.Item
-            label="Nama Koperasi Existing"
+            label="Nama Koperasi"
             name="existing_cooperative"
             className="mb-4"
             rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
@@ -220,13 +221,13 @@ export default function RegistrationExisting() {
             </Form.Item>
           </div>
           <Form.Item
-            label="Nama Koperasi Existing"
+            label="Nama Koperasi"
             name="cooperative_name"
             className="mb-4"
             rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
           >
             <Input
-              addonBefore="Koperasi Desa Merah Putih"
+              addonBefore="Koperasi Merah Putih"
               onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
               placeholder="Masukkan nama koperasi, yaitu nama desa. contoh DUREN TIGA"
             />
@@ -251,7 +252,7 @@ export default function RegistrationExisting() {
             label={
               <div className="flex flex-col gap-1">
                 <span className="font-medium">
-                  Berita Acara Musyawarah Desa
+                  Berita Acara Musyawarah Desa Khusus
                 </span>
                 <Button
                   type="link"
@@ -265,7 +266,7 @@ export default function RegistrationExisting() {
                     );
                   }}
                 >
-                  Unduh Template Berita Acara Musyawarah Desa
+                  Unduh Template Berita Acara Musyawarah Desa Khusus
                 </Button>
               </div>
             }
@@ -282,7 +283,7 @@ export default function RegistrationExisting() {
                 <InboxOutlined />
               </p>
               <p className="ant-upload-text">
-                Unggah atau tarik dokumen Berita Acara Musyawarah Desa ke sini
+                Unggah atau tarik dokumen Berita Acara Musyawarah Desa Khusus ke sini
               </p>
             </Dragger>
           </Form.Item>

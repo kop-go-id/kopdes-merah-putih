@@ -24,7 +24,7 @@ const Navbar = () => {
             <Link href="/">
               <Image
                 src="/images/logo.png"
-                alt="Koperasi Desa Merah Putih Logo"
+                alt="Koperasi Desa/Kelurahan Merah Putih Logo"
                 width={150}
                 height={50}
                 preview={false}

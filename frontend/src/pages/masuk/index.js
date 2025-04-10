@@ -30,7 +30,7 @@ export default function LoginFormAntd() {
         </div>
 
         <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#025669] text-center mb-6">
-          Masuk Ke Akun Koperasi Desa Merah Putih
+          Masuk Ke Akun Koperasi Desa/Kelurahan Merah Putih
         </h2>
 
         <Form

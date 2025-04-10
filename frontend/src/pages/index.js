@@ -120,27 +120,12 @@ export default function Home() {
 
   const faqs = [
     {
-      question: "Apakah semua koperasi wajib menggunakan domain .kop.id?",
+      question: "Apa itu Koperasi Desa/Kelurahan Merah Putih?",
       answer:
-        "Baik Koperasi yang sudah memiliki website sendiri maupun yang belum, semua diwajibkan beralih ke domain .kop.id sebagai identitas koperasi di digital agar aktivitas digitalnya terhubung dalam Digitalisasi Koperasi.",
+        "Koperasi Desa/Kelurahan Merah Putih adalah lembaga ekonomi beranggotakan masyarakat desa yang dibentuk untuk meningkatkan kesejahteraan melalui prinsip gotong royong, kekeluargaan, dan partisipasi bersama.",
     },
     {
-      question: "Bagaimana cara mendaftar domain .kop.id?",
-      answer:
-        "Untuk mendaftar domain .kop.id, koperasi perlu mengajukan permohonan melalui platform resmi yang telah ditentukan oleh pemerintah.",
-    },
-    {
-      question: "Apakah ada biaya tahunan untuk domain ini?",
-      answer:
-        "Ya, terdapat biaya tahunan yang harus dibayarkan oleh koperasi untuk mempertahankan domain .kop.id agar tetap aktif.",
-    },
-    {
-      question: "Apa itu Koperasi Desa Merah Putih?",
-      answer:
-        "Koperasi Desa Merah Putih adalah lembaga ekonomi beranggotakan masyarakat desa yang dibentuk untuk meningkatkan kesejahteraan melalui prinsip gotong royong, kekeluargaan, dan partisipasi bersama.",
-    },
-    {
-      question: "Apa tujuan utama pembentukan Kopdes Merah Putih?",
+      question: "Apa tujuan utama pembentukan Kopdes/kel Merah Putih?",
       answer:
         "Tujuannya antara lain memperkuat perekonomian desa, meningkatkan nilai tukar petani, menekan inflasi, menciptakan lapangan kerja, dan meningkatkan inklusi keuangan.",
     },
@@ -150,39 +135,34 @@ export default function Home() {
         "Pembentukan koperasi didasarkan pada berbagai peraturan, seperti Undang-Undang Nomor 25 Tahun 1992 tentang Perkoperasian (yang telah diubah beberapa kali), Peraturan Pemerintah, Peraturan Presiden, dan peraturan menteri terkait.",
     },
     {
-      question: "Apa saja mekanisme pembentukan Kopdes Merah Putih?",
+      question: "Apa saja mekanisme pembentukan Kopdes/kel Merah Putih?",
       answer:
         "Mekanismenya meliputi tiga pendekatan: pendirian koperasi baru, pengembangan koperasi yang telah ada, dan revitalisasi koperasi tidak aktif.",
     },
     {
-      question: "Bagaimana cara penamaan Koperasi Desa Merah Putih?",
+      question: "Bagaimana cara penamaan Koperasi Desa/Kelurahan Merah Putih?",
       answer:
-        "Nama harus diawali dengan kata “Koperasi”, diikuti dengan frasa “Desa Merah Putih”, dan diakhiri dengan nama desa setempat (misalnya, “Koperasi Desa Merah Putih Karangrejo”). Untuk kegiatan usaha berbasis Syariah, harus ditambahkan kata “Syariah”.",
+        "Nama harus diawali dengan kata “Koperasi”, diikuti dengan frasa “Desa/Kelurahan Merah Putih”, dan diakhiri dengan nama desa/kelurahan setempat (misalnya, “Koperasi Desa/Kelurahan Merah Putih Karangrejo”)",
     },
     {
       question: "Apa yang dimaksud dengan pra pendirian koperasi?",
       answer:
-        "Pra pendirian mencakup tahap awal di mana calon pendiri bersama Badan Permusyawaratan Desa mengadakan musyawarah untuk menyusun rancangan usaha, menentukan kebutuhan modal, dan menyepakati partisipasi modal.",
+        "Pra pendirian mencakup tahap awal di mana calon pendiri bersama Badan Permusyawaratan Desa/Kelurahan mengadakan musyawarah untuk menyusun rancangan usaha, menentukan kebutuhan modal, dan menyepakati partisipasi modal.",
     },
     {
-      question: "Siapa saja yang dapat menjadi pendiri koperasi?",
+      question: "Bagaimana proses musyawarah desa/kelurahan dalam pembentukan koperasi?",
       answer:
-        "Pendiri adalah masyarakat desa yang memenuhi persyaratan keanggotaan, hadir dalam rapat pendirian, dan menyatakan kesediaan untuk bergabung dalam koperasi.",
-    },
-    {
-      question: "Bagaimana proses musyawarah desa dalam pembentukan koperasi?",
-      answer:
-        "Musyawarah desa dilakukan untuk membahas rencana pendirian, menyampaikan rancangan usaha, model bisnis, mitigasi risiko, dan menentukan kebutuhan modal yang akan ditetapkan melalui simpanan pokok dan simpanan wajib.",
+        "Musyawarah desa/kelurahan dilakukan untuk membahas rencana pendirian, menyampaikan rancangan usaha, model bisnis, mitigasi risiko, dan menentukan kebutuhan modal yang akan ditetapkan melalui simpanan pokok dan simpanan wajib.",
     },
     {
       question: "Apa itu rapat pendirian koperasi?",
       answer:
-        "Rapat pendirian adalah pertemuan minimal yang dihadiri oleh 9 pendiri untuk membahas dan menetapkan pokok-pokok pendirian, seperti nama, alamat, maksud dan tujuan, permodalan, dan susunan pengurus.",
+        "Rapat pendirian adalah pertemuan yang dihadiri oleh sebanyak-banyaknya masyarakat desa/kelurahan untuk membahas dan menetapkan pokok-pokok pendirian, seperti nama, alamat, maksud dan tujuan, permodalan, dan susunan pengurus/pengawas.",
     },
     {
       question: "Bagaimana tata cara pendirian koperasi baru?",
       answer:
-        "Pendirian koperasi baru dimulai dari musyawarah desa, dilanjutkan dengan rapat pendirian, penyusunan notulen rapat, dan pengajuan pembuatan serta pengesahan Akta Pendirian melalui Notaris Pembuat Akta Koperasi (NPAK).",
+        "Pendirian koperasi baru dimulai dari musyawarah khusus desa/kelurahan, dilanjutkan dengan rapat pendirian, penyusunan notulen rapat, dan pengajuan pembuatan serta pengesahan Akta Pendirian melalui Notaris Pembuat Akta Koperasi (NPAK).",
     },
     {
       question: "Apa peran Notaris Pembuat Akta Koperasi (NPAK)?",
@@ -207,7 +187,7 @@ export default function Home() {
     {
       question: "Bagaimana mekanisme pengembangan koperasi yang telah ada?",
       answer:
-        "Pengembangan dilakukan dengan rapat anggota untuk perubahan anggaran dasar, penyesuaian nama dan jenis usaha sesuai dengan program Kopdes Merah Putih, serta pengajuan perubahan melalui NPAK.",
+        "Pengembangan dilakukan dengan rapat anggota untuk perubahan anggaran dasar, penyesuaian nama dan jenis usaha sesuai dengan program Kopdes/kel Merah Putih, serta pengajuan perubahan melalui NPAK.",
     },
     {
       question: "Apa yang dimaksud dengan revitalisasi koperasi?",
@@ -215,14 +195,9 @@ export default function Home() {
         "Revitalisasi adalah proses mengaktifkan kembali koperasi yang tidak aktif dengan pendampingan, identifikasi potensi, dan penyelenggaraan rapat anggota untuk mengembalikan status aktifnya.",
     },
     {
-      question: "Bagaimana tahapan penggabungan koperasi?",
-      answer:
-        "Penggabungan dilakukan dalam beberapa tahap, dimulai dari pertemuan awal dan musyawarah, rapat anggota untuk persetujuan, penyusunan perjanjian, hingga pengesahan perubahan anggaran dasar dan pembubaran koperasi yang bergabung.",
-    },
-    {
       question: "Apa saja dokumen pendukung yang diperlukan dalam rapat pendirian?",
       answer:
-        "Dokumen pendukung meliputi daftar hadir, fotokopi KTP pendiri, surat rekomendasi dari Kantor Desa, notulen rapat, dan berita acara pendirian.",
+        "Dokumen pendukung setidaknya meliputi daftar hadir, fotokopi KTP pendiri, notulen rapat, dan berita acara pendirian.",
     },
     {
       question: "Bagaimana koperasi mengurus NPWP dan NIB?",
@@ -230,14 +205,9 @@ export default function Home() {
         "Setelah akta pendirian disahkan, koperasi mengurus Nomor Pokok Wajib Pajak (NPWP) di Kantor Pelayanan Pajak dan mendaftarkan hak akses pada Online Single Submission (OSS) untuk memperoleh Nomor Induk Berusaha (NIB).",
     },
     {
-      question: "Bagaimana tata cara memperoleh izin usaha bagi koperasi?",
+      question: "Apa saja jenis usaha yang dapat dijalankan oleh Kopdes/kel Merah Putih?",
       answer:
-        "Koperasi mengajukan izin usaha berdasarkan KBLI yang sesuai dengan jenis kegiatan usaha yang dijalankan, dengan mengikuti ketentuan peraturan perundang-undangan dan melalui instansi terkait.",
-    },
-    {
-      question: "Apa saja jenis usaha yang dapat dijalankan oleh Kopdes Merah Putih?",
-      answer:
-        "Jenis usaha meliputi outlet gerai sembako, apotek desa, kantor koperasi, unit simpan pinjam, klinik desa, cold storage, logistik, serta usaha lain sesuai dengan potensi dan kebutuhan masyarakat desa.",
+        "Jenis usaha meliputi outlet gerai sembako, apotek desa/kelurahan, kantor koperasi, unit simpan pinjam, klinik desa/kelurahan, cold storage, logistik, serta usaha lain sesuai dengan potensi dan kebutuhan masyarakat desa.",
     },
     {
       question: "Bagaimana koperasi memanfaatkan teknologi digital?",
@@ -250,14 +220,19 @@ export default function Home() {
         "Rapat anggota diselenggarakan untuk mengambil keputusan penting, seperti perubahan anggaran dasar, pengesahan laporan keuangan, pembagian sisa hasil usaha, dengan ketentuan kuorum dan tata tertib yang telah ditetapkan.",
     },
     {
-      question: "Bagaimana proses pembagian Sisa Hasil Usaha (SHU) dilakukan?",
+      question: "Apa peran musyawarah desa/kelurahan khusus dalam pembentukan dan pengembangan koperasi?",
       answer:
-        "SHU dibagikan kepada anggota secara sebanding dengan simpanan dan transaksi usaha masing-masing, berdasarkan keputusan rapat anggota dan diatur dalam anggaran dasar serta anggaran rumah tangga.",
+        "Musyawarah desa/kelurahan berfungsi sebagai forum konsultasi awal untuk mendapatkan dukungan dan kesepakatan dari masyarakat serta menyusun rancangan usaha yang mendasari pendirian dan pengembangan koperasi.",
     },
     {
-      question: "Apa peran musyawarah desa dalam pembentukan dan pengembangan koperasi?",
+      question: "Apakah semua koperasi wajib menggunakan domain .kop.id?",
       answer:
-        "Musyawarah desa berfungsi sebagai forum konsultasi awal untuk mendapatkan dukungan dan kesepakatan dari masyarakat serta menyusun rancangan usaha yang mendasari pendirian dan pengembangan koperasi.",
+        "Baik Koperasi yang sudah memiliki website sendiri maupun yang belum, semua dianjurkan beralih ke domain .kop.id sebagai identitas koperasi di digital agar aktivitas digitalnya terhubung dalam Digitalisasi Koperasi.",
+    },
+    {
+      question: "Bagaimana cara mendaftar domain .kop.id?",
+      answer:
+        "Untuk mendaftar domain .kop.id, koperasi perlu mengajukan permohonan melalui platform resmi ini yang telah ditentukan oleh pemerintah.",
     },
   ];  
 
@@ -268,9 +243,9 @@ export default function Home() {
     <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah</a>,
     <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Pemerintah Nomor 11 Tahun 2021 tentang Badan Usaha Milik Desa</a>,
     <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Presiden Nomor 12 tahun 2025 tentang RPJMN tahun 2025–2029</a>,
-    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Instruksi Presiden Republik Indonesia Nomor 9 Tahun 2025 tentang percepatan pembentukan Koperasi Desa Merah Putih</a>,
+    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Instruksi Presiden Republik Indonesia Nomor 9 Tahun 2025 tentang percepatan pembentukan Koperasi Desa/Kelurahan Merah Putih</a>,
     <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Menteri Desa PDT No 7 Tahun 2023 tentang Prioritas Penggunaan Dana Desa tahun 2024</a>,
-    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Rancangan Peraturan Menteri Koperasi tentang Koperasi Desa Merah Putih</a>,
+    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Rancangan Peraturan Menteri Koperasi tentang Koperasi Desa/Kelurahan Merah Putih</a>,
   ];
   return (
     <div className="poppins-regular bg-gray-50 min-h-screen">
@@ -297,7 +272,7 @@ export default function Home() {
                 <h5 className="text-xl md:text-2xl lg:text-3xl text-white font-semibold">
                   Hitung Mundur Peluncuran Koperasi
                   <br />
-                  Desa Merah Putih 12 Juli 2025
+                  Desa/Kelurahan Merah Putih 12 Juli 2025
                 </h5>
 
                 {/* Countdown Timer */}
@@ -350,7 +325,7 @@ export default function Home() {
           {/* Left Column (Text) */}
           <div className="w-full md:w-1/2">
             <h2 className="text-2xl font-semibold text-primary mb-4 md:mb-6">
-              Tentang Koperasi Desa Merah Putih
+              Tentang Koperasi Desa/Kelurahan Merah Putih
             </h2>
             <p className="text-gray-600 text-justify">
               Undang-Undang 1945 Pasal 33 menegaskan bahwa perekonomian
@@ -361,7 +336,7 @@ export default function Home() {
               kerakyatan.
             </p>
             <p className="text-gray-600 text-justify mt-4">
-              Pembentukan Koperasi Desa Merah Putih didorong oleh kebutuhan
+              Pembentukan Koperasi Desa/Kelurahan Merah Putih didorong oleh kebutuhan
               untuk meningkatkan kesejahteraan ekonomi masyarakat desa melalui
               pendekatan ekonomi kerakyatan yang berbasis pada prinsip gotong
               royong, kekeluargaan, dan saling membantu.
@@ -374,7 +349,7 @@ export default function Home() {
             <p className="text-gray-600 text-justify mt-4">
               Pada Rapat Terbatas di Istana Negara pada 3 Maret 2025, Presiden
               RI mengumumkan peluncuran 80.000 koperasi desa dengan nama
-              Koperasi Desa Merah Putih, yang akan dilakukan pada Hari Koperasi
+              Koperasi Desa/Kelurahan Merah Putih, yang akan dilakukan pada Hari Koperasi
               Nasional pada 12 Juli 2025. Inisiatif ini bertujuan untuk
               memperkuat ekonomi desa dan meningkatkan kesejahteraan masyarakat
               melalui koperasi.
@@ -425,7 +400,7 @@ export default function Home() {
             {/* Bagian Kiri: Judul */}
             <div className="lg:w-1/3 flex items-center">
               <h2 className="text-xl lg:text-2xl font-bold text-[#0D3B66] text-left leading-snug">
-                11 Manfaat Koperasi Desa Merah Putih <br /> Sebagai Pusat Produksi & Distribusi
+                11 Manfaat Koperasi Desa/Kelurahan Merah Putih <br /> Sebagai Pusat Produksi & Distribusi
               </h2>
             </div>
 
@@ -573,7 +548,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row w-full max-w-5xl">
           {/* Label Kiri */}
           <div className="bg-[#A0B73E] text-white font-semibold text-lg p-6 md:rounded-l-lg flex items-center justify-center md:justify-start w-full md:w-[40%] text-center md:text-left">
-            Regulasi atau Dasar Hukum <br /> Koperasi Desa Merah Putih
+            Regulasi atau Dasar Hukum <br /> Koperasi Desa/Kelurahan Merah Putih
           </div>
 
           {/* Daftar Regulasi */}
@@ -596,7 +571,7 @@ export default function Home() {
           <div className="text-white">
             <h1 className="text-3xl font-bold leading-snug">
               Mari Bangun Negeri Dengan Jadi Bagian <br />
-              Dari Koperasi Desa Merah Putih
+              Dari Koperasi Desa/Kelurahan Merah Putih
             </h1>
             <div className="mt-6 flex space-x-4">
               <Link href={'/masuk'} className="bg-white text-gray-900 px-6 py-2 rounded-lg font-semibold shadow">
