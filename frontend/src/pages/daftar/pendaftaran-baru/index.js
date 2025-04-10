@@ -42,6 +42,7 @@ export default function RegistrationNew() {
   const [villages, setVillages] = useState([]);
   const [cooperativeTypes, setCooperativeTypes] = useState();
   const [notaryNumbers, setNotaryNumbers] = useState([]);
+    const [selectedDistrict, setSelectedDistrict] = useState("");
 
   useEffect(() => {
     fetchProvince().then(setProvinces);
@@ -128,7 +129,15 @@ export default function RegistrationNew() {
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
               }
-              onChange={setDistrictCode}
+              onChange={(value) => {
+                setDistrictCode(value);
+                const selectedCode = districts.find(district => district.code === value);
+                if(selectedCode.name.toUpperCase().includes('KOTA')) {
+                  setSelectedDistrict("Kota");
+                } else if(selectedCode.name.toUpperCase().includes('KAB')) {
+                  setSelectedDistrict("Kabupaten");
+                }
+              }}
             />
           </Form.Item>
 
@@ -187,7 +196,7 @@ export default function RegistrationNew() {
             rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
           >
             <Input
-              addonBefore="Koperasi Merah Putih"
+              addonBefore={`Koperasi ${selectedDistrict} Merah Putih`}
               onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
               placeholder="Masukkan nama koperasi, yaitu nama desa. contoh DUREN TIGA"
             />

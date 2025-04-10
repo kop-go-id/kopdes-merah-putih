@@ -35,6 +35,7 @@ export default function RegistrationExisting() {
   const [notaryNumbers, setNotaryNumbers] = useState();
   const [cooperativeTypes, setCooperativeTypes] = useState();
   const [nik, setNIK] = useState();
+  const [selectedDistrict, setSelectedDistrict] = useState("");
 
   useEffect(() => {
     fetchProvince().then(setProvinces);
@@ -44,10 +45,16 @@ export default function RegistrationExisting() {
   useEffect(() => {
     if (provinceCode) {
       fetchDistrict(provinceCode).then(districts => {
-        const code = districts.find(district => district.name.toUpperCase() === nik?.district.toUpperCase())?.code;
-        form.setFieldsValue({district_code: code});
+        const selectedCode = districts.find(district => district.name.toUpperCase() === nik?.district.toUpperCase());
+        form.setFieldsValue({district_code: selectedCode?.code});
         setDistricts(districts);
-        setDistrictCode(code);
+        if(selectedCode.name.toUpperCase().includes('KOTA')) {
+          setSelectedDistrict("Kota");
+        } else if(selectedCode.name.toUpperCase().includes('KAB')) {
+          setSelectedDistrict("Kabupaten");
+        }
+
+        setDistrictCode(selectedCode?.code);
       });
 
       getNPAKByProvince(provinceCode).then(setNotaryNumbers);
@@ -56,15 +63,22 @@ export default function RegistrationExisting() {
 
   useEffect(() => {
     fetchSubDistrict(districtCode).then(subdistricts => {
-      const code = subdistricts?.find(subdistrict => subdistrict.name.toUpperCase() === nik?.subdistrict.toUpperCase())?.code;
-      form.setFieldsValue({subdistrict_code: code});
+      const selectedCode = subdistricts?.find(subdistrict => subdistrict.name.toUpperCase() === nik?.subdistrict.toUpperCase());
+      form.setFieldsValue({subdistrict_code: selectedCode?.code});
       setSubDistricts(subdistricts);
-      setSubDistrictCode(code);
+      setSubDistrictCode(selectedCode?.code);
     });
   }, [districtCode]);
 
   useEffect(() => {
-    fetchVillage(subDistrictCode).then(setVillages);
+    fetchVillage(subDistrictCode).then(villages => {
+      const selectedCode = villages?.find(village => village.name.toUpperCase() === nik?.village.toUpperCase());
+      form.setFieldsValue({village_code: selectedCode?.code});
+      form.setFieldsValue({
+        cooperative_name: selectedCode?.name.toUpperCase(),
+      })
+      setVillages(villages);
+    });
   }, [subDistrictCode]);
 
   return (
@@ -211,12 +225,6 @@ export default function RegistrationExisting() {
                 }))}
                 disabled
                 showSearch
-                onChange={(val) => {
-                  const selectedVillage = villages.find((village) => village.code === val)
-                  form.setFieldsValue({
-                    cooperative_name: selectedVillage.name.toUpperCase(),
-                  })
-                }}
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
                 }
@@ -230,7 +238,7 @@ export default function RegistrationExisting() {
             rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
           >
             <Input
-              addonBefore="Koperasi Merah Putih"
+              addonBefore={`Koperasi ${selectedDistrict} Merah Putih`}
               onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
               placeholder="Masukkan nama koperasi, yaitu nama desa. contoh DUREN TIGA"
             />
