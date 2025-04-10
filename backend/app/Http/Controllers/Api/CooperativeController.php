@@ -140,7 +140,7 @@ class CooperativeController extends Controller
                 'district_code' => 'required|exists:districts,code',
                 'subdistrict_code' => 'required|exists:subdistricts,code',
                 'village_code' => 'required|exists:villages,code',
-                'npak_id' => 'required|exists:npaks',
+                'npak_id' => 'required|exists:npaks,notary_id',
                 'bamd' => 'required|file|mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 'bara' => 'required|file|mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 'klu_ids' => 'required|string',
