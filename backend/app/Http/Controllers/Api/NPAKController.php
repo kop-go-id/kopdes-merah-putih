@@ -69,7 +69,7 @@ class NPAKController extends Controller
             ->orderBy('name', 'asc')
             ->get();
 
-        $defaultNPAK = NPAK::where('provinceId', '!=', 0)
+        $defaultNPAK = NPAK::where('provinceId', 0)
             ->with(['province', 'district'])
             ->orderBy('name', 'asc')
             ->get();
