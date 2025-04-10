@@ -18,7 +18,7 @@ import {
 const { Dragger } = Upload;
 const { Option, OptGroup } = Select;
 
-export default function RegistrationExisting() {
+export default function RegistrationNew() {
   const [form] = Form.useForm();
   const router = useRouter();
 
