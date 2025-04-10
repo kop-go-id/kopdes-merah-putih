@@ -8,7 +8,7 @@ class Cooverative extends Model
 {
     protected $table = 'cooperatives';
     protected $primaryKey = 'cooperative_id';
-    protected $guarded = 'cooperative_id';
+    protected $guarded = ['cooperative_id'];
 
     protected $fillable = [
         'name', 'display_name', 'working_area', 'form', 'management_pattern',

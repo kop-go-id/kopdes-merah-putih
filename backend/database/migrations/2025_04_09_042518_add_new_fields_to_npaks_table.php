@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('npaks', function (Blueprint $table) {
-            $table->unsignedBigInteger('districtId'); // FK ke tabel provinsi
+            $table->unsignedBigInteger('districtId');
 
             $table->foreign('districtId')
                 ->references('district_id')

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'gcs'),
 
     /*
     |--------------------------------------------------------------------------
@@ -58,6 +58,17 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
             'report' => false,
+        ],
+
+        'gcs' => [
+            'driver' => 'gcs',
+            'key_file_path' => base_path('kopdes-merah-putih-2f81d9bcde23.json'),
+            'project_id' => env('GOOGLE_CLOUD_PROJECT_ID', ''),
+            'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET', ''),
+            'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX', ''),
+            'storage_api_uri' => env('GOOGLE_CLOUD_STORAGE_API_URI', null),
+            'apiEndpoint' => env('GOOGLE_CLOUD_STORAGE_API_ENDPOINT', null),
+            'visibility' => 'public',
         ],
 
     ],

@@ -8,7 +8,7 @@ class CooperativeLegalStage extends Model
 {
     protected $table = 'cooperative_legal_stages';
     protected $primaryKey = 'cooperative_legal_stage_id';
-    protected $guarded = 'cooperative_legal_stage_id';
+    protected $guarded = ['cooperative_legal_stage_id'];
 
     public function cooperative()
     {
