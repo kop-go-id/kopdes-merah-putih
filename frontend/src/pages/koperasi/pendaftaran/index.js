@@ -27,7 +27,7 @@ export default function CooperativePage() {
 
   return (
     <LayoutWrapper>
-      <div className="bg-[#f6f8fa] p-6 rounded-xl shadow-md">
+      <div className="p-6">
         <h2 className="text-2xl font-semibold text-[#004c5a] mb-6">Status Pendaftaran</h2>
         <Timeline
           items={timelineItems.map((item) => ({
