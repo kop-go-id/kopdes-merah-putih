@@ -31,7 +31,7 @@ Route::prefix('cooperative')->group(function () {
 });
 
 Route::prefix('npak')->group(function () {
-    Route::get('/npak', [NPAKController::class, 'npaks']);
-    Route::get('/npak/by-district-code/{districtCode}', [NPAKController::class, 'getByDistrict']);
-    Route::get('/npak/by-province-code/{provinceCode}', [NPAKController::class, 'getByProvince']);
+    Route::get('/', [NPAKController::class, 'npaks']);
+    Route::get('/by-district-code/{districtCode}', [NPAKController::class, 'getByDistrict']);
+    Route::get('/by-province-code/{provinceCode}', [NPAKController::class, 'getByProvince']);
 });
