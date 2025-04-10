@@ -33,6 +33,7 @@ export default function RegistrationNew() {
       [name]: e.target.checked,
     }));
   };
+  const [loadingForm, setLoadingForm] = useState(false);
   const [provinces, setProvinces] = useState([]);
   const [provinceCode, setProvinceCode] = useState();
   const [districts, setDistricts] = useState([]);
@@ -65,6 +66,7 @@ export default function RegistrationNew() {
   }, [subDistrictCode]);
 
   const onFinish = (val) => {
+    setLoadingForm(true);
     const registerInput = {
       ...val,
       klu_ids: val.klu_ids?.join(","),
@@ -74,6 +76,8 @@ export default function RegistrationNew() {
     console.log("registerInput", registerInput);
 
     registerNewCooperative(registerInput);
+    setLoadingForm(false);
+    router.push("/daftar/sukses");
   };
 
   return (
@@ -471,6 +475,7 @@ export default function RegistrationNew() {
               type="primary"
               htmlType="submit"
               block
+              loading={loadingForm}
               disabled={
                 agreementStatus.agreement_1 && agreementStatus.agreement_2
                   ? false
