@@ -154,6 +154,7 @@ class CooperativeController extends Controller
                 'name'=> $request->input('name'),
                 'email' => $request->input('email'),
                 'phone'=> $request->input('phone'),
+                'role' => 'Pengurus koperasi',
                 'password'=> Hash::make($request->input('password')),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -169,7 +170,7 @@ class CooperativeController extends Controller
             $fetchBara = $disk->url($storeBara);
 
             $cooperative = Cooverative::create([
-                'name' => $request->input('cooperative_name'),
+                'name' => strtoupper($request->input('cooperative_name')),
                 'provinceId' => $request->input('province_id'),
                 'districtId' => $request->input('district_id'),
                 'subdistrictId' => $request->input('subdistrict_id'),
@@ -183,12 +184,14 @@ class CooperativeController extends Controller
                 'bara' => $fetchBara
             ]);
 
-            CooperativeLegalStage::create([
-                'name' => 'registrasi',
-                'sequence' => 1,
+            $legalStage = CooperativeLegalStage::create([
+                'cooperativeId' => $cooperative->cooperative_id,
+                'legalStageId' => 1,                
                 'created_at' => Carbon::now(),
                 'updated_at'=> Carbon::now()
             ]);
+
+            $legalStage->name = 'Registrasi';
     
             $klus = $request->input('klu_ids');
             foreach (explode(',', $klus) as $klu) {
@@ -204,7 +207,7 @@ class CooperativeController extends Controller
                 'status' => 'active',
                 'nik' => '',
                 'name' => $request->input('name'),
-                'role' => 'Administrator koperasi',
+                'role' => 'Pengurus',
                 'npwp' => '',
                 'phone' => $request->input('phone'),
                 'gender' => 'male',
@@ -218,6 +221,7 @@ class CooperativeController extends Controller
                 'data' => [
                     'user' => $user,
                     'cooperative' => $cooperative,
+                    'legal_stage' => $legalStage,
                     'management' => $management
                 ]
             ], 200);
@@ -229,16 +233,4 @@ class CooperativeController extends Controller
             ], 500);
         }
     }
-
-    public function uploadFile(UploadedFile $file, $folder = null, $filename = null)
-    {
-        $name = !is_null($filename) ? $filename : Str::random(25);
-
-        return $file->storeAs(
-            $folder,
-            $name . "." . $file->getClientOriginalExtension(),
-            'gcs'
-        );
-    }
-
 }
