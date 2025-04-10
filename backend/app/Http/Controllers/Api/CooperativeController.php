@@ -164,8 +164,8 @@ class CooperativeController extends Controller
             $bamd = $request->file('bamd');
             $bamd_file_name = time() . '_' . $bamd->getClientOriginalName();
             $bara_file_name = time() . '_' . $bamd->getClientOriginalName();
-            $storeBamd = $bamd->storeAs("test", $bamd_file_name, "gcs");
-            $storeBara = $bamd->storeAs("test", $bara_file_name, "gcs");
+            $storeBamd = $bamd->storeAs("bamd", $bamd_file_name, "gcs");
+            $storeBara = $bamd->storeAs("bara", $bara_file_name, "gcs");
             $disk = Storage::disk('gcs');
             $fetchBamd = $disk->url($storeBamd);
             $fetchBara = $disk->url($storeBara);
