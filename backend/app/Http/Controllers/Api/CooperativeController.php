@@ -13,11 +13,12 @@ use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Http\Request;
 use App\Models\CooperativeType;
 use App\Models\Cooverative;
-use App\Models\CooverativeLegalStage;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Http\UploadedFile;
+use App\Models\Province;
+use App\Models\District;
+use App\Models\Subdistrict;
+use App\Models\Village;
 
 class CooperativeController extends Controller
 {
@@ -135,10 +136,10 @@ class CooperativeController extends Controller
         try {
             $request->validate([
                 'cooperative_name' => 'required|string|max:50|unique:cooperatives,name',
-                'province_id' => 'required|exists:provinces,province_id',
-                'district_id' => 'required|exists:districts,district_id',
-                'subdistrict_id' => 'required|exists:subdistricts,subdistrict_id',
-                'village_id' => 'required|exists:villages,village_id',
+                'province_code' => 'required|exists:provinces,code',
+                'district_code' => 'required|exists:districts,code',
+                'subdistrict_code' => 'required|exists:subdistricts,code',
+                'village_code' => 'required|exists:villages,code',
                 'npak_id' => 'required|exists:npaks,notary_id',
                 'bamd' => 'required|file|mimes:pdf,docx',
                 'bara' => 'required|file|mimes:pdf,docx',
@@ -169,12 +170,17 @@ class CooperativeController extends Controller
             $fetchBamd = $disk->url($storeBamd);
             $fetchBara = $disk->url($storeBara);
 
+            $province = Province::where('code', $request->input('province_code'))->first();
+            $district = District::where('code', $request->input('district_code'))->first();
+            $subdistrict = Subdistrict::where('code', $request->input('subdistrict_code'))->first();
+            $village = Village::where('code', $request->input('village_code'))->first();
+
             $cooperative = Cooverative::create([
                 'name' => strtoupper($request->input('cooperative_name')),
-                'provinceId' => $request->input('province_id'),
-                'districtId' => $request->input('district_id'),
-                'subdistrictId' => $request->input('subdistrict_id'),
-                'villageId' => $request->input('village_id'),
+                'provinceId' => $province->province_id,
+                'districtId' => $district->district_id,
+                'subdistrictId' => $subdistrict->subdistrict_id,
+                'villageId' => $village->village_id,
                 'userId' => $user->id,
                 'npakId' => 1,
                 'subdomain' => $request->input('subdomain'),
