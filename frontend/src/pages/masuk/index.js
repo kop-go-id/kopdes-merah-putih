@@ -23,9 +23,9 @@ export default function LoginFormAntd() {
           <Image
             src="/images/logo.png"
             alt="Logo Koperasi"
-            width={80}
-            height={80}
-            className="object-contain sm:w-[100px] sm:h-[100px]"
+            width={100}
+            height={100}
+            className="object-contain sm:w-[130px] sm:h-[130px]"
           />
         </div>
 
