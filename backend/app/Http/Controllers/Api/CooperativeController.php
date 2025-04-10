@@ -190,6 +190,8 @@ class CooperativeController extends Controller
                 'created_at' => Carbon::now(),
                 'updated_at'=> Carbon::now()
             ]);
+
+            $legalStage->name = 'Registrasi';
     
             $klus = $request->input('klu_ids');
             foreach (explode(',', $klus) as $klu) {
