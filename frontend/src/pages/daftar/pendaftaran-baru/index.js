@@ -111,7 +111,13 @@ export default function RegistrationNew() {
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
               }
-              onChange={setProvinceCode}
+              onChange={(value)=>{setProvinceCode(value);
+                form.setFieldsValue({
+                  district_code: null,
+                  subdistrict_code: null,
+                  village_code: null
+                })
+              }}
             />
           </Form.Item>
 
@@ -135,6 +141,10 @@ export default function RegistrationNew() {
               }
               onChange={(value) => {
                 setDistrictCode(value);
+                form.setFieldsValue({
+                  subdistrict_code: null,
+                  village_code: null
+                })
                 const selectedCode = districts.find(district => district.code === value);
                 if(selectedCode.name.toUpperCase().includes('KOTA')) {
                   setSelectedDistrict("Kelurahan");
@@ -161,7 +171,11 @@ export default function RegistrationNew() {
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
                 }
-                onChange={setSubDistrictCode}
+                onChange={(val)=>{setSubDistrictCode(val)
+                  form.setFieldsValue({
+                    village_code: null
+                  })
+                }}
               />
             </Form.Item>
 
