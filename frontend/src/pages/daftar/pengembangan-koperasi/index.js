@@ -44,7 +44,7 @@ export default function RegistrationExisting() {
   useEffect(() => {
     if (provinceCode) {
       fetchDistrict(provinceCode).then(districts => {
-        const code = districts.find(district => district.name === nik.district.toUpperCase())?.code;
+        const code = districts.find(district => district.name === nik?.district.toUpperCase())?.code;
         form.setFieldsValue({district_code: code});
         setDistricts(districts);
         setDistrictCode(code);
@@ -56,7 +56,7 @@ export default function RegistrationExisting() {
 
   useEffect(() => {
     fetchSubDistrict(districtCode).then(subdistricts => {
-      const code = subdistricts.find(subdistrict => subdistrict.name === nik.subdistrict.toUpperCase())?.code;
+      const code = subdistricts.find(subdistrict => subdistrict.name === nik?.subdistrict.toUpperCase())?.code;
       form.setFieldsValue({subdistrict_code: code});
       setSubDistricts(districts);
       setSubDistrictCode(code);
@@ -143,6 +143,7 @@ export default function RegistrationExisting() {
                 label: province.name,
                 value: province.code,
               }))}
+              disabled
               showSearch
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
@@ -165,12 +166,12 @@ export default function RegistrationExisting() {
                 label: district.name,
                 value: district.code,
               }))}
+              disabled
               showSearch
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
               }
               onChange={setDistrictCode}
-              // defaultValue={}
             />
           </Form.Item>
 
@@ -186,6 +187,7 @@ export default function RegistrationExisting() {
                   label: val.name,
                   value: val.code,
                 }))}
+                disabled
                 showSearch
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
@@ -207,13 +209,14 @@ export default function RegistrationExisting() {
                   label: val.name,
                   value: val.code,
                 }))}
+                disabled
                 showSearch
-                // onChange={(val) => {
-                //   const selectedVillage = villages.find((village) => village.code === val)
-                //   form.setFieldsValue({
-                //     name: selectedVillage.name.toUpperCase(),
-                //   })
-                // }}
+                onChange={(val) => {
+                  const selectedVillage = villages.find((village) => village.code === val)
+                  form.setFieldsValue({
+                    cooperative_name: selectedVillage.name.toUpperCase(),
+                  })
+                }}
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
                 }

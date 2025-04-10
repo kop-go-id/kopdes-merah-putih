@@ -170,7 +170,7 @@ export default function RegistrationExisting() {
                     (village) => village.code === val
                   );
                   form.setFieldsValue({
-                    name: selectedVillage.name.toUpperCase(),
+                    cooperative_name: selectedVillage?.name.toUpperCase(),
                   });
                 }}
                 showSearch
