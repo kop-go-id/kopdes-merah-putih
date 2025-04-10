@@ -94,16 +94,16 @@ export default function LayoutWrapper({ children }) {
       <Header className="bg-white px-4 py-0 shadow z-50 fixed w-full top-0 h-[64px] flex items-center justify-between">
   {/* Kiri: Logo + Hamburger */}
   <div className="flex items-center space-x-4">
-    <img
-      src="/images/logo.png"
-      alt="Logo"
-      className="h-10 w-auto object-contain"
-    />
     <Button
       type="text"
       icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       onClick={() => setCollapsed(!collapsed)}
       className="text-[#01566a] flex items-center justify-center"
+    />
+    <img
+      src="/images/logo.png"
+      alt="Logo"
+      className="h-10 w-auto object-contain"
     />
   </div>
 
@@ -131,7 +131,7 @@ export default function LayoutWrapper({ children }) {
             fixed top-[64px] h-[calc(100vh-64px)] left-0
             ${collapsed ? "-left-[250px]" : "left-0"}
 
-            md:relative md:top-0 md:left-0 md:h-auto
+            md:sticky md:top-[64px] md:h-[calc(100vh-64px)]
           `}
         >
 
