@@ -165,12 +165,12 @@ class CooperativeController extends Controller
 
             $bamd = $request->file('bamd');
             $bamd_file_name = time() . '_' . $bamd->getClientOriginalName();
-            $storeBamd = $bamd->storeAs("bamd", $bamd_file_name, "gcs");
+            $storeBamd = $bamd->putFileAs("bamd", $bamd_file_name, "gcs");
             $fetchBamd = $disk->url($storeBamd);
 
             $bara = $request->file('bara');
             $bara_file_name = time() . '_' . $bara->getClientOriginalName();
-            $storeBara = $bara->storeAs("bara", $bara_file_name, "gcs");
+            $storeBara = $bara->putFileAs("bara", $bara_file_name, "gcs");
             $fetchBara = $disk->url($storeBara);
 
             $province = Province::where('code', $request->input('province_code'))->first();
