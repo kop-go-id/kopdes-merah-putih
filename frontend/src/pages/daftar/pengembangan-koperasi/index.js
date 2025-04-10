@@ -81,33 +81,33 @@ export default function RegistrationExisting() {
             <Input.Search
               onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
               placeholder="Masukkan Nomor Induk Koperasi"
-              onChange={(e) => {
-                setLoadingCheckNIK(true);
-                axios.get(`https://api.merahputih.kop.id/api/cooperative/by-nik/${e.target.value}`).then((res) => {
-                  console.log(res.data.data);
-                  setLoadingCheckNIK(false);
-                  form.setFieldsValue({
-                    name: res.data.data.name
-                  })
-                }).catch((err) => {
-                  message.error("Something went wrong");
-                  setLoadingCheckNIK(false);
-                });
-              }}
+              // onChange={(e) => {
+              //   setLoadingCheckNIK(true);
+              //   axios.get(`https://api.merahputih.kop.id/api/cooperative/by-nik/${e.target.value}`).then((res) => {
+              //     console.log(res.data.data);
+              //     setLoadingCheckNIK(false);
+              //     form.setFieldsValue({
+              //       name: res.data.data.name
+              //     })
+              //   }).catch((err) => {
+              //     message.error("Something went wrong");
+              //     setLoadingCheckNIK(false);
+              //   });
+              // }}
               enterButton
               loading={loadingCheckNIK}
             />
           </Form.Item>
           <Form.Item
             label="Nama Koperasi Existing"
-            name="name"
+            name="name_existing"
             className="mb-4"
             rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
           >
             <Input
-              addonBefore="Koperasi Desa Merah Putih"
+            disabled
               onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
-              placeholder="Masukkan nama koperasi, yaitu nama desa. contoh DUREN TIGA"
+              placeholder="Nama Koperasi"
             />
           </Form.Item>
 
@@ -187,12 +187,30 @@ export default function RegistrationExisting() {
                   value: val.code,
                 }))}
                 showSearch
+                onChange={(val) => {
+                  const selectedVillage = villages.find((village) => village.code === val)
+                  form.setFieldsValue({
+                    name: selectedVillage.name.toUpperCase(),
+                  })
+                }}
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
                 }
               />
             </Form.Item>
           </div>
+          <Form.Item
+            label="Nama Koperasi Existing"
+            name="name"
+            className="mb-4"
+            rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
+          >
+            <Input
+              addonBefore="Koperasi Desa Merah Putih"
+              onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
+              placeholder="Masukkan nama koperasi, yaitu nama desa. contoh DUREN TIGA"
+            />
+          </Form.Item>
 
           <Form.Item
             label="Notaris Pembuat Akta Koperasi"
