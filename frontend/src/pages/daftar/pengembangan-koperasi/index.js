@@ -4,7 +4,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import Stepper from "@/components/Stepper";
 import { useRouter } from "next/router";
 import { callApi, getAPIEndpoint } from "@/utils/endpoint";
-import axios from "axios";
+// import axios from "axios";
 
 const { Option, OptGroup } = Select;
 const { Dragger } = Upload;
@@ -139,19 +139,19 @@ export default function RegistrationExisting() {
             <Input.Search
               onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
               placeholder="Masukkan Nomor Induk Koperasi"
-              onChange={(e) => {
-                setLoadingCheckNIK(true);
-                axios.get(`https://api.merahputih.kop.id/api/cooperative/by-nik/${e.target.value}`).then((res) => {
-                  console.log(res.data.data);
-                  setLoadingCheckNIK(false);
-                  form.setFieldsValue({
-                    name: res.data.data.name
-                  })
-                }).catch((err) => {
-                  message.error("Something went wrong");
-                  setLoadingCheckNIK(false);
-                });
-              }}
+              // onChange={(e) => {
+              //   setLoadingCheckNIK(true);
+              //   axios.get(`https://api.merahputih.kop.id/api/cooperative/by-nik/${e.target.value}`).then((res) => {
+              //     console.log(res.data.data);
+              //     setLoadingCheckNIK(false);
+              //     form.setFieldsValue({
+              //       name: res.data.data.name
+              //     })
+              //   }).catch((err) => {
+              //     message.error("Something went wrong");
+              //     setLoadingCheckNIK(false);
+              //   });
+              // }}
               enterButton
               loading={loadingCheckNIK}
             />
