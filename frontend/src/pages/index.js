@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import { list } from "postcss";
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({
@@ -23,7 +24,7 @@ export default function Home() {
     minutes: 0,
     seconds: 0,
   });
-  
+
   useEffect(() => {
     const targetDate = new Date("July 12, 2025 00:00:00").getTime();
     const timer = setInterval(() => {
@@ -50,14 +51,17 @@ export default function Home() {
     {
       icon: <Wrench size={40} className="text-[#A0B73E]" />,
       title: "Membangun Koperasi Baru",
+      link: "/daftar/pendaftaran-baru",
     },
     {
       icon: <FastForward size={40} className="text-[#A0B73E]" />,
       title: "Mengembangkan yang Sudah Ada",
+      link: "/daftar/pengembangan-koperasi",
     },
     {
       icon: <Users size={40} className="text-[#A0B73E]" />,
       title: "Revitalisasi Koperasi",
+      link: "/daftar/revitalisasi-koperasi",
     },
   ];
 
@@ -150,7 +154,8 @@ export default function Home() {
         "Pra pendirian mencakup tahap awal di mana calon pendiri bersama Badan Permusyawaratan Desa/Kelurahan mengadakan musyawarah untuk menyusun rancangan usaha, menentukan kebutuhan modal, dan menyepakati partisipasi modal.",
     },
     {
-      question: "Bagaimana proses musyawarah desa/kelurahan dalam pembentukan koperasi?",
+      question:
+        "Bagaimana proses musyawarah desa/kelurahan dalam pembentukan koperasi?",
       answer:
         "Musyawarah desa/kelurahan dilakukan untuk membahas rencana pendirian, menyampaikan rancangan usaha, model bisnis, mitigasi risiko, dan menentukan kebutuhan modal yang akan ditetapkan melalui simpanan pokok dan simpanan wajib.",
     },
@@ -195,7 +200,8 @@ export default function Home() {
         "Revitalisasi adalah proses mengaktifkan kembali koperasi yang tidak aktif dengan pendampingan, identifikasi potensi, dan penyelenggaraan rapat anggota untuk mengembalikan status aktifnya.",
     },
     {
-      question: "Apa saja dokumen pendukung yang diperlukan dalam rapat pendirian?",
+      question:
+        "Apa saja dokumen pendukung yang diperlukan dalam rapat pendirian?",
       answer:
         "Dokumen pendukung setidaknya meliputi daftar hadir, fotokopi KTP pendiri, notulen rapat, dan berita acara pendirian.",
     },
@@ -205,7 +211,8 @@ export default function Home() {
         "Setelah akta pendirian disahkan, koperasi mengurus Nomor Pokok Wajib Pajak (NPWP) di Kantor Pelayanan Pajak dan mendaftarkan hak akses pada Online Single Submission (OSS) untuk memperoleh Nomor Induk Berusaha (NIB).",
     },
     {
-      question: "Apa saja jenis usaha yang dapat dijalankan oleh Kopdes/kel Merah Putih?",
+      question:
+        "Apa saja jenis usaha yang dapat dijalankan oleh Kopdes/kel Merah Putih?",
       answer:
         "Jenis usaha meliputi outlet gerai sembako, apotek desa/kelurahan, kantor koperasi, unit simpan pinjam, klinik desa/kelurahan, cold storage, logistik, serta usaha lain sesuai dengan potensi dan kebutuhan masyarakat desa.",
     },
@@ -215,12 +222,14 @@ export default function Home() {
         "Koperasi dianjurkan mengoptimalkan teknologi digital, misalnya dengan memiliki situs web ber-domain “kop.id”, untuk memperkuat identitas dan integrasi dalam ekosistem koperasi.",
     },
     {
-      question: "Bagaimana tata cara penyelenggaraan rapat anggota dalam koperasi?",
+      question:
+        "Bagaimana tata cara penyelenggaraan rapat anggota dalam koperasi?",
       answer:
         "Rapat anggota diselenggarakan untuk mengambil keputusan penting, seperti perubahan anggaran dasar, pengesahan laporan keuangan, pembagian sisa hasil usaha, dengan ketentuan kuorum dan tata tertib yang telah ditetapkan.",
     },
     {
-      question: "Apa peran musyawarah desa/kelurahan khusus dalam pembentukan dan pengembangan koperasi?",
+      question:
+        "Apa peran musyawarah desa/kelurahan khusus dalam pembentukan dan pengembangan koperasi?",
       answer:
         "Musyawarah desa/kelurahan berfungsi sebagai forum konsultasi awal untuk mendapatkan dukungan dan kesepakatan dari masyarakat serta menyusun rancangan usaha yang mendasari pendirian dan pengembangan koperasi.",
     },
@@ -234,24 +243,74 @@ export default function Home() {
       answer:
         "Untuk mendaftar domain .kop.id, koperasi perlu mengajukan permohonan melalui platform resmi ini yang telah ditentukan oleh pemerintah.",
     },
-  ];  
+  ];
 
   const regulations = [
-    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Undang-Undang Nomor 25 Tahun 1992 tentang Perkoperasian</a>,
-    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah</a>,
-    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Undang-Undang Nomor 59 Tahun 2024 tentang RPJPN Tahun 2025–2045</a>,
-    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah</a>,
-    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Pemerintah Nomor 11 Tahun 2021 tentang Badan Usaha Milik Desa</a>,
-    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Presiden Nomor 12 tahun 2025 tentang RPJMN tahun 2025–2029</a>,
-    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Instruksi Presiden Republik Indonesia Nomor 9 Tahun 2025 tentang percepatan pembentukan Koperasi Desa/Kelurahan Merah Putih</a>,
-    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Peraturan Menteri Desa PDT No 7 Tahun 2023 tentang Prioritas Penggunaan Dana Desa tahun 2024</a>,
-    <a href="https://www.pendamping-desa.com/2025/04/instruksi-presiden-republik-indonesia.html" className="hover:text-[#8CA531]">Rancangan Peraturan Menteri Koperasi tentang Koperasi Desa/Kelurahan Merah Putih</a>,
+    <a
+      href="https://jdih.kop.go.id/doc/detail/doc-708-v_peraturan"
+      className="hover:text-[#8CA531]"
+    >
+      Undang-Undang Nomor 25 Tahun 1992 tentang Perkoperasian
+    </a>,
+    <a
+      href="https://jdih.kop.go.id/"
+      className="hover:text-[#8CA531]"
+    >
+      Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan
+      Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah
+    </a>,
+    <a
+      href="https://jdih.kop.go.id/"
+      className="hover:text-[#8CA531]"
+    >
+      Undang-Undang Nomor 59 Tahun 2024 tentang RPJPN Tahun 2025–2045
+    </a>,
+    <a
+      href="https://jdih.kop.go.id/"
+      className="hover:text-[#8CA531]"
+    >
+      Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan
+      Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah
+    </a>,
+    <a
+      href="https://jdih.kop.go.id/"
+      className="hover:text-[#8CA531]"
+    >
+      Peraturan Pemerintah Nomor 11 Tahun 2021 tentang Badan Usaha Milik Desa
+    </a>,
+    <a
+      href="https://jdih.kop.go.id/"
+      className="hover:text-[#8CA531]"
+    >
+      Peraturan Presiden Nomor 12 tahun 2025 tentang RPJMN tahun 2025–2029
+    </a>,
+    <a
+      href="https://jdih.kop.go.id/"
+      className="hover:text-[#8CA531]"
+    >
+      Instruksi Presiden Republik Indonesia Nomor 9 Tahun 2025 tentang
+      percepatan pembentukan Koperasi Desa/Kelurahan Merah Putih
+    </a>,
+    <a
+      href="https://jdih.kop.go.id/"
+      className="hover:text-[#8CA531]"
+    >
+      Peraturan Menteri Desa PDT No 7 Tahun 2023 tentang Prioritas Penggunaan
+      Dana Desa tahun 2024
+    </a>,
+    <a
+      href="https://jdih.kop.go.id/"
+      className="hover:text-[#8CA531]"
+    >
+      Rancangan Peraturan Menteri Koperasi tentang Koperasi Desa/Kelurahan Merah
+      Putih
+    </a>,
   ];
   return (
     <div className="poppins-regular bg-gray-50 min-h-screen">
       <Navbar />
       {/* Hero */}
-      <div className="relative w-full bg-white shadow-md pt-[70px] md:pt-[90px] lg:pt-[80px] pb-6 flex flex-col items-center">
+      <div className="relative w-full bg-white shadow-md pt-[90px] md:pt-[90px] lg:pt-[80px] flex flex-col items-center">
         {/* Wrapper untuk Grid di Desktop */}
         <div className="w-full  grid grid-cols-1 md:grid-cols-2  items-center">
           {/* Countdown Section */}
@@ -276,7 +335,7 @@ export default function Home() {
                 </h5>
 
                 {/* Countdown Timer */}
-                <div className="flex justify-center space-x-4 md:space-x-8 lg:space-x-12 text-white font-semibold mt-4">
+                <div className="flex justify-center space-x-4 md:space-x-8 lg:space-x-12 text-white font-semibold ">
                   {[
                     { label: "Hari", value: timeLeft.days },
                     { label: "Jam", value: timeLeft.hours },
@@ -294,9 +353,9 @@ export default function Home() {
 
                 {/* CTA Button Register */}
                 <Link
-                href="/daftar"
-                className="mt-6 w-full max-w-md bg-[#A0B73E] hover:bg-[#8CA531] text-white font-semibold py-3 px-6 rounded-md shadow-md transition duration-300 text-center"
-                > 
+                  href="/daftar"
+                  className="my-4 w-full max-w-md bg-[#A0B73E] hover:bg-[#8CA531] text-white font-semibold py-2 px-6 rounded-md shadow-md transition duration-300 text-center"
+                >
                   Daftar Sekarang
                 </Link>
               </div>
@@ -304,7 +363,7 @@ export default function Home() {
           </div>
           {/* Quote Section */}
           <div className="relative md:order-1">
-            <div className="bg-[#FBFEF5] p-6 rounded-lg shadow-lg relative">
+            <div className="bg-[#FBFEF5] p-6 md:py-24 lg:py-24 rounded-lg shadow-lg relative h-[150px] md:h-[350px] lg:h-[400px]">
               <p className="text-primary font-bold text-lg md:text-xl lg:text-5xl text-center md:text-left">
                 "Koperasi Desa Sebagai Upaya Meningkatkan Ketahanan Pangan"
               </p>
@@ -336,10 +395,10 @@ export default function Home() {
               kerakyatan.
             </p>
             <p className="text-gray-600 text-justify mt-4">
-              Pembentukan Koperasi Desa/Kelurahan Merah Putih didorong oleh kebutuhan
-              untuk meningkatkan kesejahteraan ekonomi masyarakat desa melalui
-              pendekatan ekonomi kerakyatan yang berbasis pada prinsip gotong
-              royong, kekeluargaan, dan saling membantu.
+              Pembentukan Koperasi Desa/Kelurahan Merah Putih didorong oleh
+              kebutuhan untuk meningkatkan kesejahteraan ekonomi masyarakat desa
+              melalui pendekatan ekonomi kerakyatan yang berbasis pada prinsip
+              gotong royong, kekeluargaan, dan saling membantu.
             </p>
             <p className="text-gray-600 text-justify mt-4">
               Dalam retreat kepala daerah di Akmil Magelang pada 21-28 Februari
@@ -349,8 +408,8 @@ export default function Home() {
             <p className="text-gray-600 text-justify mt-4">
               Pada Rapat Terbatas di Istana Negara pada 3 Maret 2025, Presiden
               RI mengumumkan peluncuran 80.000 koperasi desa dengan nama
-              Koperasi Desa/Kelurahan Merah Putih, yang akan dilakukan pada Hari Koperasi
-              Nasional pada 12 Juli 2025. Inisiatif ini bertujuan untuk
+              Koperasi Desa/Kelurahan Merah Putih, yang akan dilakukan pada Hari
+              Koperasi Nasional pada 12 Juli 2025. Inisiatif ini bertujuan untuk
               memperkuat ekonomi desa dan meningkatkan kesejahteraan masyarakat
               melalui koperasi.
             </p>
@@ -375,32 +434,35 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <div id="model" className="py-10">
-        <h2 className="text-center text-lg font-semibold text-[#0D3B66] mb-6">
+      <div id="model" className="py-10 bg-white w-full">
+        <h2 className="text-center text-xl font-bold text-[#0D3B66] mb-8">
           Model Pembentukan
         </h2>
 
-        <div className="flex flex-col md:flex-row justify-center items-center gap-6 px-4">
-          {modelData.map((item, index) => (
-            <div
-              key={index}
-              className="w-[250px] h-[150px] bg-[#FCFCFC] shadow-md rounded-xl flex flex-col items-center justify-center text-center p-4"
-            >
-              {item.icon}
-              <p className="mt-3 text-sm font-semibold text-[#0D3B66]">
-                {item.title}
-              </p>
-            </div>
-          ))}
+        <div className="flex justify-center items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 w-full max-w-7xl px-4 md:px-8">
+            {modelData.map((item, index) => (
+              <Link key={index} href={item.link || "#"} passHref>
+                <div className="cursor-pointer w-full h-[180px] bg-[#FCFCFC] hover:bg-[#f0f0f0] shadow rounded-xl p-4 flex flex-col items-center justify-center text-center transition-all duration-200">
+                  {item.icon}
+                  <p className="mt-4 text-sm font-semibold text-[#0D3B66]">
+                    {item.title}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
+
       <div id="benefit" className="bg-[#F9FBF3] py-10 px-6">
         <div className="bg-[#F9FBF3] py-10 px-6">
           <div className="mx-auto flex flex-col lg:flex-row items-start gap-8">
             {/* Bagian Kiri: Judul */}
             <div className="lg:w-1/3 flex items-center">
               <h2 className="text-xl lg:text-2xl font-bold text-[#0D3B66] text-left leading-snug">
-                11 Manfaat Koperasi Desa/Kelurahan Merah Putih <br /> Sebagai Pusat Produksi & Distribusi
+                11 Manfaat Koperasi Desa/Kelurahan Merah Putih <br /> Sebagai
+                Pusat Produksi & Distribusi
               </h2>
             </div>
 
@@ -520,7 +582,9 @@ export default function Home() {
             {faqs.map((faq, index) => (
               <SwiperSlide key={index}>
                 <div className="p-4 bg-gray-100 rounded-lg">
-                  <h3 className="font-semibold text-gray-900">{faq.question}</h3>
+                  <h3 className="font-semibold text-gray-900">
+                    {faq.question}
+                  </h3>
                   <p className="text-gray-700 mt-2">{faq.answer}</p>
                 </div>
               </SwiperSlide>
@@ -574,10 +638,16 @@ export default function Home() {
               Dari Koperasi Desa/Kelurahan Merah Putih
             </h1>
             <div className="mt-6 flex space-x-4">
-              <Link href={'/masuk'} className="bg-white text-gray-900 px-6 py-2 rounded-lg font-semibold shadow">
+              <Link
+                href={"/masuk"}
+                className="bg-white text-gray-900 px-6 py-2 rounded-lg font-semibold shadow"
+              >
                 Masuk
               </Link>
-              <Link href={'/daftar'} className="bg-[#A0B73E] text-white px-6 py-2 rounded-lg font-semibold shadow">
+              <Link
+                href={"/daftar"}
+                className="bg-[#A0B73E] text-white px-6 py-2 rounded-lg font-semibold shadow"
+              >
                 Daftar
               </Link>
             </div>

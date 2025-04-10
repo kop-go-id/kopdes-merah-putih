@@ -4,7 +4,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import Stepper from "@/components/Stepper";
 import { useRouter } from "next/router";
 import { fetchDistrict, fetchProvince, fetchSubDistrict, fetchVillage } from "@/services/region";
-import { getCooperativeTypes, getNIKs, getNPAKByProvince } from "@/services/cooperative";
+import { getCooperativeTypes, getNIKs, getNPAKByProvince, registerNewCooperative } from "@/services/cooperative";
 
 const { Option, OptGroup } = Select;
 const { Dragger } = Upload;
@@ -24,6 +24,7 @@ export default function RegistrationExisting() {
       [name]: e.target.checked,
     }));
   };
+    const [loadingForm, setLoadingForm] = useState(false);
   const [loadingCheckNIK, setLoadingCheckNIK] = useState(false);
   const [provinces, setProvinces] = useState([]);
   const [provinceCode, setProvinceCode] = useState();
@@ -49,9 +50,9 @@ export default function RegistrationExisting() {
         form.setFieldsValue({district_code: selectedCode?.code});
         setDistricts(districts);
         if(selectedCode.name.toUpperCase().includes('KOTA')) {
-          setSelectedDistrict("Kota");
+          setSelectedDistrict("Kelurahan");
         } else if(selectedCode.name.toUpperCase().includes('KAB')) {
-          setSelectedDistrict("Kabupaten");
+          setSelectedDistrict("Desa");
         }
 
         setDistrictCode(selectedCode?.code);
@@ -76,10 +77,26 @@ export default function RegistrationExisting() {
       form.setFieldsValue({village_code: selectedCode?.code});
       form.setFieldsValue({
         cooperative_name: selectedCode?.name.toUpperCase(),
+        subdomain: selectedCode?.name.toLowerCase().replace(/\s+/g, ""),
       })
       setVillages(villages);
     });
   }, [subDistrictCode]);
+
+  const onFinish = (val) => {
+    setLoadingForm(true);
+    const registerInput = {
+      ...val,
+      klu_ids: val.klu_ids?.join(","),
+      bamd: val.bamd.file.originFileObj,
+      bara: val.bara.file.originFileObj,
+    };
+    console.log("registerInput", registerInput);
+
+    registerNewCooperative(registerInput);
+    setLoadingForm(false);
+    router.push("/daftar/sukses");
+  };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white">
@@ -96,7 +113,7 @@ export default function RegistrationExisting() {
         <Form
           form={form}
           layout="vertical"
-          onFinish={(values) => console.log("Form Values:", values)}
+          onFinish={onFinish}
         >
                     <Divider>Kedudukan</Divider>
           <Form.Item
@@ -246,7 +263,7 @@ export default function RegistrationExisting() {
 
           <Form.Item
             label="Notaris Pembuat Akta Koperasi"
-            name="npakId"
+            name="npak_id"
             className="mb-4"
             rules={[{ required: true, message: "Notaris wajib dipilih." }]}
           >
@@ -270,9 +287,8 @@ export default function RegistrationExisting() {
                   size="small"
                   className="text-blue-600 p-0 self-start"
                   onClick={() => {
-                    // Ganti dengan link file yang sebenarnya
                     window.open(
-                      "/templates/musyawarah-desa-template.pdf",
+                      "/docs/Template_Berita_Acara_Musyawarah_Desa.docx",
                       "_blank"
                     );
                   }}
@@ -289,12 +305,18 @@ export default function RegistrationExisting() {
               },
             ]}
           >
-            <Dragger className="!bg-white">
+            <Dragger
+              className="!bg-white"
+              accept=".doc,.docx,.pdf,application/msword"
+              multiple={false}
+              maxCount={1}
+            >
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />
               </p>
               <p className="ant-upload-text">
-                Unggah atau tarik dokumen Berita Acara Musyawarah Desa Khusus ke sini
+                Unggah atau tarik dokumen Berita Acara Musyawarah Desa Khusus ke
+                sini
               </p>
             </Dragger>
           </Form.Item>
@@ -309,7 +331,7 @@ export default function RegistrationExisting() {
                   className="text-blue-600 p-0 self-start"
                   onClick={() => {
                     window.open(
-                      "/templates/rapat-anggota-template.pdf",
+                      "/docs/Template_Berita_Acara_Rapat_Anggota.docx",
                       "_blank"
                     );
                   }}
@@ -326,7 +348,12 @@ export default function RegistrationExisting() {
               },
             ]}
           >
-            <Dragger className="!bg-white">
+            <Dragger
+              className="!bg-white"
+              accept=".doc,.docx,.pdf,application/msword"
+              multiple={false}
+              maxCount={1}
+            >
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />
               </p>
@@ -338,7 +365,7 @@ export default function RegistrationExisting() {
 
           <Form.Item
             label="Jenis Usaha Koperasi"
-            name="klu"
+            name="klu_ids"
             className="mb-4 w-full"
             rules={[
               {
@@ -369,7 +396,7 @@ export default function RegistrationExisting() {
 
           <Form.Item
             label="Pendaftaran Nama Domain"
-            name="domain"
+            name="subdomain"
             className="mb-6"
             rules={[
               { required: true, message: "Nama domain koperasi wajib diisi." },
@@ -431,7 +458,7 @@ export default function RegistrationExisting() {
 
             <Form.Item
               label="Ulangi Kata Sandi"
-              name="confirmPassword"
+              name="password_confirmation"
               dependencies={["password"]}
               rules={[
                 {
@@ -502,6 +529,7 @@ export default function RegistrationExisting() {
               type="primary"
               htmlType="submit"
               block
+              loading={loadingForm}
               disabled={
                 agreementStatus.agreement_1 && agreementStatus.agreement_2
                   ? false

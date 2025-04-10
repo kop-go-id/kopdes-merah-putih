@@ -70,8 +70,8 @@ export default function RegistrationNew() {
     const registerInput = {
       ...val,
       klu_ids: val.klu_ids?.join(","),
-      bamd: val.bamd.file,
-      bara: val.bara.file,
+      bamd: val.bamd.file.originFileObj,
+      bara: val.bara.file.originFileObj,
     };
     console.log("registerInput", registerInput);
 
@@ -137,9 +137,9 @@ export default function RegistrationNew() {
                 setDistrictCode(value);
                 const selectedCode = districts.find(district => district.code === value);
                 if(selectedCode.name.toUpperCase().includes('KOTA')) {
-                  setSelectedDistrict("Kota");
+                  setSelectedDistrict("Kelurahan");
                 } else if(selectedCode.name.toUpperCase().includes('KAB')) {
-                  setSelectedDistrict("Kabupaten");
+                  setSelectedDistrict("Desa");
                 }
               }}
             />
@@ -184,6 +184,7 @@ export default function RegistrationNew() {
                   );
                   form.setFieldsValue({
                     cooperative_name: selectedVillage?.name.toUpperCase(),
+                    subdomain: selectedVillage?.name.toLowerCase().replace(/\s+/g, ""),
                   });
                 }}
                 showSearch
