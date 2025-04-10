@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\CooperativeKLU;
+use App\Models\CooperativeLegalStage;
 use App\Models\CooperativeManagement;
 use Hash;
 use Illuminate\Support\Carbon;
@@ -12,6 +13,7 @@ use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Http\Request;
 use App\Models\CooperativeType;
 use App\Models\Cooverative;
+use App\Models\CooverativeLegalStage;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -179,6 +181,13 @@ class CooperativeController extends Controller
                 'phone'=> $request->input('phone'),
                 'bamd' => $fetchBamd,
                 'bara' => $fetchBara
+            ]);
+
+            CooperativeLegalStage::create([
+                'name' => 'registrasi',
+                'sequence' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at'=> Carbon::now()
             ]);
     
             $klus = $request->input('klu_ids');
