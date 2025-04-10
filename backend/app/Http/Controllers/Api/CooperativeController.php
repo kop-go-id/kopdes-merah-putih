@@ -133,7 +133,7 @@ class CooperativeController extends Controller
 
     public function register(Request $request)
     {
-        $request->cooperative_name = strtoupper(($request->cooperative_name));
+        $request->cooperative_name = strtoupper($request->cooperative_name);
         try {
             $request->validate([
                 'cooperative_name' => 'required|string|max:50|unique:cooperatives,name',
