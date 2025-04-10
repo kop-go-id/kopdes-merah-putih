@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     public function cooperative()
     {
-        return $this->hasOne(Cooverative::class, 'userId');
+        return $this->hasOne(Cooperative::class, 'userId');
     }
 
 }

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Http\Request;
 use App\Models\CooperativeType;
-use App\Models\Cooverative;
+use App\Models\Cooperative;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Province;
@@ -133,7 +133,6 @@ class CooperativeController extends Controller
 
     public function register(Request $request)
     {
-        $request->cooperative_name = strtoupper($request->cooperative_name);
         try {
             $request->validate([
                 'cooperative_name' => 'required|string|max:50|unique:cooperatives,name',
@@ -151,6 +150,14 @@ class CooperativeController extends Controller
                 'phone' => 'required|string|min:3|max:50|unique:users,phone',
                 'password' => 'required|min:8|max:50|confirmed',
             ]);
+
+            $existingName = Cooperative::where('name', strtoupper($request->input('name')))->first();
+            if ($existingName) {
+                return response()->json([
+                    'message' => 'Failed to create cooperative.',
+                    'error' => 'Name already taken'
+                ], 500);
+            }
     
             $user = User::create([
                 'name'=> $request->input('name'),
@@ -179,7 +186,7 @@ class CooperativeController extends Controller
             $subdistrict = Subdistrict::where('code', $request->input('subdistrict_code'))->first();
             $village = Village::where('code', $request->input('village_code'))->first();
 
-            $cooperative = Cooverative::create([
+            $cooperative = Cooperative::create([
                 'name' => strtoupper($request->input('cooperative_name')),
                 'provinceId' => $province->province_id,
                 'districtId' => $district->district_id,

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cooverative extends Model
+class Cooperative extends Model
 {
     protected $table = 'cooperatives';
     protected $primaryKey = 'cooperative_id';
@@ -21,7 +21,7 @@ class Cooverative extends Model
     ];
     
 
-    // app/Models/Cooverative.php
+    // app/Models/Cooperative.php
 
     public function province()
     {

@@ -12,7 +12,7 @@ class CooperativeLegalStage extends Model
 
     public function cooperative()
     {
-        return $this->belongsTo(Cooverative::class, 'cooperativeId', 'cooperative_id');
+        return $this->belongsTo(Cooperative::class, 'cooperativeId', 'cooperative_id');
     }
 
     public function legalStage()
