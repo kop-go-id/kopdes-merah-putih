@@ -2,6 +2,9 @@
 
 import React from "react";
 import LayoutWrapper from "@/components/Layout";
+import Link from "next/link";
+import { Button } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 
 export default function ProfilKoperasiPage() {
   const data = {
@@ -29,15 +32,29 @@ export default function ProfilKoperasiPage() {
 
   return (
     <LayoutWrapper>
-      <div className="p-6 bg-white rounded shadow">
-        {/* Header + Tombol Edit (desktop) */}
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-[#004c5a]">Profil Koperasi</h2>
-          <button className="hidden md:flex bg-[#025669] text-white px-4 py-2 rounded hover:bg-[#014654] transition">
-            Edit Profil
-          </button>
+      <div className="p-6">
+        {/* Header dengan tombol Edit */}
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-xl font-semibold text-[#004c5a]">Profil Koperasi</h1>
+          <div className="hidden md:block">
+            <Link href="/koperasi/profil/edit-forms">
+              <Button type="primary" icon={<EditOutlined />} className="bg-[#025669]">
+                Edit Profil
+              </Button>
+            </Link>
+          </div>
         </div>
 
+        {/* Tombol Edit di mobile */}
+        <div className="block md:hidden mb-4">
+          <Link href="/koperasi/profil/edit-forms">
+            <Button type="primary" icon={<EditOutlined />} className="bg-[#025669] hover:bg-[#024655]">
+              Edit Profil
+            </Button>
+          </Link>
+        </div>
+
+        {/* Informasi Profil */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
           <ReadOnly label="Nama Koperasi" value={data.namaKoperasi} />
           <ReadOnly label="Nama di SK" value={data.namaDiSk} />
@@ -48,6 +65,7 @@ export default function ProfilKoperasiPage() {
           <ReadOnly label="Jangka Waktu" value={data.jangkaWaktu} />
         </div>
 
+        {/* Kedudukan Koperasi */}
         <h3 className="text-xl font-semibold text-[#004c5a] mb-4">Kedudukan Koperasi</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
           <ReadOnly label="Provinsi" value={data.provinsi} />
@@ -62,19 +80,12 @@ export default function ProfilKoperasiPage() {
           <ReadOnly label="Email" value={data.email} />
         </div>
 
+        {/* Dokumen Legalitas */}
         <h3 className="text-xl font-semibold text-[#004c5a] mb-4">Dokumen Legalitas</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <ReadOnly label="Nama Notaris" value={data.namaNotaris} />
-
-          <CardDocument label="Dokumen RAT" filename={data.dokRAT} />
-          <CardDocument label="Dokumen Musyawarah Desa" filename={data.dokMusDes} />
-        </div>
-
-        {/* Tombol Edit (mobile) */}
-        <div className="flex md:hidden mt-6">
-          <button className="bg-[#025669] text-white px-4 py-2 rounded hover:bg-[#014654] transition">
-            Edit Profil
-          </button>
+          <DocumentCard title="Dokumen RAT" fileName={data.dokRAT} />
+          <DocumentCard title="Dokumen Musyawarah Desa" fileName={data.dokMusDes} />
         </div>
       </div>
     </LayoutWrapper>
@@ -90,13 +101,11 @@ function ReadOnly({ label, value, className = "" }) {
   );
 }
 
-function CardDocument({ label, filename }) {
+function DocumentCard({ title, fileName }) {
   return (
-    <div className="border border-gray-200 rounded-lg p-4 shadow-sm">
-      <p className="text-sm text-gray-700 font-medium mb-1">{label}</p>
-      <a href="#" className="text-blue-600 underline text-sm">
-        {filename}
-      </a>
+    <div className="border border-gray-200 rounded p-4 shadow-sm">
+      <div className="text-sm text-gray-600 mb-1">{title}</div>
+      <a href="#" className="text-blue-600 underline text-sm">{fileName}</a>
     </div>
   );
 }

@@ -1,24 +1,59 @@
 "use client";
 
 import React from "react";
-import { Button, Result } from "antd";
-import "tailwindcss/tailwind.css";
 import LayoutWrapper from "@/components/Layout";
+import { Table, Button } from "antd";
+import { useRouter } from "next/navigation";
 
-export default function CooperativeDashboard() {
+const dataSource = [
+  {
+    key: "1",
+    nama: "Koperasi Tunas Mandiri",
+    status: "On Progress",
+  },
+  {
+    key: "2",
+    nama: "Koperasi Sejahtera",
+    status: "Done",
+  },
+];
+
+export default function NpakKoperasiPage() {
+  const router = useRouter();
+
+  const columns = [
+    {
+      title: "Nama Koperasi",
+      dataIndex: "nama",
+      key: "nama",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: "Aksi",
+      key: "aksi",
+      render: (_, record) => (
+        <Button
+          type="link"
+          onClick={() => router.push(`/npak/koperasi/${record.key}`)}
+        >
+          Lihat Detail
+        </Button>
+      ),
+    },
+  ];
+
   return (
     <LayoutWrapper>
-      <Result
-        status="success"
-        title="Successfully Purchased Cloud Server ECS!"
-        subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
-        extra={[
-          <Button type="primary" key="console">
-            Go Console
-          </Button>,
-          <Button key="buy">Buy Again</Button>,
-        ]}
-      />
+      <div className="p-6 bg-white rounded shadow">
+        <h2 className="text-2xl font-bold text-[#025669] mb-4">
+          Daftar Koperasi NPAK
+        </h2>
+        <Table dataSource={dataSource} columns={columns} pagination={false} />
+      </div>
     </LayoutWrapper>
   );
 }
