@@ -185,8 +185,8 @@ class CooperativeController extends Controller
             ]);
 
             $legalStage = CooperativeLegalStage::create([
-                'name' => 'registrasi', // registrasi, diperiksa notaris, selesai
-                'sequence' => 1,
+                'cooperativeId' => $cooperative->cooperative_id,
+                'legalStageId' => 1,                
                 'created_at' => Carbon::now(),
                 'updated_at'=> Carbon::now()
             ]);
