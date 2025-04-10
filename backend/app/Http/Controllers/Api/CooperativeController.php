@@ -164,7 +164,7 @@ class CooperativeController extends Controller
             $storeBara = $bamd->storeAs("test", $bara_file_name, "gcs");
             $disk = Storage::disk('gcs');
             $fetchBamd = $disk->url($storeBamd);
-            $fetchBara = $disk->url($storeBamd);
+            $fetchBara = $disk->url($storeBara);
 
             $cooperative = Cooverative::create([
                 'name' => $request->input('cooperative_name'),
