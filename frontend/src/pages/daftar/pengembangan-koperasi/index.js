@@ -44,7 +44,7 @@ export default function RegistrationExisting() {
   useEffect(() => {
     if (provinceCode) {
       fetchDistrict(provinceCode).then(districts => {
-        const code = districts.find(district => district.name === nik?.district.toUpperCase())?.code;
+        const code = districts.find(district => district.name.toUpperCase() === nik?.district.toUpperCase())?.code;
         form.setFieldsValue({district_code: code});
         setDistricts(districts);
         setDistrictCode(code);
@@ -56,9 +56,9 @@ export default function RegistrationExisting() {
 
   useEffect(() => {
     fetchSubDistrict(districtCode).then(subdistricts => {
-      const code = subdistricts.find(subdistrict => subdistrict.name === nik?.subdistrict.toUpperCase())?.code;
+      const code = subdistricts?.find(subdistrict => subdistrict.name.toUpperCase() === nik?.subdistrict.toUpperCase())?.code;
       form.setFieldsValue({subdistrict_code: code});
-      setSubDistricts(districts);
+      setSubDistricts(subdistricts);
       setSubDistrictCode(code);
     });
   }, [districtCode]);
