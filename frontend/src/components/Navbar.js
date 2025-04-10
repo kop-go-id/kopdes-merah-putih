@@ -7,12 +7,13 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "Tentang", link: "about" },
-    { name: "Model", link: "model" },
-    { name: "Manfaat", link: "benefit" },
-    { name: "Jenis", link: "type" },
-    { name: "Pertanyaan", link: "faq" },
-    { name: "Regulasi", link: "regulation" },
+    { name: "Tentang", link: "#about" },
+    { name: "Model", link: "#model" },
+    { name: "Manfaat", link: "#benefit" },
+    { name: "Jenis", link: "#type" },
+    { name: "Pertanyaan", link: "#faq" },
+    { name: "Regulasi", link: "#regulation" },
+    { name: "Kontak", link: "/kontak" },
   ];
 
   return (
@@ -38,7 +39,7 @@ const Navbar = () => {
             {navItems.map((item, index) => (
               <Link
                 key={index}
-                href={`#${item.link.toLowerCase()}`}
+                href={`${item.link.toLowerCase()}`}
                 className="text-md text-gray-900 hover:text-[#A0B73E] transition-colors"
               >
                 {item.name}
@@ -70,7 +71,7 @@ const Navbar = () => {
               {navItems.map((item, index) => (
                 <Link
                   key={index}
-                  href={`#${item.link.toLowerCase()}`}
+                  href={`${item.link.toLowerCase()}`}
                   className="text-md text-gray-900 hover:text-[#A0B73E] transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
