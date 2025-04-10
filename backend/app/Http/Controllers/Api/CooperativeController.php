@@ -230,16 +230,4 @@ class CooperativeController extends Controller
             ], 500);
         }
     }
-
-    public function uploadFile(UploadedFile $file, $folder = null, $filename = null)
-    {
-        $name = !is_null($filename) ? $filename : Str::random(25);
-
-        return $file->storeAs(
-            $folder,
-            $name . "." . $file->getClientOriginalExtension(),
-            'gcs'
-        );
-    }
-
 }
