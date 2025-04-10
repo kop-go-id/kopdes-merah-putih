@@ -183,8 +183,8 @@ class CooperativeController extends Controller
                 'bara' => $fetchBara
             ]);
 
-            CooperativeLegalStage::create([
-                'name' => 'registrasi',
+            $legalStage = CooperativeLegalStage::create([
+                'name' => 'registrasi', // registrasi, diperiksa notaris, selesai
                 'sequence' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at'=> Carbon::now()
@@ -218,6 +218,7 @@ class CooperativeController extends Controller
                 'data' => [
                     'user' => $user,
                     'cooperative' => $cooperative,
+                    'legal_stage' => $legalStage,
                     'management' => $management
                 ]
             ], 200);
