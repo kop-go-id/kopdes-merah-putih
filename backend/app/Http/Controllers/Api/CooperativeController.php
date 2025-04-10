@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\CooperativeKLU;
+use App\Models\CooperativeLegalStage;
 use App\Models\CooperativeManagement;
 use Hash;
 use Illuminate\Support\Carbon;
@@ -14,8 +15,10 @@ use App\Models\CooperativeType;
 use App\Models\Cooverative;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Http\UploadedFile;
+use App\Models\Province;
+use App\Models\District;
+use App\Models\Subdistrict;
+use App\Models\Village;
 
 class CooperativeController extends Controller
 {
@@ -133,10 +136,10 @@ class CooperativeController extends Controller
         try {
             $request->validate([
                 'cooperative_name' => 'required|string|max:50|unique:cooperatives,name',
-                'province_id' => 'required|exists:provinces,province_id',
-                'district_id' => 'required|exists:districts,district_id',
-                'subdistrict_id' => 'required|exists:subdistricts,subdistrict_id',
-                'village_id' => 'required|exists:villages,village_id',
+                'province_code' => 'required|exists:provinces,code',
+                'district_code' => 'required|exists:districts,code',
+                'subdistrict_code' => 'required|exists:subdistricts,code',
+                'village_code' => 'required|exists:villages,code',
                 'npak_id' => 'required|exists:npaks,notary_id',
                 'bamd' => 'required|file|mimes:pdf,docx',
                 'bara' => 'required|file|mimes:pdf,docx',
@@ -152,26 +155,35 @@ class CooperativeController extends Controller
                 'name'=> $request->input('name'),
                 'email' => $request->input('email'),
                 'phone'=> $request->input('phone'),
+                'role' => 'Pengurus koperasi',
                 'password'=> Hash::make($request->input('password')),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
 
+            $disk = Storage::disk('gcs');
+
             $bamd = $request->file('bamd');
             $bamd_file_name = time() . '_' . $bamd->getClientOriginalName();
-            $bara_file_name = time() . '_' . $bamd->getClientOriginalName();
-            $storeBamd = $bamd->storeAs("test", $bamd_file_name, "gcs");
-            $storeBara = $bamd->storeAs("test", $bara_file_name, "gcs");
-            $disk = Storage::disk('gcs');
+            $storeBamd = $bamd->storeAs("bamd", $bamd_file_name, "gcs");
             $fetchBamd = $disk->url($storeBamd);
-            $fetchBara = $disk->url($storeBamd);
+
+            $bara = $request->file('bara');
+            $bara_file_name = time() . '_' . $bara->getClientOriginalName();
+            $storeBara = $bara->storeAs("bara", $bara_file_name, "gcs");
+            $fetchBara = $disk->url($storeBara);
+
+            $province = Province::where('code', $request->input('province_code'))->first();
+            $district = District::where('code', $request->input('district_code'))->first();
+            $subdistrict = Subdistrict::where('code', $request->input('subdistrict_code'))->first();
+            $village = Village::where('code', $request->input('village_code'))->first();
 
             $cooperative = Cooverative::create([
-                'name' => $request->input('cooperative_name'),
-                'provinceId' => $request->input('province_id'),
-                'districtId' => $request->input('district_id'),
-                'subdistrictId' => $request->input('subdistrict_id'),
-                'villageId' => $request->input('village_id'),
+                'name' => strtoupper($request->input('cooperative_name')),
+                'provinceId' => $province->province_id,
+                'districtId' => $district->district_id,
+                'subdistrictId' => $subdistrict->subdistrict_id,
+                'villageId' => $village->village_id,
                 'userId' => $user->id,
                 'npakId' => 1,
                 'subdomain' => $request->input('subdomain'),
@@ -180,6 +192,15 @@ class CooperativeController extends Controller
                 'bamd' => $fetchBamd,
                 'bara' => $fetchBara
             ]);
+
+            $legalStage = CooperativeLegalStage::create([
+                'cooperativeId' => $cooperative->cooperative_id,
+                'legalStageId' => 1,                
+                'created_at' => Carbon::now(),
+                'updated_at'=> Carbon::now()
+            ]);
+
+            $legalStage->name = 'Registrasi';
     
             $klus = $request->input('klu_ids');
             foreach (explode(',', $klus) as $klu) {
@@ -195,7 +216,7 @@ class CooperativeController extends Controller
                 'status' => 'active',
                 'nik' => '',
                 'name' => $request->input('name'),
-                'role' => 'Administrator koperasi',
+                'role' => 'Pengurus',
                 'npwp' => '',
                 'phone' => $request->input('phone'),
                 'gender' => 'male',
@@ -209,6 +230,7 @@ class CooperativeController extends Controller
                 'data' => [
                     'user' => $user,
                     'cooperative' => $cooperative,
+                    'legal_stage' => $legalStage,
                     'management' => $management
                 ]
             ], 200);
@@ -220,16 +242,4 @@ class CooperativeController extends Controller
             ], 500);
         }
     }
-
-    public function uploadFile(UploadedFile $file, $folder = null, $filename = null)
-    {
-        $name = !is_null($filename) ? $filename : Str::random(25);
-
-        return $file->storeAs(
-            $folder,
-            $name . "." . $file->getClientOriginalExtension(),
-            'gcs'
-        );
-    }
-
 }

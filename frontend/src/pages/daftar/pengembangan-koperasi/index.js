@@ -3,8 +3,8 @@ import { Form, Input, Select, Upload, Button, Divider, Checkbox, message } from 
 import { InboxOutlined } from "@ant-design/icons";
 import Stepper from "@/components/Stepper";
 import { useRouter } from "next/router";
-import { callApi, getAPIEndpoint } from "@/utils/endpoint";
-// import axios from "axios";
+import { fetchDistrict, fetchProvince, fetchSubDistrict, fetchVillage } from "@/services/region";
+import { getCooperativeTypes, getNPAKByProvince } from "@/services/cooperative";
 
 const { Option, OptGroup } = Select;
 const { Dragger } = Upload;
@@ -35,82 +35,24 @@ export default function RegistrationExisting() {
   const [notaryNumbers, setNotaryNumbers] = useState();
   const [cooperativeTypes, setCooperativeTypes] = useState();
 
-  const fetchProvince = async () => {
-    try {
-      const endpoint = getAPIEndpoint("/provinces", "GET");
-      const response = await callApi(endpoint);
-      setProvinces(response?.data);
-    } catch (err) {}
-  };
-
-  const fetchDistrict = async () => {
-    try {
-      const endpoint = getAPIEndpoint(
-        `/districts/by-province-code/${provinceCode}`,
-        "GET"
-      );
-      const response = await callApi(endpoint);
-      setDistricts(response?.data);
-    } catch (err) {}
-  };
-
-  const fetchSubDistrict = async () => {
-    try {
-      const endpoint = getAPIEndpoint(
-        `/sub-districts/by-district-code/${districtCode}`,
-        "GET"
-      );
-      const response = await callApi(endpoint);
-      setSubDistricts(response?.data);
-    } catch (err) {}
-  };
-
-  const fetchVillage = async () => {
-    try {
-      const endpoint = getAPIEndpoint(
-        `/villages/by-sub-district-code/${subDistrictCode}`,
-        "GET"
-      );
-      const response = await callApi(endpoint);
-      setVillages(response?.data);
-    } catch (err) {}
-  };
-
-  const getCooperativeTypes = async () => {
-    try {
-      const endpoint = getAPIEndpoint(`/cooperative/types`, "GET");
-      const response = await callApi(endpoint);
-      setCooperativeTypes(response?.data);
-    } catch (err) {}
-  };
-
-  const getNPAKByProvince = async () => {
-    try {
-      const endpoint = getAPIEndpoint(
-        `/npak/by-province-code/${provinceCode}`,
-        "GET"
-      );
-      const response = await callApi(endpoint);
-      setNotaryNumbers(response?.data);
-    } catch (err) {}
-  };
-
   useEffect(() => {
-    fetchProvince();
+    fetchProvince().then(setProvinces);
+    getCooperativeTypes().then(setCooperativeTypes);
   }, []);
 
   useEffect(() => {
-    fetchDistrict();
-    getCooperativeTypes();
-    getNPAKByProvince();
+    if (provinceCode) {
+      fetchDistrict(provinceCode).then(setDistricts);
+      getNPAKByProvince(provinceCode).then(setNotaryNumbers);
+    }
   }, [provinceCode]);
 
   useEffect(() => {
-    fetchSubDistrict();
+    fetchSubDistrict(districtCode).then(setSubDistricts);
   }, [districtCode]);
 
   useEffect(() => {
-    fetchVillage();
+    fetchVillage(subDistrictCode).then(setVillages);
   }, [subDistrictCode]);
 
   return (
