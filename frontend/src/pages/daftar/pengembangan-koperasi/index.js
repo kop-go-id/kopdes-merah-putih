@@ -4,7 +4,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import Stepper from "@/components/Stepper";
 import { useRouter } from "next/router";
 import { fetchDistrict, fetchProvince, fetchSubDistrict, fetchVillage } from "@/services/region";
-import { getCooperativeTypes, getNPAKByProvince } from "@/services/cooperative";
+import { getCooperativeTypes, getNIKs, getNPAKByProvince } from "@/services/cooperative";
 
 const { Option, OptGroup } = Select;
 const { Dragger } = Upload;
@@ -34,6 +34,7 @@ export default function RegistrationExisting() {
   const [villages, setVillages] = useState();
   const [notaryNumbers, setNotaryNumbers] = useState();
   const [cooperativeTypes, setCooperativeTypes] = useState();
+  const [nik, setNIK] = useState();
 
   useEffect(() => {
     fetchProvince().then(setProvinces);
@@ -42,13 +43,24 @@ export default function RegistrationExisting() {
 
   useEffect(() => {
     if (provinceCode) {
-      fetchDistrict(provinceCode).then(setDistricts);
+      fetchDistrict(provinceCode).then(districts => {
+        const code = districts.find(district => district.name === nik.district.toUpperCase())?.code;
+        form.setFieldsValue({district_code: code});
+        setDistricts(districts);
+        setDistrictCode(code);
+      });
+
       getNPAKByProvince(provinceCode).then(setNotaryNumbers);
     }
   }, [provinceCode]);
 
   useEffect(() => {
-    fetchSubDistrict(districtCode).then(setSubDistricts);
+    fetchSubDistrict(districtCode).then(subdistricts => {
+      const code = subdistricts.find(subdistrict => subdistrict.name === nik.subdistrict.toUpperCase())?.code;
+      form.setFieldsValue({subdistrict_code: code});
+      setSubDistricts(districts);
+      setSubDistrictCode(code);
+    });
   }, [districtCode]);
 
   useEffect(() => {
@@ -81,26 +93,33 @@ export default function RegistrationExisting() {
             <Input.Search
               onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
               placeholder="Masukkan Nomor Induk Koperasi"
-              // onChange={(e) => {
-              //   setLoadingCheckNIK(true);
-              //   axios.get(`https://api.merahputih.kop.id/api/cooperative/by-nik/${e.target.value}`).then((res) => {
-              //     console.log(res.data.data);
-              //     setLoadingCheckNIK(false);
-              //     form.setFieldsValue({
-              //       name: res.data.data.name
-              //     })
-              //   }).catch((err) => {
-              //     message.error("Something went wrong");
-              //     setLoadingCheckNIK(false);
-              //   });
-              // }}
+              onChange={(e) => {
+                setLoadingCheckNIK(true);
+                getNIKs(e.target.value).then((val) => {
+                  try {
+                    const selectedProvince = provinces.find(province => province.name === val.province.toUpperCase())?.code;
+                    // Couldn't get districts and below here (data is undefined)
+                    // const selectedDistrict = districts.find(district => district.name === val.district.toUpperCase())?.code;
+
+                    form.setFieldsValue({
+                      existing_cooperative: val.name,
+                      province_code: selectedProvince,
+                    })
+
+                    setProvinceCode(selectedProvince);
+                    setNIK(val);
+                    setLoadingCheckNIK(false);
+                  } catch (err) {}
+                });
+                
+              }}
               enterButton
               loading={loadingCheckNIK}
             />
           </Form.Item>
           <Form.Item
             label="Nama Koperasi Existing"
-            name="name_existing"
+            name="existing_cooperative"
             className="mb-4"
             rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
           >
@@ -113,7 +132,7 @@ export default function RegistrationExisting() {
 
           <Form.Item
             label="Provinsi"
-            name="province"
+            name="province_code"
             className="mb-4"
             rules={[{ required: true, message: "Provinsi wajib dipilih." }]}
           >
@@ -127,13 +146,13 @@ export default function RegistrationExisting() {
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
               }
-              onChange={(val) => setProvinceCode(val)}
+              onChange={setProvinceCode}
             />
           </Form.Item>
 
           <Form.Item
             label="Kabupaten/Kota"
-            name="district"
+            name="district_code"
             className="mb-4"
             rules={[
               { required: true, message: "Kabupaten/Kota wajib dipilih." },
@@ -149,14 +168,15 @@ export default function RegistrationExisting() {
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
               }
-              onChange={(val) => setDistrictCode(val)}
+              onChange={setDistrictCode}
+              // defaultValue={}
             />
           </Form.Item>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <Form.Item
               label="Kecamatan"
-              name="subdistrict"
+              name="subdistrict_code"
               rules={[{ required: true, message: "Kecamatan wajib dipilih." }]}
             >
               <Select
@@ -175,7 +195,7 @@ export default function RegistrationExisting() {
 
             <Form.Item
               label="Desa / Kelurahan"
-              name="village"
+              name="village_code"
               rules={[
                 { required: true, message: "Desa/Kelurahan wajib dipilih." },
               ]}
@@ -187,12 +207,12 @@ export default function RegistrationExisting() {
                   value: val.code,
                 }))}
                 showSearch
-                onChange={(val) => {
-                  const selectedVillage = villages.find((village) => village.code === val)
-                  form.setFieldsValue({
-                    name: selectedVillage.name.toUpperCase(),
-                  })
-                }}
+                // onChange={(val) => {
+                //   const selectedVillage = villages.find((village) => village.code === val)
+                //   form.setFieldsValue({
+                //     name: selectedVillage.name.toUpperCase(),
+                //   })
+                // }}
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
                 }
@@ -201,7 +221,7 @@ export default function RegistrationExisting() {
           </div>
           <Form.Item
             label="Nama Koperasi Existing"
-            name="name"
+            name="cooperative_name"
             className="mb-4"
             rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
           >

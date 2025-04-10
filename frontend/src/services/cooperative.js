@@ -3,6 +3,7 @@ import { fetchData } from "@/utils/fetch";
 
 const getCooperativeTypes = () => fetchData('/cooperative/types');
 const getNPAKByProvince = (provinceCode) => fetchData(`/npak/by-province-code/${provinceCode}`);
+const getNIKs = (nik) => fetchData(`cooperative/by-nik/${nik}`);
 
 const registerNewCooperative = async (body) => {
   const endpoint = getAPIEndpoint(
@@ -39,4 +40,5 @@ export {
   getCooperativeTypes,
   getNPAKByProvince,
   registerNewCooperative,
+  getNIKs,
 };
