@@ -1,5 +1,5 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
-import { Input, Select, Upload, Button, Form, Divider, Checkbox } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Input, Select, Upload, Button, Form, Divider, Checkbox, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import Stepper from '@/components/Stepper';
 import { useRouter } from 'next/router';
@@ -8,12 +8,14 @@ import {
   fetchProvince,
   fetchSubDistrict,
   fetchVillage,
+  fetchVillageDuplicate,
 } from '@/services/region';
 import {
   getCooperativeTypes,
   getNPAKByProvince,
   registerNewCooperative,
 } from '@/services/cooperative';
+const { TextArea } = Input;
 
 const { Dragger } = Upload;
 const { Option, OptGroup } = Select;
@@ -33,6 +35,7 @@ export default function RegistrationNew() {
       [name]: e.target.checked,
     }));
   };
+
   const [loadingForm, setLoadingForm] = useState(false);
   const [provinces, setProvinces] = useState([]);
   const [provinceCode, setProvinceCode] = useState();
@@ -44,6 +47,7 @@ export default function RegistrationNew() {
   const [cooperativeTypes, setCooperativeTypes] = useState();
   const [notaryNumbers, setNotaryNumbers] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [showNotaryField, setShowNotaryField] = useState(false);
 
   useEffect(() => {
     fetchProvince().then(setProvinces);
@@ -72,12 +76,25 @@ export default function RegistrationNew() {
       klu_ids: val.klu_ids?.join(','),
       bamd: val.bamd.file.originFileObj,
       bara: val.bara.file.originFileObj,
+      subdomain: val.subdomain + 'kop.id',
+      cooperative_name:
+        `Koperasi ${selectedDistrict} Merah Putih ` + val.cooperative_name,
+      phone: '62' + val.phone,
     };
-    console.log('registerInput', registerInput);
 
-    registerNewCooperative(registerInput);
+    registerNewCooperative(registerInput)
+    .then(val => {
+      if (val) {
+        router.push('/daftar/sukses')
+      }
+    })
+    .catch(err => {
+      message.error({
+        content: 'Periksa kembali data koperasi anda dan silahkan ulangi kembali',
+        duration: 3,
+      });
+    });
     setLoadingForm(false);
-    router.push('/daftar/sukses');
   };
 
   return (
@@ -200,11 +217,22 @@ export default function RegistrationNew() {
                   const selectedVillage = villages.find(
                     (village) => village.code === val
                   );
-                  form.setFieldsValue({
-                    cooperative_name: selectedVillage?.name.toUpperCase(),
-                    subdomain: selectedVillage?.name
-                      .toLowerCase()
-                      .replace(/\s+/g, ''),
+
+                  let villageName = selectedVillage?.name;
+                  fetchVillageDuplicate(val).then((val) => {
+                    if (val.is_duplicate) {
+                      const subdistrict = subDistricts.find(
+                        (val) => val.code === subDistrictCode
+                      )?.name;
+                      villageName = `${villageName} Kecamatan ${subdistrict}`;
+                    } else {
+                      villageName;
+                    }
+
+                    form.setFieldsValue({
+                      cooperative_name: villageName.toUpperCase(),
+                      subdomain: villageName.toLowerCase().replace(/\s+/g, ''),
+                    });
                   });
                 }}
                 showSearch
@@ -218,12 +246,10 @@ export default function RegistrationNew() {
             label="Nama Koperasi Baru"
             name="cooperative_name"
             className="mb-4"
-            rules={[{ required: true, message: 'Nama koperasi wajib diisi.' }]}
           >
             <Input
               addonBefore={`Koperasi ${selectedDistrict} Merah Putih`}
-              onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
-              placeholder="Masukkan nama koperasi, yaitu nama desa. contoh DUREN TIGA"
+              disabled
             />
           </Form.Item>
 
@@ -240,8 +266,62 @@ export default function RegistrationNew() {
                 value: notary.notary_id,
               }))}
               defaultActiveFirstOption={true}
+              onChange={(val) => setShowNotaryField(val === 1)}
             />
           </Form.Item>
+          
+          {showNotaryField && (
+            <>
+              <Form.Item
+                label="Nama Notaris"
+                name="npak_name"
+                rules={[
+                  { required: showNotaryField, message: 'Nama notaris wajib diisi' },
+                ]}
+              >
+                <Input placeholder="Masukan nama notaris" />
+              </Form.Item>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Form.Item
+                  label="Alamat Email"
+                  name="npak_email"
+                  rules={[
+                    {
+                      required: showNotaryField,
+                      type: 'email',
+                      message: 'Alamat email tidak valid atau kosong.',
+                    },
+                  ]}
+                >
+                  <Input placeholder="Masukan email notaris" />
+                </Form.Item>
+
+                <Form.Item
+                  label="Nomor HP"
+                  name="npak_phone"
+                  rules={[
+                    { required: showNotaryField, message: 'Nomor HP wajib diisi.' },
+                    { min: 8, message: 'Nomor HP harus terdiri dari minimal 8 digit.' },
+                  ]}
+                >
+                  <Input addonBefore="+62" placeholder="812345678" type="number" />
+                </Form.Item>
+              </div>
+              <Form.Item
+                label="Alamat Notaris"
+                name="npak_address"
+                rules={[
+                  { required: showNotaryField, message: 'Alamat notaris wajib diisi' },
+                ]}
+              >
+                <TextArea
+                  placeholder="Masukan alamat notaris"
+                  maxLength={256}
+                  rows={2}
+                />
+              </Form.Item>
+            </>
+          )}
 
           <Form.Item
             label={
@@ -252,7 +332,7 @@ export default function RegistrationNew() {
                 <Button
                   type="link"
                   size="small"
-                  className="text-blue-600 p-0 self-start"
+                  className="text-blue-600 p-0 self-start text-wrap text-left"
                   onClick={() => {
                     window.open(
                       '/docs/Template_Berita_Acara_Musyawarah_Desa.docx',
@@ -295,7 +375,7 @@ export default function RegistrationNew() {
                 <Button
                   type="link"
                   size="small"
-                  className="text-blue-600 p-0 self-start"
+                  className="text-blue-600 p-0 self-start text-wrap text-left"
                   onClick={() => {
                     window.open(
                       '/docs/Template_Berita_Acara_Rapat_Anggota.docx',
@@ -345,7 +425,6 @@ export default function RegistrationNew() {
               mode="multiple"
               allowClear
               placeholder="Pilih Jenis Usaha"
-              onChange={(val) => console.log('multi', val)}
               className="w-full"
               popupMatchSelectWidth={true}
             >
@@ -408,7 +487,10 @@ export default function RegistrationNew() {
             <Form.Item
               label="Nomor HP"
               name="phone"
-              rules={[{ required: true, message: 'Nomor HP wajib diisi.' }]}
+              rules={[
+                { required: true, message: 'Nomor HP wajib diisi.' },
+                { min: 8, message: 'Nomor HP harus terdiri dari minimal 8 digit.' },
+              ]}
             >
               <Input addonBefore="+62" placeholder="812345678" type="number" />
             </Form.Item>
@@ -418,7 +500,10 @@ export default function RegistrationNew() {
             <Form.Item
               label="Buat Kata Sandi"
               name="password"
-              rules={[{ required: true, message: 'Kata sandi wajib diisi.' }]}
+              rules={[
+                { required: true, message: 'Kata sandi wajib diisi.' },
+                { min: 8, message: 'Kata sandi minimal 8 karakter.' },
+              ]}
             >
               <Input.Password placeholder="Masukan kata sandi" />
             </Form.Item>

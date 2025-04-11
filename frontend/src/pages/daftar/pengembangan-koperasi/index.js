@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Form,
-  Input,
-  Select,
-  Upload,
-  Button,
-  Divider,
-  Checkbox,
-  message,
-} from 'antd';
+import { Form, Input, Select, Upload, Button, Divider, Checkbox, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import Stepper from '@/components/Stepper';
 import { useRouter } from 'next/router';
@@ -17,6 +8,7 @@ import {
   fetchProvince,
   fetchSubDistrict,
   fetchVillage,
+  fetchVillageDuplicate,
 } from '@/services/region';
 import {
   getCooperativeTypes,
@@ -24,6 +16,8 @@ import {
   getNPAKByProvince,
   registerNewCooperative,
 } from '@/services/cooperative';
+import _ from 'lodash';
+const { TextArea } = Input;
 
 const { Option, OptGroup } = Select;
 const { Dragger } = Upload;
@@ -56,6 +50,9 @@ export default function RegistrationExisting() {
   const [cooperativeTypes, setCooperativeTypes] = useState();
   const [nik, setNIK] = useState();
   const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [enableRegion, setEnableRegion] = useState(true);
+  const [villageCode, setVillageCode] = useState();
+   const [showNotaryField, setShowNotaryField] = useState(false);
 
   useEffect(() => {
     fetchProvince().then(setProvinces);
@@ -69,11 +66,13 @@ export default function RegistrationExisting() {
           (district) =>
             district.name.toUpperCase() === nik?.district.toUpperCase()
         );
+        console.log("selectedCode", selectedCode)
         form.setFieldsValue({ district_code: selectedCode?.code });
         setDistricts(districts);
-        if (selectedCode.name.toUpperCase().includes('KOTA')) {
+
+        if (selectedCode?.name.toUpperCase().includes('KOTA')) {
           setSelectedDistrict('Kelurahan');
-        } else if (selectedCode.name.toUpperCase().includes('KAB')) {
+        } else if (selectedCode?.name.toUpperCase().includes('KAB')) {
           setSelectedDistrict('Desa');
         }
 
@@ -90,6 +89,7 @@ export default function RegistrationExisting() {
         (subdistrict) =>
           subdistrict.name.toUpperCase() === nik?.subdistrict.toUpperCase()
       );
+      
       form.setFieldsValue({ subdistrict_code: selectedCode?.code });
       setSubDistricts(subdistricts);
       setSubDistrictCode(selectedCode?.code);
@@ -98,17 +98,37 @@ export default function RegistrationExisting() {
 
   useEffect(() => {
     fetchVillage(subDistrictCode).then((villages) => {
-      const selectedCode = villages?.find(
-        (village) => village.name.toUpperCase() === nik?.village.toUpperCase()
-      );
-      form.setFieldsValue({ village_code: selectedCode?.code });
-      form.setFieldsValue({
-        cooperative_name: selectedCode?.name.toUpperCase(),
-        subdomain: selectedCode?.name.toLowerCase().replace(/\s+/g, ''),
-      });
+      const selectedVillage = villages.find(
+        (village) => village.name.toUpperCase() === nik.village.toUpperCase()
+      )?.code;
+
+      form.setFieldsValue({ village_code: selectedVillage });
       setVillages(villages);
+      setVillageCode(selectedVillage);
     });
   }, [subDistrictCode]);
+
+  useEffect(() => {
+    fetchVillageDuplicate(villageCode).then(({ is_duplicate }) => {
+      let villageName = villages?.find(
+        (village) => village.code === villageCode
+      )?.name;
+
+      if (is_duplicate) {
+        const subdistrict = subDistricts.find(
+          (val) => val?.code === subDistrictCode
+        )?.name;
+        villageName = `${villageName} Kecamatan ${subdistrict}`;
+      } else {
+        villageName;
+      }
+
+      form.setFieldsValue({
+        cooperative_name: villageName?.toUpperCase(),
+        subdomain: villageName?.toLowerCase().replace(/\s+/g, ''),
+      });
+    });
+  }, [villageCode, villages]);
 
   const onFinish = (val) => {
     setLoadingForm(true);
@@ -117,12 +137,25 @@ export default function RegistrationExisting() {
       klu_ids: val.klu_ids?.join(','),
       bamd: val.bamd.file.originFileObj,
       bara: val.bara.file.originFileObj,
+      subdomain: val.subdomain + 'kop.id',
+      cooperative_name:
+        `Koperasi ${selectedDistrict} Merah Putih ` + val.cooperative_name,
+      phone: '62' + val.phone,
     };
-    console.log('registerInput', registerInput);
 
-    registerNewCooperative(registerInput);
+    registerNewCooperative(registerInput)
+    .then(val => {
+      if (val) {
+        router.push('/daftar/sukses')
+      }
+    })
+    .catch(err => {
+      message.error({
+        content: 'Periksa kembali data koperasi anda dan silahkan ulangi kembali',
+        duration: 3,
+      });
+    });
     setLoadingForm(false);
-    router.push('/daftar/sukses');
   };
 
   return (
@@ -152,20 +185,29 @@ export default function RegistrationExisting() {
               placeholder="Masukkan Nomor Induk Koperasi"
               onChange={(e) => {
                 setLoadingCheckNIK(true);
+                if (_.isEmpty(e.target.value)) {
+                  setLoadingCheckNIK(false);
+                  return;
+                }
+
                 getNIKs(e.target.value).then((val) => {
                   try {
                     const selectedProvince = provinces.find(
-                      (province) => province.name === val.province.toUpperCase()
+                      (province) =>
+                        province.name === val?.province.toUpperCase()
                     )?.code;
-                    // Couldn't get districts and below here (data is undefined)
-                    // const selectedDistrict = districts.find(district => district.name === val.district.toUpperCase())?.code;
 
-                    form.setFieldsValue({
-                      existing_cooperative: val.name,
-                      province_code: selectedProvince,
-                    });
+                    if (_.isEmpty(selectedProvince)) {
+                      setEnableRegion(!enableRegion);
+                    } else {
+                      form.setFieldsValue({
+                        existing_cooperative: val?.name,
+                        province_code: selectedProvince,
+                      });
 
-                    setProvinceCode(selectedProvince);
+                      setProvinceCode(selectedProvince);
+                    }
+
                     setNIK(val);
                     setLoadingCheckNIK(false);
                   } catch (err) {}
@@ -200,7 +242,7 @@ export default function RegistrationExisting() {
                 label: province.name,
                 value: province.code,
               }))}
-              disabled
+              disabled={enableRegion}
               showSearch
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
@@ -223,7 +265,7 @@ export default function RegistrationExisting() {
                 label: district.name,
                 value: district.code,
               }))}
-              disabled
+              disabled={enableRegion}
               showSearch
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
@@ -244,7 +286,7 @@ export default function RegistrationExisting() {
                   label: val.name,
                   value: val.code,
                 }))}
-                disabled
+                disabled={enableRegion}
                 showSearch
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
@@ -266,11 +308,12 @@ export default function RegistrationExisting() {
                   label: val.name,
                   value: val.code,
                 }))}
-                disabled
+                disabled={enableRegion}
                 showSearch
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
                 }
+                onChange={setVillageCode}
               />
             </Form.Item>
           </div>
@@ -282,8 +325,7 @@ export default function RegistrationExisting() {
           >
             <Input
               addonBefore={`Koperasi ${selectedDistrict} Merah Putih`}
-              onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
-              placeholder="Masukkan nama koperasi, yaitu nama desa. contoh DUREN TIGA"
+              disabled
             />
           </Form.Item>
 
@@ -299,8 +341,62 @@ export default function RegistrationExisting() {
                 label: notary.name,
                 value: notary.notary_id,
               }))}
+              onChange={(val) => setShowNotaryField(val === 1)}
             />
           </Form.Item>
+
+          {showNotaryField && (
+            <>
+              <Form.Item
+                label="Nama Notaris"
+                name="npak_name"
+                rules={[
+                  { required: showNotaryField, message: 'Nama notaris wajib diisi' },
+                ]}
+              >
+                <Input placeholder="Masukan nama notaris" />
+              </Form.Item>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Form.Item
+                  label="Alamat Email"
+                  name="npak_email"
+                  rules={[
+                    {
+                      required: showNotaryField,
+                      type: 'email',
+                      message: 'Alamat email tidak valid atau kosong.',
+                    },
+                  ]}
+                >
+                  <Input placeholder="Masukan email notaris" />
+                </Form.Item>
+
+                <Form.Item
+                  label="Nomor HP"
+                  name="npak_phone"
+                  rules={[
+                    { required: showNotaryField, message: 'Nomor HP wajib diisi.' },
+                    { min: 8, message: 'Nomor HP harus terdiri dari minimal 8 digit.' },
+                  ]}
+                >
+                  <Input addonBefore="+62" placeholder="812345678" type="number" />
+                </Form.Item>
+              </div>
+              <Form.Item
+                label="Alamat Notaris"
+                name="npak_address"
+                rules={[
+                  { required: showNotaryField, message: 'Alamat notaris wajib diisi' },
+                ]}
+              >
+                <TextArea
+                  placeholder="Masukan alamat notaris"
+                  maxLength={256}
+                  rows={2}
+                />
+              </Form.Item>
+            </>
+          )}
 
           <Form.Item
             label={
@@ -311,7 +407,7 @@ export default function RegistrationExisting() {
                 <Button
                   type="link"
                   size="small"
-                  className="text-blue-600 p-0 self-start"
+                  className="text-blue-600 p-0 self-start text-wrap text-left"
                   onClick={() => {
                     window.open(
                       '/docs/Template_Berita_Acara_Musyawarah_Desa.docx',
@@ -354,7 +450,7 @@ export default function RegistrationExisting() {
                 <Button
                   type="link"
                   size="small"
-                  className="text-blue-600 p-0 self-start"
+                  className="text-blue-600 p-0 self-start text-wrap text-left"
                   onClick={() => {
                     window.open(
                       '/docs/Template_Berita_Acara_Rapat_Anggota.docx',
@@ -404,7 +500,6 @@ export default function RegistrationExisting() {
               mode="multiple"
               allowClear
               placeholder="Pilih Jenis Usaha"
-              onChange={(val) => console.log('multi', val)}
               className="w-full"
               popupMatchSelectWidth={true}
             >
@@ -467,9 +562,12 @@ export default function RegistrationExisting() {
             <Form.Item
               label="Nomor HP"
               name="phone"
-              rules={[{ required: true, message: 'Nomor HP wajib diisi.' }]}
+              rules={[
+                { required: true, message: 'Nomor HP wajib diisi.' },
+                { min: 8, message: 'Nomor HP harus terdiri dari minimal 8 digit.' },
+              ]}
             >
-              <Input addonBefore="+62" placeholder="812345678" />
+              <Input addonBefore="+62" placeholder="812345678" type="number" />
             </Form.Item>
           </div>
 
@@ -477,7 +575,10 @@ export default function RegistrationExisting() {
             <Form.Item
               label="Buat Kata Sandi"
               name="password"
-              rules={[{ required: true, message: 'Kata sandi wajib diisi.' }]}
+              rules={[
+                { required: true, message: 'Kata sandi wajib diisi.' },
+                { min: 8, message: 'Kata sandi minimal 8 karakter.' },
+              ]}
             >
               <Input.Password placeholder="Masukan kata sandi" />
             </Form.Item>

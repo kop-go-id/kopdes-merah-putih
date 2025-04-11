@@ -62,11 +62,11 @@ const axiosFetchHandler = async (endpoint, body) => {
   } catch (err) {
     if (err.response) {
       const { error } = err.response.data || {};
-      throw new Error(error || 'Server responded with an error');
+      console.log(error ?? 'Server responded with an error');
     } else if (err.request) {
-      throw new Error('Server is not responding');
+      console.log('Server is not responding');
     } else {
-      throw new Error(err.message || 'Unexpected error occurred');
+      console.log(err.message ?? 'Unexpected error occurred');
     }
   }
 };

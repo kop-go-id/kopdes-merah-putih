@@ -29,5 +29,11 @@ class AppServiceProvider extends ServiceProvider
         ResetPassword::createUrlUsing(function ($notifiable, string $token) {
             return 'https://merahputih.kop.id/reset-password?token=' . $token . '&email=' . urlencode($notifiable->email);
         });
+
+        // ResetPassword::createUrlUsing(function ($notifiable, string $token) {
+        //     return 'http://127.0.0.1:8000/reset-password?token=' . $token . '&email=' . urlencode($notifiable->email);
+        // });
+
+        
     }
 }
