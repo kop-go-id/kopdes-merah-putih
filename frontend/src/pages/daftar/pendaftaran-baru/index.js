@@ -80,6 +80,7 @@ export default function RegistrationNew() {
       cooperative_name:
         `Koperasi ${selectedDistrict} Merah Putih ` + val.cooperative_name,
       phone: '62' + val.phone,
+      registration_type: 'pendaftaran baru',
     };
 
     registerNewCooperative(registerInput)

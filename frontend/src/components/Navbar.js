@@ -93,6 +93,16 @@ const Navbar = () => {
             >
               Masuk
             </Link>
+            {
+              pathname.includes("#") ? null : (
+                <Link
+                  href="/daftar"
+                  className="ml-4 text-[#0E4B5A] border border-[#0E4B5A] px-4 py-2 rounded-md hover:bg-[#0E4B5A] hover:text-white transition-colors"
+                >
+                  Daftar
+                </Link>
+              )
+            }
           </div>
 
           {/* Hamburger Icon */}
