@@ -1,5 +1,5 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
-import { Input, Select, Upload, Button, Form, Divider, Checkbox } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Input, Select, Upload, Button, Form, Divider, Checkbox, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import Stepper from '@/components/Stepper';
 import { useRouter } from 'next/router';
@@ -15,6 +15,7 @@ import {
   getNPAKByProvince,
   registerNewCooperative,
 } from '@/services/cooperative';
+const { TextArea } = Input;
 
 const { Dragger } = Upload;
 const { Option, OptGroup } = Select;
@@ -81,9 +82,19 @@ export default function RegistrationNew() {
       phone: '62' + val.phone,
     };
 
-    registerNewCooperative(registerInput);
+    registerNewCooperative(registerInput)
+    .then(val => {
+      if (val) {
+        router.push('/daftar/sukses')
+      }
+    })
+    .catch(err => {
+      message.error({
+        content: 'Periksa kembali data koperasi anda dan silahkan ulangi kembali',
+        duration: 3,
+      });
+    });
     setLoadingForm(false);
-    router.push('/daftar/sukses');
   };
 
   return (
@@ -303,9 +314,10 @@ export default function RegistrationNew() {
                   { required: showNotaryField, message: 'Alamat notaris wajib diisi' },
                 ]}
               >
-                <Input
+                <TextArea
                   placeholder="Masukan alamat notaris"
                   maxLength={256}
+                  rows={2}
                 />
               </Form.Item>
             </>
@@ -320,7 +332,7 @@ export default function RegistrationNew() {
                 <Button
                   type="link"
                   size="small"
-                  className="text-blue-600 p-0 self-start"
+                  className="text-blue-600 p-0 self-start text-wrap text-left"
                   onClick={() => {
                     window.open(
                       '/docs/Template_Berita_Acara_Musyawarah_Desa.docx',
@@ -363,7 +375,7 @@ export default function RegistrationNew() {
                 <Button
                   type="link"
                   size="small"
-                  className="text-blue-600 p-0 self-start"
+                  className="text-blue-600 p-0 self-start text-wrap text-left"
                   onClick={() => {
                     window.open(
                       '/docs/Template_Berita_Acara_Rapat_Anggota.docx',

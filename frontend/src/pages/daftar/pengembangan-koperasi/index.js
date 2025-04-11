@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input, Select, Upload, Button, Divider, Checkbox } from 'antd';
+import { Form, Input, Select, Upload, Button, Divider, Checkbox, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import Stepper from '@/components/Stepper';
 import { useRouter } from 'next/router';
@@ -17,6 +17,7 @@ import {
   registerNewCooperative,
 } from '@/services/cooperative';
 import _ from 'lodash';
+const { TextArea } = Input;
 
 const { Option, OptGroup } = Select;
 const { Dragger } = Upload;
@@ -65,6 +66,7 @@ export default function RegistrationExisting() {
           (district) =>
             district.name.toUpperCase() === nik?.district.toUpperCase()
         );
+        console.log("selectedCode", selectedCode)
         form.setFieldsValue({ district_code: selectedCode?.code });
         setDistricts(districts);
 
@@ -87,6 +89,7 @@ export default function RegistrationExisting() {
         (subdistrict) =>
           subdistrict.name.toUpperCase() === nik?.subdistrict.toUpperCase()
       );
+      
       form.setFieldsValue({ subdistrict_code: selectedCode?.code });
       setSubDistricts(subdistricts);
       setSubDistrictCode(selectedCode?.code);
@@ -106,7 +109,6 @@ export default function RegistrationExisting() {
   }, [subDistrictCode]);
 
   useEffect(() => {
-    // Check village duplicate
     fetchVillageDuplicate(villageCode).then(({ is_duplicate }) => {
       let villageName = villages?.find(
         (village) => village.code === villageCode
@@ -141,9 +143,19 @@ export default function RegistrationExisting() {
       phone: '62' + val.phone,
     };
 
-    registerNewCooperative(registerInput);
+    registerNewCooperative(registerInput)
+    .then(val => {
+      if (val) {
+        router.push('/daftar/sukses')
+      }
+    })
+    .catch(err => {
+      message.error({
+        content: 'Periksa kembali data koperasi anda dan silahkan ulangi kembali',
+        duration: 3,
+      });
+    });
     setLoadingForm(false);
-    router.push('/daftar/sukses');
   };
 
   return (
@@ -377,9 +389,10 @@ export default function RegistrationExisting() {
                   { required: showNotaryField, message: 'Alamat notaris wajib diisi' },
                 ]}
               >
-                <Input
+                <TextArea
                   placeholder="Masukan alamat notaris"
                   maxLength={256}
+                  rows={2}
                 />
               </Form.Item>
             </>
@@ -394,7 +407,7 @@ export default function RegistrationExisting() {
                 <Button
                   type="link"
                   size="small"
-                  className="text-blue-600 p-0 self-start"
+                  className="text-blue-600 p-0 self-start text-wrap text-left"
                   onClick={() => {
                     window.open(
                       '/docs/Template_Berita_Acara_Musyawarah_Desa.docx',
@@ -437,7 +450,7 @@ export default function RegistrationExisting() {
                 <Button
                   type="link"
                   size="small"
-                  className="text-blue-600 p-0 self-start"
+                  className="text-blue-600 p-0 self-start text-wrap text-left"
                   onClick={() => {
                     window.open(
                       '/docs/Template_Berita_Acara_Rapat_Anggota.docx',
