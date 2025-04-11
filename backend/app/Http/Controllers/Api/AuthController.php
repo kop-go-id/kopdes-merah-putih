@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -113,5 +115,27 @@ class AuthController extends Controller
             ], 500);
         }
     }
+
+    public function sendResetLink(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ]);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        Log::info('Status Password Reset', ['status' => $status]);
+
+        if ($status === Password::RESET_LINK_SENT) {
+            return response()->json(['message' => 'Password reset link has been sent to your email.']);
+        } elseif ($status === Password::RESET_THROTTLED) {
+            return response()->json(['message' => 'Too many reset attempts. Please try again later.'], 429);
+        }
+
+        return response()->json(['message' => 'Failed to send password reset link.'], 500);
+    }
+
 
 }

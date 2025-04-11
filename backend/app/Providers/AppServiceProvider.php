@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Sanctum\PersonalAccessToken;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Auth\Notifications\ResetPassword;
 
 
 
@@ -24,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+        ResetPassword::createUrlUsing(function ($notifiable, string $token) {
+            return 'https://merahputih.kop.id/reset-password?token=' . $token . '&email=' . urlencode($notifiable->email);
+        });
     }
 }

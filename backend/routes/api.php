@@ -11,6 +11,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 Route::middleware('auth:sanctum')->get('/profile', [AuthController::class, 'profile']);
+Route::post('/forgot-password', [AuthController::class, 'sendResetLink']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
