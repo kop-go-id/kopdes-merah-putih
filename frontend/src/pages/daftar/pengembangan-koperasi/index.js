@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Form,
-  Input,
-  Select,
-  Upload,
-  Button,
-  Divider,
-  Checkbox,
-  message,
-} from 'antd';
+import { Form, Input, Select, Upload, Button, Divider, Checkbox } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import Stepper from '@/components/Stepper';
 import { useRouter } from 'next/router';
@@ -17,6 +8,7 @@ import {
   fetchProvince,
   fetchSubDistrict,
   fetchVillage,
+  fetchVillageDuplicate,
 } from '@/services/region';
 import {
   getCooperativeTypes,
@@ -24,6 +16,7 @@ import {
   getNPAKByProvince,
   registerNewCooperative,
 } from '@/services/cooperative';
+import _ from 'lodash';
 
 const { Option, OptGroup } = Select;
 const { Dragger } = Upload;
@@ -56,6 +49,8 @@ export default function RegistrationExisting() {
   const [cooperativeTypes, setCooperativeTypes] = useState();
   const [nik, setNIK] = useState();
   const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [enableRegion, setEnableRegion] = useState(true);
+  const [villageCode, setVillageCode] = useState();
 
   useEffect(() => {
     fetchProvince().then(setProvinces);
@@ -71,9 +66,10 @@ export default function RegistrationExisting() {
         );
         form.setFieldsValue({ district_code: selectedCode?.code });
         setDistricts(districts);
-        if (selectedCode.name.toUpperCase().includes('KOTA')) {
+
+        if (selectedCode?.name.toUpperCase().includes('KOTA')) {
           setSelectedDistrict('Kelurahan');
-        } else if (selectedCode.name.toUpperCase().includes('KAB')) {
+        } else if (selectedCode?.name.toUpperCase().includes('KAB')) {
           setSelectedDistrict('Desa');
         }
 
@@ -98,17 +94,38 @@ export default function RegistrationExisting() {
 
   useEffect(() => {
     fetchVillage(subDistrictCode).then((villages) => {
-      const selectedCode = villages?.find(
-        (village) => village.name.toUpperCase() === nik?.village.toUpperCase()
-      );
-      form.setFieldsValue({ village_code: selectedCode?.code });
-      form.setFieldsValue({
-        cooperative_name: selectedCode?.name.toUpperCase(),
-        subdomain: selectedCode?.name.toLowerCase().replace(/\s+/g, ''),
-      });
+      const selectedVillage = villages.find(
+        (village) => village.name.toUpperCase() === nik.village.toUpperCase()
+      )?.code;
+
+      form.setFieldsValue({ village_code: selectedVillage });
       setVillages(villages);
+      setVillageCode(selectedVillage);
     });
   }, [subDistrictCode]);
+
+  useEffect(() => {
+    // Check village duplicate
+    fetchVillageDuplicate(villageCode).then(({ is_duplicate }) => {
+      let villageName = villages?.find(
+        (village) => village.code === villageCode
+      )?.name;
+
+      if (is_duplicate) {
+        const subdistrict = subDistricts.find(
+          (val) => val?.code === subDistrictCode
+        )?.name;
+        villageName = `${villageName} Kecamatan ${subdistrict}`;
+      } else {
+        villageName;
+      }
+
+      form.setFieldsValue({
+        cooperative_name: villageName?.toUpperCase(),
+        subdomain: villageName?.toLowerCase().replace(/\s+/g, ''),
+      });
+    });
+  }, [villageCode, villages]);
 
   const onFinish = (val) => {
     setLoadingForm(true);
@@ -117,8 +134,10 @@ export default function RegistrationExisting() {
       klu_ids: val.klu_ids?.join(','),
       bamd: val.bamd.file.originFileObj,
       bara: val.bara.file.originFileObj,
+      subdomain: val.subdomain + 'kop.id',
+      cooperative_name:
+        `Koperasi ${selectedDistrict} Merah Putih ` + val.cooperative_name,
     };
-    console.log('registerInput', registerInput);
 
     registerNewCooperative(registerInput);
     setLoadingForm(false);
@@ -152,20 +171,29 @@ export default function RegistrationExisting() {
               placeholder="Masukkan Nomor Induk Koperasi"
               onChange={(e) => {
                 setLoadingCheckNIK(true);
+                if (_.isEmpty(e.target.value)) {
+                  setLoadingCheckNIK(false);
+                  return;
+                }
+
                 getNIKs(e.target.value).then((val) => {
                   try {
                     const selectedProvince = provinces.find(
-                      (province) => province.name === val.province.toUpperCase()
+                      (province) =>
+                        province.name === val?.province.toUpperCase()
                     )?.code;
-                    // Couldn't get districts and below here (data is undefined)
-                    // const selectedDistrict = districts.find(district => district.name === val.district.toUpperCase())?.code;
 
-                    form.setFieldsValue({
-                      existing_cooperative: val.name,
-                      province_code: selectedProvince,
-                    });
+                    if (_.isEmpty(selectedProvince)) {
+                      setEnableRegion(!enableRegion);
+                    } else {
+                      form.setFieldsValue({
+                        existing_cooperative: val?.name,
+                        province_code: selectedProvince,
+                      });
 
-                    setProvinceCode(selectedProvince);
+                      setProvinceCode(selectedProvince);
+                    }
+
                     setNIK(val);
                     setLoadingCheckNIK(false);
                   } catch (err) {}
@@ -200,7 +228,7 @@ export default function RegistrationExisting() {
                 label: province.name,
                 value: province.code,
               }))}
-              disabled
+              disabled={enableRegion}
               showSearch
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
@@ -223,7 +251,7 @@ export default function RegistrationExisting() {
                 label: district.name,
                 value: district.code,
               }))}
-              disabled
+              disabled={enableRegion}
               showSearch
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
@@ -244,7 +272,7 @@ export default function RegistrationExisting() {
                   label: val.name,
                   value: val.code,
                 }))}
-                disabled
+                disabled={enableRegion}
                 showSearch
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
@@ -266,11 +294,12 @@ export default function RegistrationExisting() {
                   label: val.name,
                   value: val.code,
                 }))}
-                disabled
+                disabled={enableRegion}
                 showSearch
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
                 }
+                onChange={setVillageCode}
               />
             </Form.Item>
           </div>
@@ -282,8 +311,7 @@ export default function RegistrationExisting() {
           >
             <Input
               addonBefore={`Koperasi ${selectedDistrict} Merah Putih`}
-              onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
-              placeholder="Masukkan nama koperasi, yaitu nama desa. contoh DUREN TIGA"
+              disabled
             />
           </Form.Item>
 
@@ -404,7 +432,6 @@ export default function RegistrationExisting() {
               mode="multiple"
               allowClear
               placeholder="Pilih Jenis Usaha"
-              onChange={(val) => console.log('multi', val)}
               className="w-full"
               popupMatchSelectWidth={true}
             >
@@ -469,7 +496,7 @@ export default function RegistrationExisting() {
               name="phone"
               rules={[{ required: true, message: 'Nomor HP wajib diisi.' }]}
             >
-              <Input addonBefore="+62" placeholder="812345678" />
+              <Input addonBefore="+62" placeholder="812345678" type="number" />
             </Form.Item>
           </div>
 

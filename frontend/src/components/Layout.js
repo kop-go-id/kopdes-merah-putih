@@ -74,7 +74,7 @@ const menuByRole = {
       icon: <DashboardOutlined />,
       label: 'Dashboard',
       path: '/koperasi/dashboard',
-      requiresRegistration: true,
+      // requiresRegistration: true,
     },
     {
       key: '2',
