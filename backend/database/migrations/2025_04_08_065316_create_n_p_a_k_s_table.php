@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('npaks', function (Blueprint $table) {
             $table->id('notary_id');
-            $table->string('name', 50);
+            $table->string('name', 256);
             $table->string('address', 256);
             $table->timestamps();
             $table->unsignedBigInteger('provinceId'); // FK ke tabel provinsi
