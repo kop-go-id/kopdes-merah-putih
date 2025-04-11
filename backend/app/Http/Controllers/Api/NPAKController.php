@@ -78,4 +78,50 @@ class NPAKController extends Controller
             'data' => [...$defaultNPAK, ...$npaks],
         ], 201);
     }
+
+    public function search (Request $request)
+    { 
+        if (!$request->filled('query')) {
+            return response()->json([
+                'message' => 'Success',
+                'data' => [],
+            ], 200);
+        }
+
+        $search = $request->query('query');
+        $npaks = NPAK::with(['province'])
+            ->where('provinceId', '!=', 0)
+            ->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhereHas('province', function ($q) use ($search) {
+                        $q->where('name', 'like', '%' . strtoupper($search) . '%');
+                    });
+            })
+            ->orderBy('name', 'asc')
+            ->get();
+
+        return response()->json([
+            'message' => 'Success',
+            'data' => $npaks,
+        ], 201);
+    }
+
+    public function validityCheck($notaryId, $districtCode)
+    {
+        $district = District::where('code', $districtCode)->first();
+        if (!$district) {
+            return response()->json([
+                'message' => 'Success',
+                'data' => false,
+            ], 201);
+        }
+        $check = NPAK::where('notary_id', $notaryId)
+            ->where('districtId', $district->district_id)
+            ->first();
+
+        return response()->json([
+            'message' => 'Success',
+            'data' => $check ? true : false,
+        ], 201);
+    }
 }
