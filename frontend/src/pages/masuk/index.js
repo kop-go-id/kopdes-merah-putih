@@ -6,14 +6,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { login } from '@/services/auth';
+import { fetchProvince } from '@/services/region';
 
 export default function LoginFormAntd() {
   const [form] = Form.useForm();
   const router = useRouter();
 
-  const handleLogin = async (values) => {
-    const val = await login(values);
-    console.log(val);
+  const handleLogin = (values) => {
+    // fetchProvince()
+    try {
+      login(values);
+    } catch (error) {
+      console.log(error)
+    }
+    // router.push('/koperasi');
   };
 
   return (

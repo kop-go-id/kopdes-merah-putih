@@ -1,5 +1,4 @@
 import { callApi, getAPIEndpoint } from '@/utils/endpoint';
-import { fetchData } from '@/utils/fetch';
 
 const login = async (body) => {
   const endpoint = getAPIEndpoint('login', 'POST');
@@ -8,9 +7,9 @@ const login = async (body) => {
     const response = await callApi(endpoint, body);
 
     console.log(response);
-    return response.data;
+    return response;
   } catch (error) {
-    console.error('registerNewCooperative call error:', error);
+    console.error('login call error:', error);
     throw error;
   }
 };
