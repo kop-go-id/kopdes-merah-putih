@@ -21,7 +21,7 @@ export default function CooperativePage() {
       title: 'Selesai',
       date: 'Unduh Surat',
       status: 'done',
-      link: '#', // Ganti dengan link unduhan surat
+      link: '#', 
     },
   ];
 
