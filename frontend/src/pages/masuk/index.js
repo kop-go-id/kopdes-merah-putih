@@ -1,25 +1,31 @@
 'use client';
 
-import { useState } from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { login } from '@/services/auth';
-import { fetchProvince } from '@/services/region';
 
 export default function LoginFormAntd() {
   const [form] = Form.useForm();
   const router = useRouter();
+  const [messageApi, contextHolder] = message.useMessage();
 
-  const handleLogin = (values) => {
-    // fetchProvince()
+  const handleLogin = async (values) => {
     try {
-      login(values);
+      await login(values).then((e) => {
+        if (e === 'error') {
+          messageApi.open({
+            type: 'error',
+            content: 'Email atau kata sandi tidak valid',
+          });
+        }else{
+          router.push('/koperasi/pendaftaran');
+        }
+      })
     } catch (error) {
-      console.log(error)
+      console.log('error', error)
     }
-    // router.push('/koperasi');
   };
 
   return (
@@ -27,6 +33,7 @@ export default function LoginFormAntd() {
       className="min-h-screen flex items-center justify-center bg-cover bg-center px-4 sm:px-6 md:px-8"
       style={{ backgroundImage: "url('/images/bg-login.jpeg')" }}
     >
+      {contextHolder}
       <div className="bg-white shadow-lg rounded-2xl p-6 sm:p-8 w-full max-w-md">
         {/* Logo */}
         <div className="flex justify-center mb-4">

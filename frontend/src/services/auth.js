@@ -5,12 +5,9 @@ const login = async (body) => {
 
   try {
     const response = await callApi(endpoint, body);
-
-    console.log(response);
-    return response;
+    return response ?? 'error';
   } catch (error) {
-    console.error('login call error:', error);
-    throw error;
+    return error;
   }
 };
 
