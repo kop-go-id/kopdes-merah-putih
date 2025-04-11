@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CooperativeKLU;
 use App\Models\CooperativeLegalStage;
 use App\Models\CooperativeManagement;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\DomCrawler\Crawler;
