@@ -29,7 +29,7 @@ return [
         /*
          * Description rendered on the home page of the API documentation (`/docs/api`).
          */
-        'description' => '',
+        'description' => 'created by "Pengendali-API" - Kemenkop',
     ],
 
     /*
@@ -42,7 +42,7 @@ return [
         'title' => 'KopDes API Documentation',
         'description' => 'This API serves as the backend for the KopDes platform.',
         'base_url' => env('APP_URL') . '/api',
-        'logo_path' => 'images/logo.png', // kalau kamu mau pasang logo
+        'logo_path' => 'kemenkop-logo.png', // kalau kamu mau pasang logo
 
         /*
          * Define the theme of the documentation. Available options are `light` and `dark`.
@@ -62,7 +62,7 @@ return [
         /*
          * URL to an image that displays as a small square logo next to the title, above the table of contents.
          */
-        'logo' => '',
+        'logo' => '/kemenkop-logo.png',
 
         /*
          * Use to fetch the credential policy for the Try It feature. Options are: omit, include (default), and same-origin
