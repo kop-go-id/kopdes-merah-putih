@@ -78,8 +78,8 @@ export default function RegistrationRevitalization() {
       klu_ids: val.klu_ids?.join(','),
       bamd: val.bamd.file,
       bara: val.bara.file,
+      registration_type: 'revitalisasi'
     };
-    console.log('registerInput', registerInput);
 
     registerNewCooperative(registerInput);
   };
