@@ -8,6 +8,7 @@ import {
   fetchProvince,
   fetchSubDistrict,
   fetchVillage,
+  fetchVillageDuplicate,
 } from '@/services/region';
 import {
   getCooperativeTypes,
@@ -33,6 +34,7 @@ export default function RegistrationNew() {
       [name]: e.target.checked,
     }));
   };
+  
   const [loadingForm, setLoadingForm] = useState(false);
   const [provinces, setProvinces] = useState([]);
   const [provinceCode, setProvinceCode] = useState();
@@ -72,8 +74,9 @@ export default function RegistrationNew() {
       klu_ids: val.klu_ids?.join(','),
       bamd: val.bamd.file.originFileObj,
       bara: val.bara.file.originFileObj,
+      subdomain: val.subdomain + 'kop.id',
+      cooperative_name: `Koperasi ${selectedDistrict} Merah Putih ` + val.cooperative_name,
     };
-    console.log('registerInput', registerInput);
 
     registerNewCooperative(registerInput);
     setLoadingForm(false);
@@ -200,11 +203,21 @@ export default function RegistrationNew() {
                   const selectedVillage = villages.find(
                     (village) => village.code === val
                   );
-                  form.setFieldsValue({
-                    cooperative_name: selectedVillage?.name.toUpperCase(),
-                    subdomain: selectedVillage?.name
-                      .toLowerCase()
-                      .replace(/\s+/g, ''),
+
+                  let villageName = selectedVillage?.name
+                  fetchVillageDuplicate(val).then(val => {
+                    if (val.is_duplicate) {
+                      const subdistrict = subDistricts.find(val => val.code === subDistrictCode)?.name;
+                      villageName = `${villageName} Kecamatan ${subdistrict}`;
+                    } else {
+                      villageName
+                    }
+
+                    form.setFieldsValue({
+                      cooperative_name: villageName.toUpperCase(),
+                      subdomain: villageName.toLowerCase().replace(/\s+/g, ''),
+                    });
+
                   });
                 }}
                 showSearch
@@ -218,12 +231,10 @@ export default function RegistrationNew() {
             label="Nama Koperasi Baru"
             name="cooperative_name"
             className="mb-4"
-            rules={[{ required: true, message: 'Nama koperasi wajib diisi.' }]}
           >
             <Input
               addonBefore={`Koperasi ${selectedDistrict} Merah Putih`}
-              onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
-              placeholder="Masukkan nama koperasi, yaitu nama desa. contoh DUREN TIGA"
+              disabled
             />
           </Form.Item>
 
@@ -345,7 +356,6 @@ export default function RegistrationNew() {
               mode="multiple"
               allowClear
               placeholder="Pilih Jenis Usaha"
-              onChange={(val) => console.log('multi', val)}
               className="w-full"
               popupMatchSelectWidth={true}
             >
