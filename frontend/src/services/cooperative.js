@@ -24,8 +24,6 @@ const registerNewCooperative = async (body) => {
 
   try {
     const response = await callApi(endpoint, formData);
-
-    console.log(response);
     return response.data;
   } catch (error) {
     console.error('registerNewCooperative call error:', error);

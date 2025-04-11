@@ -51,6 +51,7 @@ export default function RegistrationExisting() {
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [enableRegion, setEnableRegion] = useState(true);
   const [villageCode, setVillageCode] = useState();
+   const [showNotaryField, setShowNotaryField] = useState(false);
 
   useEffect(() => {
     fetchProvince().then(setProvinces);
@@ -137,6 +138,7 @@ export default function RegistrationExisting() {
       subdomain: val.subdomain + 'kop.id',
       cooperative_name:
         `Koperasi ${selectedDistrict} Merah Putih ` + val.cooperative_name,
+      phone: '62' + val.phone,
     };
 
     registerNewCooperative(registerInput);
@@ -327,8 +329,61 @@ export default function RegistrationExisting() {
                 label: notary.name,
                 value: notary.notary_id,
               }))}
+              onChange={(val) => setShowNotaryField(val === 1)}
             />
           </Form.Item>
+
+          {showNotaryField && (
+            <>
+              <Form.Item
+                label="Nama Notaris"
+                name="npak_name"
+                rules={[
+                  { required: showNotaryField, message: 'Nama notaris wajib diisi' },
+                ]}
+              >
+                <Input placeholder="Masukan nama notaris" />
+              </Form.Item>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Form.Item
+                  label="Alamat Email"
+                  name="npak_email"
+                  rules={[
+                    {
+                      required: showNotaryField,
+                      type: 'email',
+                      message: 'Alamat email tidak valid atau kosong.',
+                    },
+                  ]}
+                >
+                  <Input placeholder="Masukan email notaris" />
+                </Form.Item>
+
+                <Form.Item
+                  label="Nomor HP"
+                  name="npak_phone"
+                  rules={[
+                    { required: showNotaryField, message: 'Nomor HP wajib diisi.' },
+                    { min: 8, message: 'Nomor HP harus terdiri dari minimal 8 digit.' },
+                  ]}
+                >
+                  <Input addonBefore="+62" placeholder="812345678" type="number" />
+                </Form.Item>
+              </div>
+              <Form.Item
+                label="Alamat Notaris"
+                name="npak_address"
+                rules={[
+                  { required: showNotaryField, message: 'Alamat notaris wajib diisi' },
+                ]}
+              >
+                <Input
+                  placeholder="Masukan alamat notaris"
+                  maxLength={256}
+                />
+              </Form.Item>
+            </>
+          )}
 
           <Form.Item
             label={
@@ -494,7 +549,10 @@ export default function RegistrationExisting() {
             <Form.Item
               label="Nomor HP"
               name="phone"
-              rules={[{ required: true, message: 'Nomor HP wajib diisi.' }]}
+              rules={[
+                { required: true, message: 'Nomor HP wajib diisi.' },
+                { min: 8, message: 'Nomor HP harus terdiri dari minimal 8 digit.' },
+              ]}
             >
               <Input addonBefore="+62" placeholder="812345678" type="number" />
             </Form.Item>
@@ -504,7 +562,10 @@ export default function RegistrationExisting() {
             <Form.Item
               label="Buat Kata Sandi"
               name="password"
-              rules={[{ required: true, message: 'Kata sandi wajib diisi.' }]}
+              rules={[
+                { required: true, message: 'Kata sandi wajib diisi.' },
+                { min: 8, message: 'Kata sandi minimal 8 karakter.' },
+              ]}
             >
               <Input.Password placeholder="Masukan kata sandi" />
             </Form.Item>
