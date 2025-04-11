@@ -26,6 +26,7 @@ Route::prefix('villages')->group(function () {
 });
 
 Route::apiResource('cooperatives', CooperativeController::class);
+Route::get('/verifikasi-pengajuan', [CooperativeController::class, 'verify']);
 
 Route::prefix('cooperative')->group(function () {
     Route::post('/register', [CooperativeController::class, 'register']);

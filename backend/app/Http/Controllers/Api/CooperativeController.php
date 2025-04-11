@@ -20,6 +20,10 @@ use App\Models\District;
 use App\Models\Subdistrict;
 use App\Models\Village;
 use App\Models\NPAK;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CooperativeRegisterMail;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CooperativeController extends Controller
 {
@@ -158,7 +162,7 @@ class CooperativeController extends Controller
                 'bara' => 'required|file|mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 'klu_ids' => 'required|string',
                 'subdomain' => 'required|string|max:50|unique:cooperatives,subdomain',
-                'nik' => 'required|unique:cooperatives,nik',
+                'nik' => 'unique:cooperatives,nik',
                 'name' => 'required|string|min:3|max:50',
                 'email' => 'required|string|email|min:3|max:50|unique:users,email',
                 'phone' => 'required|string|min:3|max:16|unique:users,phone',
@@ -270,6 +274,33 @@ class CooperativeController extends Controller
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
+
+            $token = Str::random(64);
+
+            DB::table('cooperative_tokens')->insert([
+                'cooperative_id' => $cooperative->cooperative_id,
+                'token' => $token,
+                'expires_at' => now()->addMinutes(30), // expire dalam 30 menit
+            ]);
+
+            $emailData = [
+                'nama_koperasi' => $request->input('cooperative_name'),
+                'provinsi' => $province->name ?? '-',
+                'kabupaten' => $district->name ?? '-',
+                'kecamatan' => $subdistrict->name ?? '-',
+                'desa' => $village->name ?? '-',
+                'alamat' => $request->input('alamat', '-'),
+                'kode_pos' => $request->input('kode_pos', '-'),
+                'telepon_koperasi' => $request->input('phone'),
+                'email_koperasi' => $request->input('email'),
+                'pj_nama' => $request->input('name'),
+                'pj_email' => $request->input('email'),
+                'pj_telepon' => $request->input('phone'),
+                'action_url' => url('/verifikasi-pengajuan/' . $token),
+            ];
+            
+            Mail::to($request->input('email'))->send(new CooperativeRegisterMail($emailData));
+            
     
             return response()->json([
                 'message' => 'Cooperative created successfully.',
@@ -288,4 +319,34 @@ class CooperativeController extends Controller
             ], 500);
         }
     }
+
+    public function verifikasi($token)
+    {
+        $record = DB::table('cooperative_tokens')
+            ->where('token', $token)
+            ->where('expires_at', '>', now())
+            ->first();
+
+        if (!$record) {
+            return response()->json(['message' => 'Token tidak valid atau expired'], 401);
+        }
+
+        $cooperative = Cooperative::where('cooperative_id', $record->cooperative_id)->first();
+
+        if (!$cooperative) {
+            return response()->json(['message' => 'Koperasi tidak ditemukan'], 404);
+        }
+
+        $user = User::find($cooperative->user_id); 
+
+        $token = $user->createToken('magic-link-login')->plainTextToken;
+
+        DB::table('cooperative_tokens')->where('token', $token)->delete();
+
+        return redirect()->away("https://frontend.kop.id/dashboard?token={$token}");
+    }
+
+
+    
+
 }
