@@ -23,6 +23,18 @@ use App\Models\NPAK;
 
 class CooperativeController extends Controller
 {
+
+    public function index()
+    {
+        return response()->json([
+            'status' => true,
+            'message' => 'List data cooperatives',
+            'data' => Cooperative::all()
+        ]);
+    }
+
+
+
     public function getByNIK(Request $request, $nik)
     {
         $targetUrl = 'https://nik.kop.go.id/odsnik/detail';
