@@ -1,14 +1,8 @@
 'use client';
 
 import React from 'react';
-import {
-  EditOutlined,
-} from '@ant-design/icons';
-import {
-  Button,
-  Table,
-  Pagination,
-} from 'antd';
+import { EditOutlined } from '@ant-design/icons';
+import { Button, Table, Pagination } from 'antd';
 import 'tailwindcss/tailwind.css';
 import LayoutWrapper from '@/components/Layout';
 

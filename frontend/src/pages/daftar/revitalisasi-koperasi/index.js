@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import {
   Input,
   Select,
@@ -8,21 +8,21 @@ import {
   Divider,
   Checkbox,
   Result,
-} from "antd";
-import { InboxOutlined } from "@ant-design/icons";
-import Stepper from "@/components/Stepper";
-import { useRouter } from "next/router";
+} from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
+import Stepper from '@/components/Stepper';
+import { useRouter } from 'next/router';
 import {
   fetchDistrict,
   fetchProvince,
   fetchSubDistrict,
   fetchVillage,
-} from "@/services/region";
+} from '@/services/region';
 import {
   getCooperativeTypes,
   getNPAKByProvince,
   registerNewCooperative,
-} from "@/services/cooperative";
+} from '@/services/cooperative';
 
 const { Dragger } = Upload;
 const { Option, OptGroup } = Select;
@@ -75,11 +75,11 @@ export default function RegistrationRevitalization() {
   const onFinish = (val) => {
     const registerInput = {
       ...val,
-      klu_ids: val.klu_ids?.join(","),
+      klu_ids: val.klu_ids?.join(','),
       bamd: val.bamd.file,
       bara: val.bara.file,
     };
-    console.log("registerInput", registerInput);
+    console.log('registerInput', registerInput);
 
     registerNewCooperative(registerInput);
   };
@@ -96,20 +96,20 @@ export default function RegistrationRevitalization() {
         </h2>
         <p className="text-[#7CAF3C] mb-6">Revitalisasi Koperasi</p>
         <div className=" flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-4xl px-6 py-10">
-        <Result
-          status="403"
-          title="🚧 Sedang Dalam Pengembangan"
-          subTitle="Halaman atau fitur ini sedang dalam proses pembangunan. Silakan kembali nanti."
-          extra={
-            <Button type="primary" href="/daftar" className="mt-4">
-              Kembali ke Beranda
-            </Button>
-          }
-          className="bg-white shadow-md p-6 rounded-lg"
-        />
-      </div>
-    </div>
+          <div className="w-full max-w-4xl px-6 py-10">
+            <Result
+              status="403"
+              title="🚧 Sedang Dalam Pengembangan"
+              subTitle="Halaman atau fitur ini sedang dalam proses pembangunan. Silakan kembali nanti."
+              extra={
+                <Button type="primary" href="/daftar" className="mt-4">
+                  Kembali ke Beranda
+                </Button>
+              }
+              className="bg-white shadow-md p-6 rounded-lg"
+            />
+          </div>
+        </div>
 
         {/* <Form form={form} layout="vertical" onFinish={onFinish}>
           <Divider>Kedudukan</Divider>

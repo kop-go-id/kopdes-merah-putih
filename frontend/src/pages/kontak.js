@@ -1,12 +1,12 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 export default function Contacts() {
   const contatactData = Array.from({ length: 38 }, (_, i) => ({
     nama: `Kantor Wilayah ${i + 1}`,
     email: `wilayah${i + 1}@kopdes.id`,
     phone: `0812-000${i + 1}`,
-    alamat: `Jl. Wilayah No.${i + 1}, Indonesia`
+    alamat: `Jl. Wilayah No.${i + 1}, Indonesia`,
   }));
 
   return (
@@ -20,10 +20,14 @@ export default function Contacts() {
           height={120}
           className="mx-auto mb-4"
         />
-        <h1 className="text-2xl font-bold text-[#0D3B66]">Koperasi Merah Putih</h1>
+        <h1 className="text-2xl font-bold text-[#0D3B66]">
+          Koperasi Merah Putih
+        </h1>
         <p className="mt-2 text-gray-600">Email: dev@satu.kop.id</p>
         <p className="text-gray-600">Telepon: 0812-3456-7890</p>
-        <p className="text-gray-600">Alamat: Jl. Merdeka No. 45, Jakarta Pusat</p>
+        <p className="text-gray-600">
+          Alamat: Jl. Merdeka No. 45, Jakarta Pusat
+        </p>
       </div>
 
       {/* Daftar Kontak Kantor Wilayah */}

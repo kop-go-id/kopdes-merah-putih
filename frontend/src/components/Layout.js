@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -12,88 +12,88 @@ import {
   BarChartOutlined,
   FileAddOutlined,
   IdcardOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu, Button, Dropdown, Avatar, Space } from "antd";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import "tailwindcss/tailwind.css";
+} from '@ant-design/icons';
+import { Layout, Menu, Button, Dropdown, Avatar, Space } from 'antd';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import 'tailwindcss/tailwind.css';
 
 const { Header, Sider, Content } = Layout;
 
-const role = "PENGURUS KOPERASI";
+const role = 'PENGURUS KOPERASI';
 const isRegistered = false;
 
 const menuByRole = {
   ADMINISTRATOR: [
     {
-      key: "1",
+      key: '1',
       icon: <TeamOutlined />,
-      label: "User",
-      path: "/administrator/user",
+      label: 'User',
+      path: '/administrator/user',
     },
     {
-      key: "2",
+      key: '2',
       icon: <IdcardOutlined />,
-      label: "NPAK",
-      path: "/administrator/npak",
+      label: 'NPAK',
+      path: '/administrator/npak',
     },
     {
-      key: "3",
+      key: '3',
       icon: <AppstoreOutlined />,
-      label: "Koperasi",
-      path: "/administrator/koperasi",
+      label: 'Koperasi',
+      path: '/administrator/koperasi',
     },
   ],
   NPAK: [
     {
-      key: "1",
+      key: '1',
       icon: <AppstoreOutlined />,
-      label: "Koperasi",
-      path: "/npak/koperasi",
+      label: 'Koperasi',
+      path: '/npak/koperasi',
     },
   ],
   KORWIL_DINAS: [
     {
-      key: "1",
+      key: '1',
       icon: <AppstoreOutlined />,
-      label: "Koperasi",
-      path: "/korwil/koperasi",
+      label: 'Koperasi',
+      path: '/korwil/koperasi',
     },
   ],
   KEMENTRIAN: [
     {
-      key: "1",
+      key: '1',
       icon: <BarChartOutlined />,
-      label: "Statistik Koperasi",
-      path: "/kementrian/statistik",
+      label: 'Statistik Koperasi',
+      path: '/kementrian/statistik',
     },
   ],
-  "PENGURUS KOPERASI": [
+  'PENGURUS KOPERASI': [
     {
-      key: "1",
+      key: '1',
       icon: <DashboardOutlined />,
-      label: "Dashboard",
-      path: "/koperasi/dashboard",
+      label: 'Dashboard',
+      path: '/koperasi/dashboard',
       requiresRegistration: true,
     },
     {
-      key: "2",
+      key: '2',
       icon: <FileAddOutlined />,
-      label: "Pendaftaran",
-      path: "/koperasi/pendaftaran",
+      label: 'Pendaftaran',
+      path: '/koperasi/pendaftaran',
     },
     {
-      key: "3",
+      key: '3',
       icon: <AppstoreOutlined />,
-      label: "Anggota",
-      path: "/koperasi/anggota",
+      label: 'Anggota',
+      path: '/koperasi/anggota',
       requiresRegistration: true,
     },
     {
-      key: "4",
+      key: '4',
       icon: <IdcardOutlined />,
-      label: "Profil Koperasi",
-      path: "/koperasi/profil",
+      label: 'Profil Koperasi',
+      path: '/koperasi/profil',
     },
   ],
 };
@@ -135,19 +135,19 @@ export default function LayoutWrapper({ children }) {
             className="text-[#01566a] flex items-center justify-center"
           />
           <Link href="/" className="text-[#01566a] text-lg font-bold">
-          <img
-            src="/images/logo.png"
-            alt="Logo"
-            className="h-10 w-auto object-contain"
-          />
+            <img
+              src="/images/logo.png"
+              alt="Logo"
+              className="h-10 w-auto object-contain"
+            />
           </Link>
         </div>
 
         {/* Kanan: Avatar/Profile */}
-        <Dropdown overlay={profileMenu} trigger={["click"]}>
+        <Dropdown overlay={profileMenu} trigger={['click']}>
           <Space className="cursor-pointer">
             <Avatar
-              style={{ backgroundColor: "#025669" }}
+              style={{ backgroundColor: '#025669' }}
               icon={<UserOutlined />}
             />
           </Space>
@@ -168,7 +168,7 @@ export default function LayoutWrapper({ children }) {
             z-40
 
             fixed top-[64px] h-[calc(100vh-64px)] left-0
-            ${collapsed ? "-left-[250px]" : "left-0"}
+            ${collapsed ? '-left-[250px]' : 'left-0'}
 
             md:sticky md:top-[64px] md:h-[calc(100vh-64px)]
           `}
@@ -186,7 +186,7 @@ export default function LayoutWrapper({ children }) {
                 <Link
                   href={item.path}
                   className={
-                    item.disabled ? "pointer-events-none opacity-50" : ""
+                    item.disabled ? 'pointer-events-none opacity-50' : ''
                   }
                 >
                   <span className="text-white">{item.label}</span>

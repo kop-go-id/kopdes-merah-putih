@@ -1,15 +1,15 @@
-import { callApi, getAPIEndpoint } from "@/utils/endpoint";
-import { fetchData } from "@/utils/fetch";
+import { callApi, getAPIEndpoint } from '@/utils/endpoint';
+import { fetchData } from '@/utils/fetch';
 
 const getCooperativeTypes = () => fetchData('/cooperative/types');
-const getNPAKByProvince = (provinceCode) => fetchData(`/npak/by-province-code/${provinceCode}`);
+const getNPAKByProvince = (provinceCode) =>
+  fetchData(`/npak/by-province-code/${provinceCode}`);
 const getNIKs = (nik) => fetchData(`cooperative/by-nik/${nik}`);
 
 const registerNewCooperative = async (body) => {
-  const endpoint = getAPIEndpoint(
-    'cooperative/register', 'POST',  
-    {'Content-Type': 'multipart/form-data'},
-  );
+  const endpoint = getAPIEndpoint('cooperative/register', 'POST', {
+    'Content-Type': 'multipart/form-data',
+  });
 
   const formData = new FormData();
   Object.entries(body).forEach(([key, value]) => {
@@ -23,10 +23,7 @@ const registerNewCooperative = async (body) => {
   });
 
   try {
-    const response = await callApi(
-      endpoint,
-      formData
-    )
+    const response = await callApi(endpoint, formData);
 
     console.log(response);
     return response.data;
@@ -34,7 +31,7 @@ const registerNewCooperative = async (body) => {
     console.error('registerNewCooperative call error:', error);
     throw error;
   }
-}
+};
 
 export {
   getCooperativeTypes,

@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import React from "react";
-import LayoutWrapper from "@/components/Layout";
-import { Table, Button } from "antd";
-import { useRouter } from "next/navigation";
+import React from 'react';
+import LayoutWrapper from '@/components/Layout';
+import { Table, Button } from 'antd';
+import { useRouter } from 'next/navigation';
 
 const dataSource = [
   {
-    key: "1",
-    nama: "Koperasi Tunas Mandiri",
-    status: "On Progress",
+    key: '1',
+    nama: 'Koperasi Tunas Mandiri',
+    status: 'On Progress',
   },
   {
-    key: "2",
-    nama: "Koperasi Sejahtera",
-    status: "Done",
+    key: '2',
+    nama: 'Koperasi Sejahtera',
+    status: 'Done',
   },
 ];
 
@@ -23,18 +23,18 @@ export default function NpakKoperasiPage() {
 
   const columns = [
     {
-      title: "Nama Koperasi",
-      dataIndex: "nama",
-      key: "nama",
+      title: 'Nama Koperasi',
+      dataIndex: 'nama',
+      key: 'nama',
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
     },
     {
-      title: "Aksi",
-      key: "aksi",
+      title: 'Aksi',
+      key: 'aksi',
       render: (_, record) => (
         <Button
           type="link"

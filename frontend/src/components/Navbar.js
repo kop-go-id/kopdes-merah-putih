@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { Menu, X } from "lucide-react";
-import Link from "next/link";
-import { Image } from "antd";
+import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { Image } from 'antd';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "Tentang", link: "#about" },
-    { name: "Model", link: "#model" },
-    { name: "Manfaat", link: "#benefit" },
-    { name: "Jenis", link: "#type" },
-    { name: "Pertanyaan", link: "#faq" },
-    { name: "Regulasi", link: "#regulation" },
-    { name: "Kontak", link: "/kontak" },
+    { name: 'Tentang', link: '#about' },
+    { name: 'Model', link: '#model' },
+    { name: 'Manfaat', link: '#benefit' },
+    { name: 'Jenis', link: '#type' },
+    { name: 'Pertanyaan', link: '#faq' },
+    { name: 'Regulasi', link: '#regulation' },
+    { name: 'Kontak', link: '/kontak' },
   ];
 
   return (

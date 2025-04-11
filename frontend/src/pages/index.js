@@ -1,21 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Wrench,
   FastForward,
   Users,
   ChevronLeft,
   ChevronRight,
-} from "lucide-react";
-import { Image } from "antd";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Link from "next/link";
-import { list } from "postcss";
+} from 'lucide-react';
+import { Image } from 'antd';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import Link from 'next/link';
+import { list } from 'postcss';
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({
@@ -26,7 +26,7 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const targetDate = new Date("July 12, 2025 00:00:00").getTime();
+    const targetDate = new Date('July 12, 2025 00:00:00').getTime();
     const timer = setInterval(() => {
       const now = new Date().getTime();
       const difference = targetDate - now;
@@ -50,198 +50,198 @@ export default function Home() {
   const modelData = [
     {
       icon: <Wrench size={40} className="text-[#A0B73E]" />,
-      title: "Membangun Koperasi Baru",
-      link: "/daftar/pendaftaran-baru",
+      title: 'Membangun Koperasi Baru',
+      link: '/daftar/pendaftaran-baru',
     },
     {
       icon: <FastForward size={40} className="text-[#A0B73E]" />,
-      title: "Mengembangkan yang Sudah Ada",
-      link: "/daftar/pengembangan-koperasi",
+      title: 'Mengembangkan yang Sudah Ada',
+      link: '/daftar/pengembangan-koperasi',
     },
     {
       icon: <Users size={40} className="text-[#A0B73E]" />,
-      title: "Revitalisasi Koperasi",
-      link: "/daftar/revitalisasi-koperasi",
+      title: 'Revitalisasi Koperasi',
+      link: '/daftar/revitalisasi-koperasi',
     },
   ];
 
   const benefitsData = [
     {
-      image: "/images/rupiah.jpg",
-      title: "Menekan Inflasi",
+      image: '/images/rupiah.jpg',
+      title: 'Menekan Inflasi',
     },
     {
-      image: "/images/pexels-photo-4445848.jpeg",
-      title: "Memberikan Service Request Intake",
+      image: '/images/pexels-photo-4445848.jpeg',
+      title: 'Memberikan Service Request Intake',
     },
     {
-      image: "/images/pexels-photo-3226898.jpeg",
-      title: "Menekan harga di tingkat konsumen",
+      image: '/images/pexels-photo-3226898.jpeg',
+      title: 'Menekan harga di tingkat konsumen',
     },
     {
-      image: "/images/bg-login.jpeg",
-      title: "Meningkatkan Kesejahteraan Petani",
+      image: '/images/bg-login.jpeg',
+      title: 'Meningkatkan Kesejahteraan Petani',
     },
     {
-      image: "/images/kerja.png",
-      title: "Menciptakan Lapangan Kerja",
+      image: '/images/kerja.png',
+      title: 'Menciptakan Lapangan Kerja',
     },
     {
-      image: "/images/berdaya.jpeg",
-      title: "Meningkatkan Pemberdayaan Masyarakat",
+      image: '/images/berdaya.jpeg',
+      title: 'Meningkatkan Pemberdayaan Masyarakat',
     },
     {
-      image: "/images/tengkulak.jpg",
-      title: "Menekan Pergerakan Tengkulak",
+      image: '/images/tengkulak.jpg',
+      title: 'Menekan Pergerakan Tengkulak',
     },
     {
-      image: "/images/nelayan.png",
-      title: "Katup Penyelamat Guncangan Ekonomi",
+      image: '/images/nelayan.png',
+      title: 'Katup Penyelamat Guncangan Ekonomi',
     },
     {
-      image: "/images/inklusi.jpg",
-      title: "Meningkatkan Inklusi Keuangan",
+      image: '/images/inklusi.jpg',
+      title: 'Meningkatkan Inklusi Keuangan',
     },
     {
-      image: "/images/umkm.png",
-      title: "Menjadi Konsolidator UMKM",
+      image: '/images/umkm.png',
+      title: 'Menjadi Konsolidator UMKM',
     },
     {
-      image: "/images/pexels-photo-11505049.jpeg",
-      title: "Perwujudan Pemerataan Ekonomi",
+      image: '/images/pexels-photo-11505049.jpeg',
+      title: 'Perwujudan Pemerataan Ekonomi',
     },
   ];
 
   const bussinessTypeData = [
-    "Gerai Sembako (Embrio KopHub)",
-    "Apotek Desa",
-    "Gerai Kantor Koperasi",
-    "Gerai Unit Usaha Simpan Pinjam (Embrio Kop Bank)",
-    "Gerai Klinik Desa",
-    "Gerai Cold Storage/Cold Chain",
-    "Logistik (Distribusi)",
+    'Gerai Sembako (Embrio KopHub)',
+    'Apotek Desa',
+    'Gerai Kantor Koperasi',
+    'Gerai Unit Usaha Simpan Pinjam (Embrio Kop Bank)',
+    'Gerai Klinik Desa',
+    'Gerai Cold Storage/Cold Chain',
+    'Logistik (Distribusi)',
   ];
 
   const faqs = [
     {
-      question: "Apa itu Koperasi Desa/Kelurahan Merah Putih?",
+      question: 'Apa itu Koperasi Desa/Kelurahan Merah Putih?',
       answer:
-        "Koperasi Desa/Kelurahan Merah Putih adalah lembaga ekonomi beranggotakan masyarakat desa yang dibentuk untuk meningkatkan kesejahteraan melalui prinsip gotong royong, kekeluargaan, dan partisipasi bersama.",
+        'Koperasi Desa/Kelurahan Merah Putih adalah lembaga ekonomi beranggotakan masyarakat desa yang dibentuk untuk meningkatkan kesejahteraan melalui prinsip gotong royong, kekeluargaan, dan partisipasi bersama.',
     },
     {
-      question: "Apa tujuan utama pembentukan Kopdes/kel Merah Putih?",
+      question: 'Apa tujuan utama pembentukan Kopdes/kel Merah Putih?',
       answer:
-        "Tujuannya antara lain memperkuat perekonomian desa, meningkatkan nilai tukar petani, menekan inflasi, menciptakan lapangan kerja, dan meningkatkan inklusi keuangan.",
+        'Tujuannya antara lain memperkuat perekonomian desa, meningkatkan nilai tukar petani, menekan inflasi, menciptakan lapangan kerja, dan meningkatkan inklusi keuangan.',
     },
     {
-      question: "Apa dasar hukum pembentukan koperasi ini?",
+      question: 'Apa dasar hukum pembentukan koperasi ini?',
       answer:
-        "Pembentukan koperasi didasarkan pada berbagai peraturan, seperti Undang-Undang Nomor 25 Tahun 1992 tentang Perkoperasian (yang telah diubah beberapa kali), Peraturan Pemerintah, Peraturan Presiden, dan peraturan menteri terkait.",
+        'Pembentukan koperasi didasarkan pada berbagai peraturan, seperti Undang-Undang Nomor 25 Tahun 1992 tentang Perkoperasian (yang telah diubah beberapa kali), Peraturan Pemerintah, Peraturan Presiden, dan peraturan menteri terkait.',
     },
     {
-      question: "Apa saja mekanisme pembentukan Kopdes/kel Merah Putih?",
+      question: 'Apa saja mekanisme pembentukan Kopdes/kel Merah Putih?',
       answer:
-        "Mekanismenya meliputi tiga pendekatan: pendirian koperasi baru, pengembangan koperasi yang telah ada, dan revitalisasi koperasi tidak aktif.",
+        'Mekanismenya meliputi tiga pendekatan: pendirian koperasi baru, pengembangan koperasi yang telah ada, dan revitalisasi koperasi tidak aktif.',
     },
     {
-      question: "Bagaimana cara penamaan Koperasi Desa/Kelurahan Merah Putih?",
+      question: 'Bagaimana cara penamaan Koperasi Desa/Kelurahan Merah Putih?',
       answer:
-        "Nama harus diawali dengan kata “Koperasi”, diikuti dengan frasa “Desa/Kelurahan Merah Putih”, dan diakhiri dengan nama desa/kelurahan setempat (misalnya, “Koperasi Desa/Kelurahan Merah Putih Karangrejo”)",
+        'Nama harus diawali dengan kata “Koperasi”, diikuti dengan frasa “Desa/Kelurahan Merah Putih”, dan diakhiri dengan nama desa/kelurahan setempat (misalnya, “Koperasi Desa/Kelurahan Merah Putih Karangrejo”)',
     },
     {
-      question: "Apa yang dimaksud dengan pra pendirian koperasi?",
+      question: 'Apa yang dimaksud dengan pra pendirian koperasi?',
       answer:
-        "Pra pendirian mencakup tahap awal di mana calon pendiri bersama Badan Permusyawaratan Desa/Kelurahan mengadakan musyawarah untuk menyusun rancangan usaha, menentukan kebutuhan modal, dan menyepakati partisipasi modal.",
-    },
-    {
-      question:
-        "Bagaimana proses musyawarah desa/kelurahan dalam pembentukan koperasi?",
-      answer:
-        "Musyawarah desa/kelurahan dilakukan untuk membahas rencana pendirian, menyampaikan rancangan usaha, model bisnis, mitigasi risiko, dan menentukan kebutuhan modal yang akan ditetapkan melalui simpanan pokok dan simpanan wajib.",
-    },
-    {
-      question: "Apa itu rapat pendirian koperasi?",
-      answer:
-        "Rapat pendirian adalah pertemuan yang dihadiri oleh sebanyak-banyaknya masyarakat desa/kelurahan untuk membahas dan menetapkan pokok-pokok pendirian, seperti nama, alamat, maksud dan tujuan, permodalan, dan susunan pengurus/pengawas.",
-    },
-    {
-      question: "Bagaimana tata cara pendirian koperasi baru?",
-      answer:
-        "Pendirian koperasi baru dimulai dari musyawarah khusus desa/kelurahan, dilanjutkan dengan rapat pendirian, penyusunan notulen rapat, dan pengajuan pembuatan serta pengesahan Akta Pendirian melalui Notaris Pembuat Akta Koperasi (NPAK).",
-    },
-    {
-      question: "Apa peran Notaris Pembuat Akta Koperasi (NPAK)?",
-      answer:
-        "NPAK berperan membuat dan mengesahkan akta pendirian, perubahan anggaran dasar, serta dokumen hukum lain yang diperlukan dalam pendirian dan pengelolaan koperasi.",
-    },
-    {
-      question: "Apa itu Simpanan Pokok dan Simpanan Wajib?",
-      answer:
-        "Simpanan Pokok adalah sejumlah uang yang wajib disetor saat menjadi anggota dan tidak dapat diambil kembali, sedangkan Simpanan Wajib adalah simpanan berkala yang juga tidak dapat dicairkan selama keanggotaan.",
-    },
-    {
-      question: "Bagaimana proses pengesahan Akta Pendirian Koperasi?",
-      answer:
-        "Pengesahan dilakukan oleh NPAK melalui sistem SABH dengan menyerahkan dokumen seperti notulen rapat, berita acara pendirian, bukti penyetoran modal, dan rencana kerja koperasi.",
-    },
-    {
-      question: "Apa itu SABH?",
-      answer:
-        "SABH (Sistem Administrasi Badan Hukum) adalah platform layanan elektronik untuk pengesahan akta pendirian, perubahan anggaran dasar, dan pembubaran koperasi.",
-    },
-    {
-      question: "Bagaimana mekanisme pengembangan koperasi yang telah ada?",
-      answer:
-        "Pengembangan dilakukan dengan rapat anggota untuk perubahan anggaran dasar, penyesuaian nama dan jenis usaha sesuai dengan program Kopdes/kel Merah Putih, serta pengajuan perubahan melalui NPAK.",
-    },
-    {
-      question: "Apa yang dimaksud dengan revitalisasi koperasi?",
-      answer:
-        "Revitalisasi adalah proses mengaktifkan kembali koperasi yang tidak aktif dengan pendampingan, identifikasi potensi, dan penyelenggaraan rapat anggota untuk mengembalikan status aktifnya.",
+        'Pra pendirian mencakup tahap awal di mana calon pendiri bersama Badan Permusyawaratan Desa/Kelurahan mengadakan musyawarah untuk menyusun rancangan usaha, menentukan kebutuhan modal, dan menyepakati partisipasi modal.',
     },
     {
       question:
-        "Apa saja dokumen pendukung yang diperlukan dalam rapat pendirian?",
+        'Bagaimana proses musyawarah desa/kelurahan dalam pembentukan koperasi?',
       answer:
-        "Dokumen pendukung setidaknya meliputi daftar hadir, fotokopi KTP pendiri, notulen rapat, dan berita acara pendirian.",
+        'Musyawarah desa/kelurahan dilakukan untuk membahas rencana pendirian, menyampaikan rancangan usaha, model bisnis, mitigasi risiko, dan menentukan kebutuhan modal yang akan ditetapkan melalui simpanan pokok dan simpanan wajib.',
     },
     {
-      question: "Bagaimana koperasi mengurus NPWP dan NIB?",
+      question: 'Apa itu rapat pendirian koperasi?',
       answer:
-        "Setelah akta pendirian disahkan, koperasi mengurus Nomor Pokok Wajib Pajak (NPWP) di Kantor Pelayanan Pajak dan mendaftarkan hak akses pada Online Single Submission (OSS) untuk memperoleh Nomor Induk Berusaha (NIB).",
+        'Rapat pendirian adalah pertemuan yang dihadiri oleh sebanyak-banyaknya masyarakat desa/kelurahan untuk membahas dan menetapkan pokok-pokok pendirian, seperti nama, alamat, maksud dan tujuan, permodalan, dan susunan pengurus/pengawas.',
+    },
+    {
+      question: 'Bagaimana tata cara pendirian koperasi baru?',
+      answer:
+        'Pendirian koperasi baru dimulai dari musyawarah khusus desa/kelurahan, dilanjutkan dengan rapat pendirian, penyusunan notulen rapat, dan pengajuan pembuatan serta pengesahan Akta Pendirian melalui Notaris Pembuat Akta Koperasi (NPAK).',
+    },
+    {
+      question: 'Apa peran Notaris Pembuat Akta Koperasi (NPAK)?',
+      answer:
+        'NPAK berperan membuat dan mengesahkan akta pendirian, perubahan anggaran dasar, serta dokumen hukum lain yang diperlukan dalam pendirian dan pengelolaan koperasi.',
+    },
+    {
+      question: 'Apa itu Simpanan Pokok dan Simpanan Wajib?',
+      answer:
+        'Simpanan Pokok adalah sejumlah uang yang wajib disetor saat menjadi anggota dan tidak dapat diambil kembali, sedangkan Simpanan Wajib adalah simpanan berkala yang juga tidak dapat dicairkan selama keanggotaan.',
+    },
+    {
+      question: 'Bagaimana proses pengesahan Akta Pendirian Koperasi?',
+      answer:
+        'Pengesahan dilakukan oleh NPAK melalui sistem SABH dengan menyerahkan dokumen seperti notulen rapat, berita acara pendirian, bukti penyetoran modal, dan rencana kerja koperasi.',
+    },
+    {
+      question: 'Apa itu SABH?',
+      answer:
+        'SABH (Sistem Administrasi Badan Hukum) adalah platform layanan elektronik untuk pengesahan akta pendirian, perubahan anggaran dasar, dan pembubaran koperasi.',
+    },
+    {
+      question: 'Bagaimana mekanisme pengembangan koperasi yang telah ada?',
+      answer:
+        'Pengembangan dilakukan dengan rapat anggota untuk perubahan anggaran dasar, penyesuaian nama dan jenis usaha sesuai dengan program Kopdes/kel Merah Putih, serta pengajuan perubahan melalui NPAK.',
+    },
+    {
+      question: 'Apa yang dimaksud dengan revitalisasi koperasi?',
+      answer:
+        'Revitalisasi adalah proses mengaktifkan kembali koperasi yang tidak aktif dengan pendampingan, identifikasi potensi, dan penyelenggaraan rapat anggota untuk mengembalikan status aktifnya.',
     },
     {
       question:
-        "Apa saja jenis usaha yang dapat dijalankan oleh Kopdes/kel Merah Putih?",
+        'Apa saja dokumen pendukung yang diperlukan dalam rapat pendirian?',
       answer:
-        "Jenis usaha meliputi outlet gerai sembako, apotek desa/kelurahan, kantor koperasi, unit simpan pinjam, klinik desa/kelurahan, cold storage, logistik, serta usaha lain sesuai dengan potensi dan kebutuhan masyarakat desa.",
+        'Dokumen pendukung setidaknya meliputi daftar hadir, fotokopi KTP pendiri, notulen rapat, dan berita acara pendirian.',
     },
     {
-      question: "Bagaimana koperasi memanfaatkan teknologi digital?",
+      question: 'Bagaimana koperasi mengurus NPWP dan NIB?',
       answer:
-        "Koperasi dianjurkan mengoptimalkan teknologi digital, misalnya dengan memiliki situs web ber-domain “kop.id”, untuk memperkuat identitas dan integrasi dalam ekosistem koperasi.",
-    },
-    {
-      question:
-        "Bagaimana tata cara penyelenggaraan rapat anggota dalam koperasi?",
-      answer:
-        "Rapat anggota diselenggarakan untuk mengambil keputusan penting, seperti perubahan anggaran dasar, pengesahan laporan keuangan, pembagian sisa hasil usaha, dengan ketentuan kuorum dan tata tertib yang telah ditetapkan.",
+        'Setelah akta pendirian disahkan, koperasi mengurus Nomor Pokok Wajib Pajak (NPWP) di Kantor Pelayanan Pajak dan mendaftarkan hak akses pada Online Single Submission (OSS) untuk memperoleh Nomor Induk Berusaha (NIB).',
     },
     {
       question:
-        "Apa peran musyawarah desa/kelurahan khusus dalam pembentukan dan pengembangan koperasi?",
+        'Apa saja jenis usaha yang dapat dijalankan oleh Kopdes/kel Merah Putih?',
       answer:
-        "Musyawarah desa/kelurahan berfungsi sebagai forum konsultasi awal untuk mendapatkan dukungan dan kesepakatan dari masyarakat serta menyusun rancangan usaha yang mendasari pendirian dan pengembangan koperasi.",
+        'Jenis usaha meliputi outlet gerai sembako, apotek desa/kelurahan, kantor koperasi, unit simpan pinjam, klinik desa/kelurahan, cold storage, logistik, serta usaha lain sesuai dengan potensi dan kebutuhan masyarakat desa.',
     },
     {
-      question: "Apakah semua koperasi wajib menggunakan domain .kop.id?",
+      question: 'Bagaimana koperasi memanfaatkan teknologi digital?',
       answer:
-        "Baik Koperasi yang sudah memiliki website sendiri maupun yang belum, semua dianjurkan beralih ke domain .kop.id sebagai identitas koperasi di digital agar aktivitas digitalnya terhubung dalam Digitalisasi Koperasi.",
+        'Koperasi dianjurkan mengoptimalkan teknologi digital, misalnya dengan memiliki situs web ber-domain “kop.id”, untuk memperkuat identitas dan integrasi dalam ekosistem koperasi.',
     },
     {
-      question: "Bagaimana cara mendaftar domain .kop.id?",
+      question:
+        'Bagaimana tata cara penyelenggaraan rapat anggota dalam koperasi?',
       answer:
-        "Untuk mendaftar domain .kop.id, koperasi perlu mengajukan permohonan melalui platform resmi ini yang telah ditentukan oleh pemerintah.",
+        'Rapat anggota diselenggarakan untuk mengambil keputusan penting, seperti perubahan anggaran dasar, pengesahan laporan keuangan, pembagian sisa hasil usaha, dengan ketentuan kuorum dan tata tertib yang telah ditetapkan.',
+    },
+    {
+      question:
+        'Apa peran musyawarah desa/kelurahan khusus dalam pembentukan dan pengembangan koperasi?',
+      answer:
+        'Musyawarah desa/kelurahan berfungsi sebagai forum konsultasi awal untuk mendapatkan dukungan dan kesepakatan dari masyarakat serta menyusun rancangan usaha yang mendasari pendirian dan pengembangan koperasi.',
+    },
+    {
+      question: 'Apakah semua koperasi wajib menggunakan domain .kop.id?',
+      answer:
+        'Baik Koperasi yang sudah memiliki website sendiri maupun yang belum, semua dianjurkan beralih ke domain .kop.id sebagai identitas koperasi di digital agar aktivitas digitalnya terhubung dalam Digitalisasi Koperasi.',
+    },
+    {
+      question: 'Bagaimana cara mendaftar domain .kop.id?',
+      answer:
+        'Untuk mendaftar domain .kop.id, koperasi perlu mengajukan permohonan melalui platform resmi ini yang telah ditentukan oleh pemerintah.',
     },
   ];
 
@@ -252,56 +252,32 @@ export default function Home() {
     >
       Undang-Undang Nomor 25 Tahun 1992 tentang Perkoperasian
     </a>,
-    <a
-      href="https://jdih.kop.go.id/"
-      className="hover:text-[#8CA531]"
-    >
+    <a href="https://jdih.kop.go.id/" className="hover:text-[#8CA531]">
       Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan
       Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah
     </a>,
-    <a
-      href="https://jdih.kop.go.id/"
-      className="hover:text-[#8CA531]"
-    >
+    <a href="https://jdih.kop.go.id/" className="hover:text-[#8CA531]">
       Undang-Undang Nomor 59 Tahun 2024 tentang RPJPN Tahun 2025–2045
     </a>,
-    <a
-      href="https://jdih.kop.go.id/"
-      className="hover:text-[#8CA531]"
-    >
+    <a href="https://jdih.kop.go.id/" className="hover:text-[#8CA531]">
       Peraturan Pemerintah Nomor 7 Tahun 2021 tentang Kemudahan, Pelindungan dan
       Pemberdayaan Koperasi dan Usaha Mikro, Kecil dan Menengah
     </a>,
-    <a
-      href="https://jdih.kop.go.id/"
-      className="hover:text-[#8CA531]"
-    >
+    <a href="https://jdih.kop.go.id/" className="hover:text-[#8CA531]">
       Peraturan Pemerintah Nomor 11 Tahun 2021 tentang Badan Usaha Milik Desa
     </a>,
-    <a
-      href="https://jdih.kop.go.id/"
-      className="hover:text-[#8CA531]"
-    >
+    <a href="https://jdih.kop.go.id/" className="hover:text-[#8CA531]">
       Peraturan Presiden Nomor 12 tahun 2025 tentang RPJMN tahun 2025–2029
     </a>,
-    <a
-      href="https://jdih.kop.go.id/"
-      className="hover:text-[#8CA531]"
-    >
+    <a href="https://jdih.kop.go.id/" className="hover:text-[#8CA531]">
       Instruksi Presiden Republik Indonesia Nomor 9 Tahun 2025 tentang
       percepatan pembentukan Koperasi Desa/Kelurahan Merah Putih
     </a>,
-    <a
-      href="https://jdih.kop.go.id/"
-      className="hover:text-[#8CA531]"
-    >
+    <a href="https://jdih.kop.go.id/" className="hover:text-[#8CA531]">
       Peraturan Menteri Desa PDT No 7 Tahun 2023 tentang Prioritas Penggunaan
       Dana Desa tahun 2024
     </a>,
-    <a
-      href="https://jdih.kop.go.id/"
-      className="hover:text-[#8CA531]"
-    >
+    <a href="https://jdih.kop.go.id/" className="hover:text-[#8CA531]">
       Rancangan Peraturan Menteri Koperasi tentang Koperasi Desa/Kelurahan Merah
       Putih
     </a>,
@@ -320,7 +296,7 @@ export default function Home() {
               <div
                 className="w-full h-full bg-cover bg-center "
                 style={{
-                  backgroundImage: "url(/images/v621.webp)",
+                  backgroundImage: 'url(/images/v621.webp)',
                 }}
               ></div>
               {/* Overlay */}
@@ -337,10 +313,10 @@ export default function Home() {
                 {/* Countdown Timer */}
                 <div className="flex justify-center space-x-4 md:space-x-8 lg:space-x-12 text-white font-semibold ">
                   {[
-                    { label: "Hari", value: timeLeft.days },
-                    { label: "Jam", value: timeLeft.hours },
-                    { label: "Menit", value: timeLeft.minutes },
-                    { label: "Detik", value: timeLeft.seconds },
+                    { label: 'Hari', value: timeLeft.days },
+                    { label: 'Jam', value: timeLeft.hours },
+                    { label: 'Menit', value: timeLeft.minutes },
+                    { label: 'Detik', value: timeLeft.seconds },
                   ].map((item, index) => (
                     <div key={index} className="text-center p-3 rounded-lg">
                       <span className="block font-bold text-3xl md:text-4xl lg:text-5xl">
@@ -442,7 +418,7 @@ export default function Home() {
         <div className="flex justify-center items-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 w-full max-w-7xl px-4 md:px-8">
             {modelData.map((item, index) => (
-              <Link key={index} href={item.link || "#"} passHref>
+              <Link key={index} href={item.link || '#'} passHref>
                 <div className="cursor-pointer w-full h-[180px] bg-[#FCFCFC] hover:bg-[#f0f0f0] shadow rounded-xl p-4 flex flex-col items-center justify-center text-center transition-all duration-200">
                   {item.icon}
                   <p className="mt-4 text-sm font-semibold text-[#0D3B66]">
@@ -564,7 +540,7 @@ export default function Home() {
         <div className="bg-white shadow-lg rounded-xl w-full max-w-3xl p-6 relative z-10">
           <h2
             className="text-center text-lg font-semibold mb-4"
-            style={{ color: "#025669" }}
+            style={{ color: '#025669' }}
           >
             Pertanyaan Umum
           </h2>
@@ -575,8 +551,8 @@ export default function Home() {
             spaceBetween={20}
             slidesPerView={1}
             navigation={{
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
             }}
           >
             {faqs.map((faq, index) => (
@@ -639,13 +615,13 @@ export default function Home() {
             </h1>
             <div className="mt-6 flex space-x-4">
               <Link
-                href={"/masuk"}
+                href={'/masuk'}
                 className="bg-white text-gray-900 px-6 py-2 rounded-lg font-semibold shadow"
               >
                 Masuk
               </Link>
               <Link
-                href={"/daftar"}
+                href={'/daftar'}
                 className="bg-[#A0B73E] text-white px-6 py-2 rounded-lg font-semibold shadow"
               >
                 Daftar

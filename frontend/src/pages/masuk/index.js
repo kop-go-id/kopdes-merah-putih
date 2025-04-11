@@ -52,7 +52,9 @@ export default function LoginFormAntd() {
           <Form.Item
             label="Kata Sandi"
             name="password"
-            rules={[{ required: true, message: 'Mohon masukkan kata sandi Anda' }]}
+            rules={[
+              { required: true, message: 'Mohon masukkan kata sandi Anda' },
+            ]}
           >
             <Input.Password placeholder="Masukkan kata sandi" />
           </Form.Item>
