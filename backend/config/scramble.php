@@ -42,7 +42,7 @@ return [
         'title' => 'KopDes API Documentation',
         'description' => 'This API serves as the backend for the KopDes platform.',
         'base_url' => env('APP_URL') . '/api',
-        'logo_path' => 'images/logo.png', // kalau kamu mau pasang logo
+        'logo_path' => 'kemenkop-logo.png', // kalau kamu mau pasang logo
 
         /*
          * Define the theme of the documentation. Available options are `light` and `dark`.
