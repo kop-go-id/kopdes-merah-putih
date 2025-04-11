@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             KLUSeeder::class,
             NPAKSeeder::class,
             LegalStageSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
+            RolePositionSeeder::class
         ]);
     }
 }
