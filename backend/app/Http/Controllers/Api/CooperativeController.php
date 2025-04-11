@@ -320,7 +320,7 @@ class CooperativeController extends Controller
         }
     }
 
-    public function verifikasi($token)
+    public function verify($token)
     {
         $record = DB::table('cooperative_tokens')
             ->where('token', $token)
