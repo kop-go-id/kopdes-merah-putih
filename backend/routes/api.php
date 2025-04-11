@@ -25,6 +25,8 @@ Route::prefix('villages')->group(function () {
     Route::get('/duplicate-check/{villageCode}', [LocationController::class, 'villageDuplicateCheck']);
 });
 
+Route::apiResource('cooperatives', CooperativeController::class);
+
 Route::prefix('cooperative')->group(function () {
     Route::post('/register', [CooperativeController::class, 'register']);
     Route::get('/by-nik/{nik}', [CooperativeController::class, 'getByNIK']);

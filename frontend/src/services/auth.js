@@ -5,6 +5,7 @@ const login = async (body) => {
 
   try {
     const response = await callApi(endpoint, body);
+    localStorage.setItem('token', response.token);
     return response ?? 'error';
   } catch (error) {
     return error;
