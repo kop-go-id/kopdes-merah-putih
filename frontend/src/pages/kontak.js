@@ -10,17 +10,17 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Card } from "antd";
-import Navbar from "@/components/Navbar"; // sesuaikan path dengan strukturmu
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function ContactsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const contactData = [
     {
-      nama: "Wilayah I - Aceh",
+      nama: "Wilayah I",
       koordinator: "David Bastian",
-      alamat: "Aceh",
-      email: "aceh@kopdes.id",
+      provinsi: "Aceh",
+      email: "korwil1@merahputih.kop.id",
       phone: "0812-1234-0001",
       ukp: [
         "Asisten Deputi Pengelolaan Data",
@@ -29,10 +29,10 @@ export default function ContactsPage() {
       ]
     },
     {
-      nama: "Wilayah II - Sumatera Utara dan Kepulauan Riau",
+      nama: "Wilayah II",
       koordinator: "Panel Barus",
-      alamat: "Sumatera Utara & Kepulauan Riau",
-      email: "sumutkepri@kopdes.id",
+      provinsi: "Sumatera Utara dan Kepulauan Riau",
+      email: "korwil2@merahputih.kop.id",
       phone: "0812-1234-0002",
       ukp: [
         "Sekretaris Deputi Bidang Pengembangan Usaha (Gendo Saragih)",
@@ -42,10 +42,10 @@ export default function ContactsPage() {
       ]
     },
     {
-      nama: "Wilayah III - Sumatera Barat, Riau, Jambi, dan Bengkulu",
+      nama: "Wilayah III",
       koordinator: "Koko Haryono",
-      alamat: "Padang, Pekanbaru, Jambi, Bengkulu",
-      email: "sumbar-riau@kopdes.id",
+      provinsi: "Sumatera Barat, Riau, Jambi, dan Bengkulu",
+      email: "korwil3@merahputih.kop.id",
       phone: "0812-1234-0003",
       ukp: [
         "Asisten Deputi Pengembangan Produksi (Elviandi R.S.)",
@@ -54,10 +54,10 @@ export default function ContactsPage() {
       ]
     },
     {
-      nama: "Wilayah IV - Sumatera Selatan, Bangka Belitung, Lampung",
+      nama: "Wilayah IV",
       koordinator: "Ambar Pertiwiningrum",
-      alamat: "Palembang, Pangkalpinang, Bandar Lampung",
-      email: "sumsel-babel@kopdes.id",
+      provinsi: "Sumatera Selatan, Bangka Belitung, Lampung",
+      email: "korwil4@merahputih.kop.id",
       phone: "0812-1234-0004",
       ukp: [
         "Asisten Deputi Akselerasi Jaringan Usaha (Cecep Setiawan)",
@@ -66,10 +66,10 @@ export default function ContactsPage() {
       ]
     },
     {
-      nama: "Wilayah V - Jawa Barat",
+      nama: "Wilayah V",
       koordinator: "Rulli Nuryanto",
-      alamat: "Bandung, Jawa Barat",
-      email: "jabar@kopdes.id",
+      provinsi: "Jawa Barat",
+      email: "korwil5@merahputih.kop.id",
       phone: "0812-1234-0005",
       ukp: [
         "Asisten Deputi Tata Kelola dan Manajemen Risiko (Trias Sujatmiko)",
@@ -79,10 +79,10 @@ export default function ContactsPage() {
       ]
     },
     {
-      nama: "Wilayah VI - Jawa Tengah",
+      nama: "Wilayah VI",
       koordinator: "Destry Anna Sari",
-      alamat: "Semarang, Jawa Tengah",
-      email: "jateng@kopdes.id",
+      provinsi: "Jawa Tengah",
+      email: "korwil6@merahputih.kop.id",
       phone: "0812-1234-0006",
       ukp: [
         "Sekretaris Deputi Pengembangan Talenta (Wisnu Gunadi)",
@@ -91,10 +91,10 @@ export default function ContactsPage() {
       ]
     },
     {
-      nama: "Wilayah VII - Jawa Timur",
+      nama: "Wilayah VII",
       koordinator: "Adi Sulistyowati",
-      alamat: "Surabaya, Jawa Timur",
-      email: "jatim@kopdes.id",
+      provinsi: "Jawa Timur",
+      email: "korwil7@merahputih.kop.id",
       phone: "0812-1234-0007",
       ukp: [
         "Asisten Deputi Digitalisasi (Riza Azmi)",
@@ -104,10 +104,10 @@ export default function ContactsPage() {
       ]
     },
     {
-      nama: "Wilayah VIII - Banten, DIY, NTB, NTT",
+      nama: "Wilayah VIII",
       koordinator: "Sweeta Melanie",
-      alamat: "Banten, Yogyakarta, Mataram, Kupang",
-      email: "bantendiyntbntt@kopdes.id",
+      provinsi: "Banten, DIY, NTB, NTT",
+      email: "korwil8@merahputih.kop.id",
       phone: "0812-1234-0008",
       ukp: [
         "Asisten Deputi Literasi dan Penyuluhan (Edy Haryana)",
@@ -116,10 +116,10 @@ export default function ContactsPage() {
       ]
     },
     {
-      nama: "Wilayah IX - Kalbar, Kalteng, Kaltim, Kalsel, Bali",
+      nama: "Wilayah IX",
       koordinator: "Supomo",
-      alamat: "Pontianak, Palangkaraya, Samarinda, Banjarmasin, Denpasar",
-      email: "kalimantanbali@kopdes.id",
+      provinsi: "Kalbar, Kalteng, Kaltim, Kalsel, Bali",
+      email: "korwil9@merahputih.kop.id",
       phone: "0812-1234-0009",
       ukp: [
         "Asisten Deputi Pemetaan Potensi Usaha (Lely Hiswendari)",
@@ -129,10 +129,10 @@ export default function ContactsPage() {
       ]
     },
     {
-      nama: "Wilayah X - Kaltara, Sulteng, Sulsel, Sultra, Papua Barat",
+      nama: "Wilayah X",
       koordinator: "Henra Saragih",
-      alamat: "Tanjung Selor, Palu, Makassar, Kendari, Manokwari",
-      email: "sulawesikalimantan@kopdes.id",
+      provinsi: "Kaltara, Sulteng, Sulsel, Sultra, Papua Barat",
+      email: "korwil10n@merahputih.kop.id",
       phone: "0812-1234-0010",
       ukp: [
         "Sekretaris Deputi Kelembagaan (Niken Prasetyawati)",
@@ -141,10 +141,10 @@ export default function ContactsPage() {
       ]
     },
     {
-      nama: "Wilayah XI - Sulut, Gorontalo, Sulbar, Maluku, Papua Barat Daya",
+      nama: "Wilayah XI",
       koordinator: "Henny Navilah",
-      alamat: "Manado, Gorontalo, Mamuju, Ambon, Sorong",
-      email: "sulutmaluku@kopdes.id",
+      provinsi: "Sulut, Gorontalo, Sulbar, Maluku, Papua Barat Daya",
+      email: "korwil11@merahputih.kop.id",
       phone: "0812-1234-0011",
       ukp: [
         "Asisten Deputi Kemitraan (Leonardi Pratama)",
@@ -153,10 +153,10 @@ export default function ContactsPage() {
       ]
     },
     {
-      nama: "Wilayah XII - Maluku Utara, Papua, Papua Tengah, Papua Pegunungan, Papua Selatan",
+      nama: "Wilayah XII",
       koordinator: "Herbert H.O. Siagian",
-      alamat: "Ternate, Jayapura, Nabire, Wamena, Merauke",
-      email: "papua@kopdes.id",
+      provinsi: "Maluku Utara, Papua, Papua Tengah, Papua Pegunungan, Papua Selatan",
+      email: "korwil12@merahputih.kop.id",
       phone: "0812-1234-0012",
       ukp: [
         "Sekretaris Deputi Pengawasan (Windy Novita Rauf)",
@@ -191,7 +191,7 @@ export default function ContactsPage() {
         </div>
 
         <h2 className="text-xl font-semibold text-[#0D3B66] mb-4">
-          Daftar Kontak Kantor Wilayah
+          Daftar Kontak Koordinator Wilayah
         </h2>
 
         {/* Search Bar */}
@@ -218,7 +218,7 @@ export default function ContactsPage() {
                   </p>
                   <p>
                     <EnvironmentOutlined className="mr-2" />
-                    {item.alamat}
+                    {item.provinsi}
                   </p>
                   <p>
                     <PhoneOutlined className="mr-2" />
