@@ -215,6 +215,7 @@ class CooperativeController extends Controller
                     'primary_phone' => $request->input('npak_phone'),
                     'address' => $request->input('npak_address'),
                     'email' => $request->input('npak_email'),
+                    'status' => 'Requested',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
