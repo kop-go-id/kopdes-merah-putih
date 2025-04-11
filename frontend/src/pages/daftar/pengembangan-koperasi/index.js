@@ -66,16 +66,9 @@ export default function RegistrationExisting() {
           (district) =>
             district.name.toUpperCase() === nik?.district.toUpperCase()
         );
-        console.log("selectedCode", selectedCode)
+        
         form.setFieldsValue({ district_code: selectedCode?.code });
         setDistricts(districts);
-
-        if (selectedCode?.name.toUpperCase().includes('KOTA')) {
-          setSelectedDistrict('Kelurahan');
-        } else if (selectedCode?.name.toUpperCase().includes('KAB')) {
-          setSelectedDistrict('Desa');
-        }
-
         setDistrictCode(selectedCode?.code);
       });
 
@@ -94,6 +87,15 @@ export default function RegistrationExisting() {
       setSubDistricts(subdistricts);
       setSubDistrictCode(selectedCode?.code);
     });
+
+    if (districts) {
+      const districtName = districts.find(district => district.code === districtCode)?.name;
+      if (districtName.toUpperCase().includes('KOTA')) {
+        setSelectedDistrict('Kelurahan');
+      } else if (districtName.toUpperCase().includes('KAB')) {
+        setSelectedDistrict('Desa');
+      }
+    }
   }, [districtCode]);
 
   useEffect(() => {
