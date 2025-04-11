@@ -40,11 +40,7 @@ export default function ProfilKoperasiPage() {
           </h1>
           <div className="hidden md:block">
             <Link href="/koperasi/profil/edit-forms">
-              <Button
-                type="primary"
-                icon={<EditOutlined />}
-                className="bg-[#025669]"
-              >
+              <Button type="primary" icon={<EditOutlined />} className="bg-[#025669]">
                 Edit Profil
               </Button>
             </Link>
@@ -54,11 +50,7 @@ export default function ProfilKoperasiPage() {
         {/* Tombol Edit di mobile */}
         <div className="block md:hidden mb-4">
           <Link href="/koperasi/profil/edit-forms">
-            <Button
-              type="primary"
-              icon={<EditOutlined />}
-              className="bg-[#025669] hover:bg-[#024655]"
-            >
+            <Button type="primary" icon={<EditOutlined />} className="bg-[#025669] hover:bg-[#024655]">
               Edit Profil
             </Button>
           </Link>

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CooperativeKLU;
 use App\Models\CooperativeLegalStage;
 use App\Models\CooperativeManagement;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\DomCrawler\Crawler;
@@ -19,6 +19,7 @@ use App\Models\Province;
 use App\Models\District;
 use App\Models\Subdistrict;
 use App\Models\Village;
+use App\Models\NPAK;
 
 class CooperativeController extends Controller
 {
@@ -149,6 +150,10 @@ class CooperativeController extends Controller
                 'email' => 'required|string|email|min:3|max:50|unique:users,email',
                 'phone' => 'required|string|min:3|max:50|unique:users,phone',
                 'password' => 'required|min:8|max:50|confirmed',
+                'npak_name' => 'required_if:npak_id,1|string|min:3|max:128',
+                'npak_email' => 'required_if:npak_id,1|string|email|min:8|max:128',
+                'npak_address' => 'required_if:npak_id,1|string|min:8|max:128',
+                'npak_phone' => 'required_if:npak_id,1|string|min:8|max:16'
             ]);
 
             $existingName = Cooperative::where('name', strtoupper($request->input('cooperative_name')))->first();
@@ -186,6 +191,24 @@ class CooperativeController extends Controller
             $subdistrict = Subdistrict::where('code', $request->input('subdistrict_code'))->first();
             $village = Village::where('code', $request->input('village_code'))->first();
 
+            $npakId = $request->input('npak_id');
+            if ($npakId == 1) {
+                $latestNPAK = NPAK::orderBy('notary_id', 'desc')->select('notary_id')->first();
+                $npak = NPAK::create([
+                    'notary_id' => $latestNPAK->notary_id + 1,
+                    'provinceId' => $province->province_id,
+                    'districtId' => $district->district_id,
+                    'name' => $request->input('npak_name'),
+                    'primary_phone' => $request->input('npak_phone'),
+                    'address' => $request->input('npak_address'),
+                    'email' => $request->input('npak_email'),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+
+                $npakId = $npak->notary_id;
+            }
+
             $cooperative = Cooperative::create([
                 'name' => strtoupper($request->input('cooperative_name')),
                 'provinceId' => $province->province_id,
@@ -193,7 +216,7 @@ class CooperativeController extends Controller
                 'subdistrictId' => $subdistrict->subdistrict_id,
                 'villageId' => $village->village_id,
                 'userId' => $user->id,
-                'npakId' => 1,
+                'npakId' => $npakId,
                 'subdomain' => $request->input('subdomain'),
                 'email' => $request->input('email'),
                 'phone'=> $request->input('phone'),
