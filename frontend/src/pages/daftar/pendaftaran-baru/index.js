@@ -34,7 +34,7 @@ export default function RegistrationNew() {
       [name]: e.target.checked,
     }));
   };
-  
+
   const [loadingForm, setLoadingForm] = useState(false);
   const [provinces, setProvinces] = useState([]);
   const [provinceCode, setProvinceCode] = useState();
@@ -75,7 +75,8 @@ export default function RegistrationNew() {
       bamd: val.bamd.file.originFileObj,
       bara: val.bara.file.originFileObj,
       subdomain: val.subdomain + 'kop.id',
-      cooperative_name: `Koperasi ${selectedDistrict} Merah Putih ` + val.cooperative_name,
+      cooperative_name:
+        `Koperasi ${selectedDistrict} Merah Putih ` + val.cooperative_name,
     };
 
     registerNewCooperative(registerInput);
@@ -204,20 +205,21 @@ export default function RegistrationNew() {
                     (village) => village.code === val
                   );
 
-                  let villageName = selectedVillage?.name
-                  fetchVillageDuplicate(val).then(val => {
+                  let villageName = selectedVillage?.name;
+                  fetchVillageDuplicate(val).then((val) => {
                     if (val.is_duplicate) {
-                      const subdistrict = subDistricts.find(val => val.code === subDistrictCode)?.name;
+                      const subdistrict = subDistricts.find(
+                        (val) => val.code === subDistrictCode
+                      )?.name;
                       villageName = `${villageName} Kecamatan ${subdistrict}`;
                     } else {
-                      villageName
+                      villageName;
                     }
 
                     form.setFieldsValue({
                       cooperative_name: villageName.toUpperCase(),
                       subdomain: villageName.toLowerCase().replace(/\s+/g, ''),
                     });
-
                   });
                 }}
                 showSearch

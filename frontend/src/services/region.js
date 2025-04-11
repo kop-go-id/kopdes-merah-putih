@@ -10,4 +10,10 @@ const fetchVillage = (subDistrictCode) =>
 const fetchVillageDuplicate = (villageCode) =>
   fetchData(`/villages/duplicate-check/${villageCode}`);
 
-export { fetchProvince, fetchDistrict, fetchSubDistrict, fetchVillage, fetchVillageDuplicate };
+export {
+  fetchProvince,
+  fetchDistrict,
+  fetchSubDistrict,
+  fetchVillage,
+  fetchVillageDuplicate,
+};

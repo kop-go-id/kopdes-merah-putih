@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Form,
-  Input,
-  Select,
-  Upload,
-  Button,
-  Divider,
-  Checkbox,
-} from 'antd';
+import { Form, Input, Select, Upload, Button, Divider, Checkbox } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import Stepper from '@/components/Stepper';
 import { useRouter } from 'next/router';
@@ -101,34 +93,38 @@ export default function RegistrationExisting() {
   }, [districtCode]);
 
   useEffect(() => {
-    fetchVillage(subDistrictCode).then(villages => {
+    fetchVillage(subDistrictCode).then((villages) => {
       const selectedVillage = villages.find(
         (village) => village.name.toUpperCase() === nik.village.toUpperCase()
       )?.code;
-      
-      form.setFieldsValue({ village_code:  selectedVillage});
-      setVillages(villages)
+
+      form.setFieldsValue({ village_code: selectedVillage });
+      setVillages(villages);
       setVillageCode(selectedVillage);
     });
   }, [subDistrictCode]);
 
   useEffect(() => {
-      // Check village duplicate
-      fetchVillageDuplicate(villageCode).then(({is_duplicate}) => {
-        let villageName = villages?.find(village => village.code === villageCode)?.name;
+    // Check village duplicate
+    fetchVillageDuplicate(villageCode).then(({ is_duplicate }) => {
+      let villageName = villages?.find(
+        (village) => village.code === villageCode
+      )?.name;
 
-        if (is_duplicate) {
-          const subdistrict = subDistricts.find(val => val?.code === subDistrictCode)?.name;
-          villageName = `${villageName} Kecamatan ${subdistrict}`;
-        } else {
-          villageName
-        }
-  
-        form.setFieldsValue({
-          cooperative_name: villageName?.toUpperCase(),
-          subdomain: villageName?.toLowerCase().replace(/\s+/g, ''),
-        });
+      if (is_duplicate) {
+        const subdistrict = subDistricts.find(
+          (val) => val?.code === subDistrictCode
+        )?.name;
+        villageName = `${villageName} Kecamatan ${subdistrict}`;
+      } else {
+        villageName;
+      }
+
+      form.setFieldsValue({
+        cooperative_name: villageName?.toUpperCase(),
+        subdomain: villageName?.toLowerCase().replace(/\s+/g, ''),
       });
+    });
   }, [villageCode, villages]);
 
   const onFinish = (val) => {
@@ -139,7 +135,8 @@ export default function RegistrationExisting() {
       bamd: val.bamd.file.originFileObj,
       bara: val.bara.file.originFileObj,
       subdomain: val.subdomain + 'kop.id',
-      cooperative_name: `Koperasi ${selectedDistrict} Merah Putih ` + val.cooperative_name,
+      cooperative_name:
+        `Koperasi ${selectedDistrict} Merah Putih ` + val.cooperative_name,
     };
 
     registerNewCooperative(registerInput);
@@ -175,14 +172,15 @@ export default function RegistrationExisting() {
               onChange={(e) => {
                 setLoadingCheckNIK(true);
                 if (_.isEmpty(e.target.value)) {
-                  setLoadingCheckNIK(false)
-                  return
+                  setLoadingCheckNIK(false);
+                  return;
                 }
 
                 getNIKs(e.target.value).then((val) => {
                   try {
                     const selectedProvince = provinces.find(
-                      (province) => province.name === val?.province.toUpperCase()
+                      (province) =>
+                        province.name === val?.province.toUpperCase()
                     )?.code;
 
                     if (_.isEmpty(selectedProvince)) {
@@ -195,7 +193,7 @@ export default function RegistrationExisting() {
 
                       setProvinceCode(selectedProvince);
                     }
-                    
+
                     setNIK(val);
                     setLoadingCheckNIK(false);
                   } catch (err) {}
