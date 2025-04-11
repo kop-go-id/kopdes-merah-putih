@@ -152,30 +152,42 @@ class NPAKSeeder extends Seeder
         $invalidDistricts = [];
 
         foreach ($data as $index => $npak) {
-            $province = Province::where('name', $npak['Provinsi'])->first();
+            $provinsi = trim($npak['Provinsi']);
+            if (\Str::contains($provinsi, '/')) {
+                $provinsi = trim(explode('/', $provinsi)[0]);
+            }
+            $province = Province::where('name', $provinsi)->first();
             if ($province) {
-                $district = District::where('name', $npak['Tempat Kedudukan'])
+                $kabkota = trim($npak['Tempat Kedudukan']);
+                if (\Str::contains($kabkota, '/')) {
+                    $kabkota = trim(explode('/', $kabkota)[0]);
+                }
+                $district = District::where('name', $kabkota)
                     ->where('province_code', $province->code)
                     ->first();
 
                 if ($district) {
-                    NPAK::insert([
-                        'notary_id' => 7 + $index + 1,
-                        'name' => $npak['Nama'],
-                        'address' => $npak['Alamat Kantor'],
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now(),
-                        'provinceId' => $province->province_id,
-                        'districtId' => $district->district_id,
-                        'ahu_number' => $npak['No. AHU'] != 'N/A' && $npak['No. AHU'] != '' ? $npak['No. AHU'] : '-',
-                        'sk_number' => $npak['SK Pengangkatan Notaris'] != 'N/A' && $npak['SK Pengangkatan Notaris'] != '' ? $npak['SK Pengangkatan Notaris'] : '-',
-                        'certificate_training' => $npak['Sertifikat Pelatihan NPAK'] != 'N/A' && $npak['Sertifikat Pelatihan NPAK'] != '' ? $npak['Sertifikat Pelatihan NPAK'] : '-',
-                        'email' => $npak['Email'] != 'N/A' && $npak['Email'] != '' ? $npak['Email'] : '-',
-                        'primary_phone' => $npak['No.HP-1'] != 'N/A' && $npak['No.HP-1'] != '' ? $npak['No.HP-1'] : '-',
-                        'secondary_phone' => $npak['No.HP-2'] != 'N/A' && $npak['No.HP-2'] != '' ? $npak['No.HP-2'] : '-',
-                        'office_telephone' => $npak['No. Kantor'] != 'N/A' && $npak['No. Kantor'] != '' ? $npak['No. Kantor'] : '-',
-                        'status' => 'Approved'
-                    ]);
+                    try {
+                        NPAK::insert([
+                            'notary_id' => 7 + $index + 1,
+                            'name' => $npak['Nama'],
+                            'address' => $npak['Alamat Kantor'],
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now(),
+                            'provinceId' => $province->province_id,
+                            'districtId' => $district->district_id,
+                            'ahu_number' => $npak['No. AHU'] != 'N/A' && $npak['No. AHU'] != '' ? $npak['No. AHU'] : '-',
+                            'sk_number' => $npak['SK Pengangkatan Notaris'] != 'N/A' && $npak['SK Pengangkatan Notaris'] != '' ? $npak['SK Pengangkatan Notaris'] : '-',
+                            'certificate_training' => $npak['Sertifikat Pelatihan NPAK'] != 'N/A' && $npak['Sertifikat Pelatihan NPAK'] != '' ? $npak['Sertifikat Pelatihan NPAK'] : '-',
+                            'email' => $npak['Email'] != 'N/A' && $npak['Email'] != '' ? $npak['Email'] : '-',
+                            'primary_phone' => $npak['No.HP-1'] != 'N/A' && $npak['No.HP-1'] != '' ? $npak['No.HP-1'] : '-',
+                            'secondary_phone' => $npak['No.HP-2'] != 'N/A' && $npak['No.HP-2'] != '' ? $npak['No.HP-2'] : '-',
+                            'office_telephone' => $npak['No. Kantor'] != 'N/A' && $npak['No. Kantor'] != '' ? $npak['No. Kantor'] : '-',
+                            'status' => 'Approved'
+                        ]);
+                    } catch (\Throwable $th) {
+                        \Log::error($th->getMessage());
+                    }
                 }else{
                     \Log::info('INVALID DISTRICT');
                     array_push($invalidDistricts, $npak['Tempat Kedudukan']);
