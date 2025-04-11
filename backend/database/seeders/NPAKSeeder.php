@@ -183,7 +183,6 @@ class NPAKSeeder extends Seeder
                             'primary_phone' => $npak['No.HP-1'] != 'N/A' && $npak['No.HP-1'] != '' ? $npak['No.HP-1'] : '-',
                             'secondary_phone' => $npak['No.HP-2'] != 'N/A' && $npak['No.HP-2'] != '' ? $npak['No.HP-2'] : '-',
                             'office_telephone' => $npak['No. Kantor'] != 'N/A' && $npak['No. Kantor'] != '' ? $npak['No. Kantor'] : '-',
-                            'status' => 'Approved'
                         ]);
                     } catch (\Throwable $th) {
                         \Log::error($th->getMessage());

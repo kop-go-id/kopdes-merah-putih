@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CooperativeKLU;
 use App\Models\CooperativeLegalStage;
 use App\Models\CooperativeManagement;
+use App\Models\NPAKRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
@@ -19,7 +20,6 @@ use App\Models\Province;
 use App\Models\District;
 use App\Models\Subdistrict;
 use App\Models\Village;
-use App\Models\NPAK;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CooperativeRegisterMail;
 use Illuminate\Support\Facades\DB;
@@ -210,9 +210,7 @@ class CooperativeController extends Controller
 
             $npakId = $request->input('npak_id');
             if ($npakId == 1) {
-                $latestNPAK = NPAK::orderBy('notary_id', 'desc')->select('notary_id')->first();
-                $npak = NPAK::create([
-                    'notary_id' => $latestNPAK->notary_id + 1,
+                NPAKRequest::insert([
                     'provinceId' => $province->province_id,
                     'districtId' => $district->district_id,
                     'name' => $request->input('npak_name'),
@@ -223,8 +221,6 @@ class CooperativeController extends Controller
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
-
-                $npakId = $npak->notary_id;
             }
 
             $cooperative = Cooperative::create([
