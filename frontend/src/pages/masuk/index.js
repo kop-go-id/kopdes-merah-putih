@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { login } from '@/services/auth';
+import { signIn } from 'next-auth/react';
 
 export default function LoginFormAntd() {
   const [form] = Form.useForm();
