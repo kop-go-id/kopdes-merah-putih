@@ -4,15 +4,14 @@
 
 /* globals.css */
 .custom-menu .ant-menu-item {
-    color: white !important;
-  }
-  
-  .custom-menu .ant-menu-item .anticon {
-    color: white !important;
-  }
-  
-  .custom-menu .ant-menu-item-selected {
-    background-color: #024655 !important;
-    color: white !important;
-  }
-  
+  color: white !important;
+}
+
+.custom-menu .ant-menu-item .anticon {
+  color: white !important;
+}
+
+.custom-menu .ant-menu-item-selected {
+  background-color: #024655 !important;
+  color: white !important;
+}

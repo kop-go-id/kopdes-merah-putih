@@ -1,60 +1,60 @@
-"use client";
+'use client';
 
 const termsData = [
   {
-    title: "Pendahuluan",
+    title: 'Pendahuluan',
     content:
-      "Selamat datang di situs web MerahPutih.kop.id. Dengan mengakses dan menggunakan layanan, Anda dianggap menyetujui syarat dan ketentuan ini.",
+      'Selamat datang di situs web MerahPutih.kop.id. Dengan mengakses dan menggunakan layanan, Anda dianggap menyetujui syarat dan ketentuan ini.',
   },
   {
-    title: "Definisi",
+    title: 'Definisi',
     content:
-      "Penjelasan istilah seperti Pengguna, Pengelola Layanan, Notaris, Dinas, dsb. sebagai acuan dalam syarat dan ketentuan.",
+      'Penjelasan istilah seperti Pengguna, Pengelola Layanan, Notaris, Dinas, dsb. sebagai acuan dalam syarat dan ketentuan.',
   },
   {
-    title: "Ruang Lingkup Layanan",
+    title: 'Ruang Lingkup Layanan',
     content:
-      "Layanan ini mencakup pendaftaran koperasi, dashboard statistik, chatbot konsultasi, dan layanan non-transaksional lainnya.",
+      'Layanan ini mencakup pendaftaran koperasi, dashboard statistik, chatbot konsultasi, dan layanan non-transaksional lainnya.',
   },
   {
-    title: "Hak & Kewajiban Pengguna",
+    title: 'Hak & Kewajiban Pengguna',
     content:
-      "Pengguna berhak mendapat informasi, privasi, bantuan, serta wajib memberikan data benar dan tidak menyalahgunakan layanan.",
+      'Pengguna berhak mendapat informasi, privasi, bantuan, serta wajib memberikan data benar dan tidak menyalahgunakan layanan.',
   },
   {
-    title: "Hak & Kewajiban Pengelola",
+    title: 'Hak & Kewajiban Pengelola',
     content:
-      "Pengelola berhak memverifikasi data, membatasi akses, dan bertanggung jawab menjaga keamanan sistem dan privasi pengguna.",
+      'Pengelola berhak memverifikasi data, membatasi akses, dan bertanggung jawab menjaga keamanan sistem dan privasi pengguna.',
   },
   {
-    title: "Ketentuan Dashboard Statistik",
+    title: 'Ketentuan Dashboard Statistik',
     content:
-      "Dashboard hanya bisa diakses pengguna berwenang, data bersifat agregat, tidak untuk komersial, dan harus digunakan secara bertanggung jawab.",
+      'Dashboard hanya bisa diakses pengguna berwenang, data bersifat agregat, tidak untuk komersial, dan harus digunakan secara bertanggung jawab.',
   },
   {
-    title: "Ketentuan Layanan Chatbot",
+    title: 'Ketentuan Layanan Chatbot',
     content:
-      "Chatbot AI hanya memberikan informasi awal, tidak menggantikan konsultasi profesional, dan tidak dapat mengambil keputusan resmi.",
+      'Chatbot AI hanya memberikan informasi awal, tidak menggantikan konsultasi profesional, dan tidak dapat mengambil keputusan resmi.',
   },
   {
-    title: "Kebijakan Privasi",
+    title: 'Kebijakan Privasi',
     content:
-      "Data pribadi disimpan aman, digunakan sesuai tujuan layanan, tidak dibagikan ke pihak ketiga kecuali yang sah secara hukum.",
+      'Data pribadi disimpan aman, digunakan sesuai tujuan layanan, tidak dibagikan ke pihak ketiga kecuali yang sah secara hukum.',
   },
   {
-    title: "Batasan Tanggung Jawab Pengelola",
+    title: 'Batasan Tanggung Jawab Pengelola',
     content:
-      "Pengelola tidak bertanggung jawab atas gangguan teknis, kesalahan data, atau penyalahgunaan informasi oleh pihak luar.",
+      'Pengelola tidak bertanggung jawab atas gangguan teknis, kesalahan data, atau penyalahgunaan informasi oleh pihak luar.',
   },
   {
-    title: "Perubahan Layanan & Kebijakan",
+    title: 'Perubahan Layanan & Kebijakan',
     content:
-      "Pengelola berhak mengubah layanan atau syarat dan ketentuan, serta akan memberi tahu pengguna melalui media yang tersedia.",
+      'Pengelola berhak mengubah layanan atau syarat dan ketentuan, serta akan memberi tahu pengguna melalui media yang tersedia.',
   },
   {
-    title: "Hukum & Penyelesaian Sengketa",
+    title: 'Hukum & Penyelesaian Sengketa',
     content:
-      "Syarat dan ketentuan ini tunduk pada hukum Republik Indonesia, dan jika terjadi sengketa akan diselesaikan melalui pengadilan.",
+      'Syarat dan ketentuan ini tunduk pada hukum Republik Indonesia, dan jika terjadi sengketa akan diselesaikan melalui pengadilan.',
   },
 ];
 
@@ -91,7 +91,7 @@ export default function TermsSection() {
             Terakhir diperbarui: <strong>8 April 2025</strong>
           </p>
           <p>
-            Kontak:{" "}
+            Kontak:{' '}
             <a
               href="mailto:dev@satu.kop.id"
               className="text-[#025669] underline"

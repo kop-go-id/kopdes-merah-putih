@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Button, Result } from "antd";
-import "tailwindcss/tailwind.css";
-import LayoutWrapper from "@/components/Layout";
+import React from 'react';
+import { Button, Result } from 'antd';
+import 'tailwindcss/tailwind.css';
+import LayoutWrapper from '@/components/Layout';
 
 export default function CooperativeDashboard() {
   return (

@@ -1,19 +1,19 @@
-import React, { useEffect, useReducer, useRef, useState } from "react";
-import { Input, Select, Upload, Button, Form, Divider, Checkbox } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
-import Stepper from "@/components/Stepper";
-import { useRouter } from "next/router";
+import React, { useEffect, useReducer, useRef, useState } from 'react';
+import { Input, Select, Upload, Button, Form, Divider, Checkbox } from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
+import Stepper from '@/components/Stepper';
+import { useRouter } from 'next/router';
 import {
   fetchDistrict,
   fetchProvince,
   fetchSubDistrict,
   fetchVillage,
-} from "@/services/region";
+} from '@/services/region';
 import {
   getCooperativeTypes,
   getNPAKByProvince,
   registerNewCooperative,
-} from "@/services/cooperative";
+} from '@/services/cooperative';
 
 const { Dragger } = Upload;
 const { Option, OptGroup } = Select;
@@ -43,7 +43,7 @@ export default function RegistrationNew() {
   const [villages, setVillages] = useState([]);
   const [cooperativeTypes, setCooperativeTypes] = useState();
   const [notaryNumbers, setNotaryNumbers] = useState([]);
-    const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState('');
 
   useEffect(() => {
     fetchProvince().then(setProvinces);
@@ -69,15 +69,15 @@ export default function RegistrationNew() {
     setLoadingForm(true);
     const registerInput = {
       ...val,
-      klu_ids: val.klu_ids?.join(","),
+      klu_ids: val.klu_ids?.join(','),
       bamd: val.bamd.file.originFileObj,
       bara: val.bara.file.originFileObj,
     };
-    console.log("registerInput", registerInput);
+    console.log('registerInput', registerInput);
 
     registerNewCooperative(registerInput);
     setLoadingForm(false);
-    router.push("/daftar/sukses");
+    router.push('/daftar/sukses');
   };
 
   return (
@@ -99,7 +99,7 @@ export default function RegistrationNew() {
             label="Provinsi"
             name="province_code"
             className="mb-4"
-            rules={[{ required: true, message: "Provinsi wajib dipilih." }]}
+            rules={[{ required: true, message: 'Provinsi wajib dipilih.' }]}
           >
             <Select
               placeholder="Pilih Provinsi"
@@ -111,12 +111,13 @@ export default function RegistrationNew() {
               filterOption={(input, option) =>
                 option?.label?.toLowerCase().includes(input.toLowerCase())
               }
-              onChange={(value)=>{setProvinceCode(value);
+              onChange={(value) => {
+                setProvinceCode(value);
                 form.setFieldsValue({
                   district_code: null,
                   subdistrict_code: null,
-                  village_code: null
-                })
+                  village_code: null,
+                });
               }}
             />
           </Form.Item>
@@ -126,7 +127,7 @@ export default function RegistrationNew() {
             name="district_code"
             className="mb-4"
             rules={[
-              { required: true, message: "Kabupaten/Kota wajib dipilih." },
+              { required: true, message: 'Kabupaten/Kota wajib dipilih.' },
             ]}
           >
             <Select
@@ -143,13 +144,15 @@ export default function RegistrationNew() {
                 setDistrictCode(value);
                 form.setFieldsValue({
                   subdistrict_code: null,
-                  village_code: null
-                })
-                const selectedCode = districts.find(district => district.code === value);
-                if(selectedCode.name.toUpperCase().includes('KOTA')) {
-                  setSelectedDistrict("Kelurahan");
-                } else if(selectedCode.name.toUpperCase().includes('KAB')) {
-                  setSelectedDistrict("Desa");
+                  village_code: null,
+                });
+                const selectedCode = districts.find(
+                  (district) => district.code === value
+                );
+                if (selectedCode.name.toUpperCase().includes('KOTA')) {
+                  setSelectedDistrict('Kelurahan');
+                } else if (selectedCode.name.toUpperCase().includes('KAB')) {
+                  setSelectedDistrict('Desa');
                 }
               }}
             />
@@ -159,7 +162,7 @@ export default function RegistrationNew() {
             <Form.Item
               label="Kecamatan"
               name="subdistrict_code"
-              rules={[{ required: true, message: "Kecamatan wajib dipilih." }]}
+              rules={[{ required: true, message: 'Kecamatan wajib dipilih.' }]}
             >
               <Select
                 placeholder="Pilih Kecamatan"
@@ -171,10 +174,11 @@ export default function RegistrationNew() {
                 filterOption={(input, option) =>
                   option?.label?.toLowerCase().includes(input.toLowerCase())
                 }
-                onChange={(val)=>{setSubDistrictCode(val)
+                onChange={(val) => {
+                  setSubDistrictCode(val);
                   form.setFieldsValue({
-                    village_code: null
-                  })
+                    village_code: null,
+                  });
                 }}
               />
             </Form.Item>
@@ -183,7 +187,7 @@ export default function RegistrationNew() {
               label="Desa / Kelurahan"
               name="village_code"
               rules={[
-                { required: true, message: "Desa/Kelurahan wajib dipilih." },
+                { required: true, message: 'Desa/Kelurahan wajib dipilih.' },
               ]}
             >
               <Select
@@ -198,7 +202,9 @@ export default function RegistrationNew() {
                   );
                   form.setFieldsValue({
                     cooperative_name: selectedVillage?.name.toUpperCase(),
-                    subdomain: selectedVillage?.name.toLowerCase().replace(/\s+/g, ""),
+                    subdomain: selectedVillage?.name
+                      .toLowerCase()
+                      .replace(/\s+/g, ''),
                   });
                 }}
                 showSearch
@@ -212,7 +218,7 @@ export default function RegistrationNew() {
             label="Nama Koperasi Baru"
             name="cooperative_name"
             className="mb-4"
-            rules={[{ required: true, message: "Nama koperasi wajib diisi." }]}
+            rules={[{ required: true, message: 'Nama koperasi wajib diisi.' }]}
           >
             <Input
               addonBefore={`Koperasi ${selectedDistrict} Merah Putih`}
@@ -225,7 +231,7 @@ export default function RegistrationNew() {
             label="Notaris Pembuat Akta Koperasi"
             name="npak_id"
             className="mb-4"
-            rules={[{ required: true, message: "Notaris wajib dipilih." }]}
+            rules={[{ required: true, message: 'Notaris wajib dipilih.' }]}
           >
             <Select
               placeholder="Pilih Notaris"
@@ -249,8 +255,8 @@ export default function RegistrationNew() {
                   className="text-blue-600 p-0 self-start"
                   onClick={() => {
                     window.open(
-                      "/docs/Template_Berita_Acara_Musyawarah_Desa.docx",
-                      "_blank"
+                      '/docs/Template_Berita_Acara_Musyawarah_Desa.docx',
+                      '_blank'
                     );
                   }}
                 >
@@ -262,7 +268,7 @@ export default function RegistrationNew() {
             rules={[
               {
                 required: true,
-                message: "Dokumen Musyawarah Desa wajib diunggah.",
+                message: 'Dokumen Musyawarah Desa wajib diunggah.',
               },
             ]}
           >
@@ -292,8 +298,8 @@ export default function RegistrationNew() {
                   className="text-blue-600 p-0 self-start"
                   onClick={() => {
                     window.open(
-                      "/docs/Template_Berita_Acara_Rapat_Anggota.docx",
-                      "_blank"
+                      '/docs/Template_Berita_Acara_Rapat_Anggota.docx',
+                      '_blank'
                     );
                   }}
                 >
@@ -305,7 +311,7 @@ export default function RegistrationNew() {
             rules={[
               {
                 required: true,
-                message: "Dokumen Rapat Anggota wajib diunggah.",
+                message: 'Dokumen Rapat Anggota wajib diunggah.',
               },
             ]}
           >
@@ -331,7 +337,7 @@ export default function RegistrationNew() {
             rules={[
               {
                 required: true,
-                message: "Jenis Usaha Koperasi wajib dipilih.",
+                message: 'Jenis Usaha Koperasi wajib dipilih.',
               },
             ]}
           >
@@ -339,7 +345,7 @@ export default function RegistrationNew() {
               mode="multiple"
               allowClear
               placeholder="Pilih Jenis Usaha"
-              onChange={(val) => console.log("multi", val)}
+              onChange={(val) => console.log('multi', val)}
               className="w-full"
               popupMatchSelectWidth={true}
             >
@@ -360,7 +366,7 @@ export default function RegistrationNew() {
             name="subdomain"
             className="mb-6"
             rules={[
-              { required: true, message: "Nama domain koperasi wajib diisi." },
+              { required: true, message: 'Nama domain koperasi wajib diisi.' },
             ]}
           >
             <Input
@@ -375,7 +381,7 @@ export default function RegistrationNew() {
             label="Nama Penanggung Jawab"
             name="name"
             rules={[
-              { required: true, message: "Nama penanggung jawab wajib diisi." },
+              { required: true, message: 'Nama penanggung jawab wajib diisi.' },
             ]}
           >
             <Input
@@ -391,8 +397,8 @@ export default function RegistrationNew() {
               rules={[
                 {
                   required: true,
-                  type: "email",
-                  message: "Alamat email tidak valid atau kosong.",
+                  type: 'email',
+                  message: 'Alamat email tidak valid atau kosong.',
                 },
               ]}
             >
@@ -402,7 +408,7 @@ export default function RegistrationNew() {
             <Form.Item
               label="Nomor HP"
               name="phone"
-              rules={[{ required: true, message: "Nomor HP wajib diisi." }]}
+              rules={[{ required: true, message: 'Nomor HP wajib diisi.' }]}
             >
               <Input addonBefore="+62" placeholder="812345678" type="number" />
             </Form.Item>
@@ -412,7 +418,7 @@ export default function RegistrationNew() {
             <Form.Item
               label="Buat Kata Sandi"
               name="password"
-              rules={[{ required: true, message: "Kata sandi wajib diisi." }]}
+              rules={[{ required: true, message: 'Kata sandi wajib diisi.' }]}
             >
               <Input.Password placeholder="Masukan kata sandi" />
             </Form.Item>
@@ -420,18 +426,18 @@ export default function RegistrationNew() {
             <Form.Item
               label="Ulangi Kata Sandi"
               name="password_confirmation"
-              dependencies={["password"]}
+              dependencies={['password']}
               rules={[
                 {
                   required: true,
-                  message: "Konfirmasi kata sandi wajib diisi.",
+                  message: 'Konfirmasi kata sandi wajib diisi.',
                 },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    if (!value || getFieldValue("password") === value) {
+                    if (!value || getFieldValue('password') === value) {
                       return Promise.resolve();
                     }
-                    return Promise.reject("Kata sandi tidak cocok");
+                    return Promise.reject('Kata sandi tidak cocok');
                   },
                 }),
               ]}
@@ -448,11 +454,11 @@ export default function RegistrationNew() {
                 validator: (_, value) =>
                   value
                     ? Promise.resolve()
-                    : Promise.reject("Harus menyetujui pernyataan"),
+                    : Promise.reject('Harus menyetujui pernyataan'),
               },
             ]}
           >
-            <Checkbox onChange={(e) => handleCheckboxChange(e, "agreement_1")}>
+            <Checkbox onChange={(e) => handleCheckboxChange(e, 'agreement_1')}>
               Saya menyatakan data yang saya berikan adalah benar, jika
               dikemudian hari ternyata terdapat ketidaksesuaian atau kekeliruan,
               saya bersedia menerima segala konsekuensi hukum serta sanksi
@@ -467,11 +473,11 @@ export default function RegistrationNew() {
                 validator: (_, value) =>
                   value
                     ? Promise.resolve()
-                    : Promise.reject("Harus menyetujui pernyataan"),
+                    : Promise.reject('Harus menyetujui pernyataan'),
               },
             ]}
           >
-            <Checkbox onChange={(e) => handleCheckboxChange(e, "agreement_2")}>
+            <Checkbox onChange={(e) => handleCheckboxChange(e, 'agreement_2')}>
               Saya menyatakan bahwa seluruh anggota koperasi berdomisili
               diwilayah yang sama.
             </Checkbox>

@@ -9,16 +9,18 @@ const IAPIEndpointMethod = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'];
  * Create a full API endpoint object
  */
 const getAPIEndpoint = (path, method, headers = {}) => {
-    const cleanedPath = path.startsWith('/') ? path.slice(1) : path;
-    const cleanedBase = API_ENDPOINT.endsWith('/') ? API_ENDPOINT.slice(0, -1) : API_ENDPOINT;
-    const url = `${cleanedBase}/${cleanedPath}`;
-    
-    return {
-      url,
-      method,
-      headers,
-    };
+  const cleanedPath = path.startsWith('/') ? path.slice(1) : path;
+  const cleanedBase = API_ENDPOINT.endsWith('/')
+    ? API_ENDPOINT.slice(0, -1)
+    : API_ENDPOINT;
+  const url = `${cleanedBase}/${cleanedPath}`;
+
+  return {
+    url,
+    method,
+    headers,
   };
+};
 
 /**
  * Axios method handlers

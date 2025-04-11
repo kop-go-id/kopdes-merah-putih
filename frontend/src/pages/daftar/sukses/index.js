@@ -20,7 +20,10 @@ export default function SuccessPage() {
             subTitle="Terima kasih telah mendaftar di Koperasi Merah Putih. Kami akan segera menghubungi Anda untuk proses selanjutnya."
             extra={
               <Link href="/">
-                <Button type="primary" className="bg-blue-600 hover:bg-blue-700">
+                <Button
+                  type="primary"
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
                   Kembali ke Beranda
                 </Button>
               </Link>

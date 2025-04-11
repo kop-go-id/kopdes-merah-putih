@@ -1,14 +1,22 @@
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link';
+import React from 'react';
 const Footer = () => {
-    return (
-      <footer className="bg-white border-t border-gray-300">
+  return (
+    <footer className="bg-white border-t border-gray-300">
       {/* Kontainer Footer */}
       <div className="container mx-auto flex flex-col md:flex-row items-center md:items-start justify-between px-8 py-6 space-y-6 md:space-y-0">
         {/* Bagian Logo (Kiri) */}
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 items-center md:items-start w-full md:w-1/2">
-          <img src="/images/logo-kemenkop.png" alt="Kemenkop" className="h-12" />
-          <img src="/images/internasional.png" alt="Coop 2025" className="h-12" />
+          <img
+            src="/images/logo-kemenkop.png"
+            alt="Kemenkop"
+            className="h-12"
+          />
+          <img
+            src="/images/internasional.png"
+            alt="Coop 2025"
+            className="h-12"
+          />
           <img src="/images/BerAKHLAK.png" alt="BerAKHLAK" className="h-12" />
         </div>
 
@@ -21,8 +29,8 @@ const Footer = () => {
             </h2>
             <p className="text-sm">
               Jl. H. R. Rasuna Said No.Kav. 3-4, RT.6/RW.7, Kuningan, Karet
-              Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah
-              Khusus Ibukota Jakarta 12940
+              Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus
+              Ibukota Jakarta 12940
             </p>
           </div>
 
@@ -45,6 +53,6 @@ const Footer = () => {
         </Link>
       </div>
     </footer>
-    )
+  );
 };
 export default Footer;

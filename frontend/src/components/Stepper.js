@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { Button } from "antd";
-import { LeftOutlined } from "@ant-design/icons";
-import { twMerge } from "tailwind-merge";
-import { useRouter } from "next/router";
+import { useEffect, useState } from 'react';
+import { Button } from 'antd';
+import { LeftOutlined } from '@ant-design/icons';
+import { twMerge } from 'tailwind-merge';
+import { useRouter } from 'next/router';
 
 export default function Stepper(activeIndexParams) {
   const router = useRouter();
@@ -13,12 +13,12 @@ export default function Stepper(activeIndexParams) {
 
   const schema = [
     {
-      label: "Pilih Skema",
-      desc: "Pilih salah satu dari tiga skema yang disediakan",
+      label: 'Pilih Skema',
+      desc: 'Pilih salah satu dari tiga skema yang disediakan',
     },
     {
-      label: "Informasi Data Koperasi & Penanggung Jawab",
-      desc: "Isi detail data koperasi & penanggung jawab koperasi",
+      label: 'Informasi Data Koperasi & Penanggung Jawab',
+      desc: 'Isi detail data koperasi & penanggung jawab koperasi',
     },
   ];
 
@@ -39,14 +39,14 @@ export default function Stepper(activeIndexParams) {
               <div
                 key={index}
                 className={twMerge(
-                  "flex items-start space-x-3",
-                  active ? "" : "opacity-70"
+                  'flex items-start space-x-3',
+                  active ? '' : 'opacity-70'
                 )}
               >
                 <div
                   className={twMerge(
-                    "w-5 h-5 rounded-full border-2 border-white",
-                    active ? "flex items-center justify-center" : ""
+                    'w-5 h-5 rounded-full border-2 border-white',
+                    active ? 'flex items-center justify-center' : ''
                   )}
                 >
                   {active && (
@@ -68,8 +68,8 @@ export default function Stepper(activeIndexParams) {
         icon={<LeftOutlined />}
         className="text-white border-white mx-4 my-6 md:mx-6 md:my-10 w-fit"
         type="text"
-        onClick={()=>{
-          router.push("/");
+        onClick={() => {
+          router.push('/');
         }}
       >
         Halaman utama

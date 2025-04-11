@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Form, Input, Button, Row, Col, Select, Upload } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import LayoutWrapper from "@/components/Layout";
-import { useRouter } from "next/navigation";
+import React, { useState } from 'react';
+import { Form, Input, Button, Row, Col, Select, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import LayoutWrapper from '@/components/Layout';
+import { useRouter } from 'next/navigation';
 
 const { Option } = Select;
 
@@ -12,12 +12,12 @@ export default function EditProfilKoperasiPage() {
   const router = useRouter();
 
   const handleFinish = (values) => {
-    console.log("Form submitted:", values);
-    router.push("/koperasi/profil");
+    console.log('Form submitted:', values);
+    router.push('/koperasi/profil');
   };
 
   const handleCancel = () => {
-    router.push("/koperasi/profil");
+    router.push('/koperasi/profil');
   };
 
   return (
@@ -178,31 +178,29 @@ export default function EditProfilKoperasiPage() {
             </Col>
           </Row>
 
-        <div className="flex flex-col sm:flex-row justify-end gap-3 mt-6">
+          <div className="flex flex-col sm:flex-row justify-end gap-3 mt-6">
             <Button
-                onClick={handleCancel}
-                style={{
-                borderColor: "#ef4444", // Tailwind 'red-500'
-                color: "#ef4444",
-                }}
-                className="hover:!bg-red-50 hover:!text-red-600"
+              onClick={handleCancel}
+              style={{
+                borderColor: '#ef4444', // Tailwind 'red-500'
+                color: '#ef4444',
+              }}
+              className="hover:!bg-red-50 hover:!text-red-600"
             >
-                Batal
+              Batal
             </Button>
             <Button
-                type="primary"
-                htmlType="submit"
-                style={{
-                backgroundColor: "#025669",
-                borderColor: "#025669",
-                }}
-                className="hover:!bg-[#024655] text-white"
+              type="primary"
+              htmlType="submit"
+              style={{
+                backgroundColor: '#025669',
+                borderColor: '#025669',
+              }}
+              className="hover:!bg-[#024655] text-white"
             >
-                Simpan Perubahan
+              Simpan Perubahan
             </Button>
-            </div>
-
-
+          </div>
         </Form>
       </div>
     </LayoutWrapper>
