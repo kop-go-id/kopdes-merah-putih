@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('role_positions', function (Blueprint $table) {
             $table->id('role_id');
             $table->unsignedBigInteger('roleId');
-            $table->char('position', 50);
+            $table->string('position', 255);
             $table->timestamps();
 
             $table->foreign('roleId')->references('role_id')->on('roles')->onDelete('cascade');
