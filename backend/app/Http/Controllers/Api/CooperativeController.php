@@ -136,7 +136,7 @@ class CooperativeController extends Controller
     {
         try {
             $request->validate([
-                'cooperative_name' => 'required|string|max:50|unique:cooperatives,name',
+                'cooperative_name' => 'required|string|max:256|unique:cooperatives,name',
                 'province_code' => 'required|exists:provinces,code',
                 'district_code' => 'required|exists:districts,code',
                 'subdistrict_code' => 'required|exists:subdistricts,code',
@@ -148,7 +148,7 @@ class CooperativeController extends Controller
                 'subdomain' => 'required|string|max:50|unique:cooperatives,subdomain',
                 'name' => 'required|string|min:3|max:50',
                 'email' => 'required|string|email|min:3|max:50|unique:users,email',
-                'phone' => 'required|string|min:3|max:50|unique:users,phone',
+                'phone' => 'required|string|min:3|max:16|unique:users,phone',
                 'password' => 'required|min:8|max:50|confirmed',
                 'npak_name' => 'required_if:npak_id,1|string|min:3|max:128',
                 'npak_email' => 'required_if:npak_id,1|string|email|min:8|max:128',
