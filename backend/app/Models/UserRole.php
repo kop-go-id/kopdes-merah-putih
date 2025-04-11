@@ -8,7 +8,7 @@ class UserRole extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'role_positionId', 'userId', 'institutionId', 'npak', 'cooperativeId', 'createdAt', 'updatedAt'
+        'role_positionId', 'userId', 'institutionId', 'npak', 'cooperativeId',
     ];
 
     public function institution()

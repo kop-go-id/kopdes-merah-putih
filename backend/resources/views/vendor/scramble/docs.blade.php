@@ -8,6 +8,8 @@
 
     <script src="https://unpkg.com/@stoplight/elements@8.3.4/web-components.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements@8.3.4/styles.min.css">
+    <link rel="icon" type="image/png" href="{{ asset('kemenkop-logo.png') }}"/>
+
     
 
     <script>
