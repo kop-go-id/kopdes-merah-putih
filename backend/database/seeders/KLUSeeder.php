@@ -51,7 +51,7 @@ class KLUSeeder extends Seeder
             ],
             [
                 'klu_id' => 5,
-                'name' => 'erdagangan Eceran Obat Tradisional Untuk Manusia',
+                'name' => 'Perdagangan Eceran Obat Tradisional Untuk Manusia',
                 'code_kbli' => '47724',
                 'cooperativeTypeId' => 2,
                 'created_at' => Carbon::now(),
