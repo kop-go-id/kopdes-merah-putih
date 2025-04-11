@@ -20,6 +20,7 @@ use App\Models\Province;
 use App\Models\District;
 use App\Models\Subdistrict;
 use App\Models\Village;
+use App\Models\UserRole;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CooperativeRegisterMail;
 use Illuminate\Support\Facades\DB;
@@ -242,6 +243,15 @@ class CooperativeController extends Controller
             $legalStage = CooperativeLegalStage::create([
                 'cooperativeId' => $cooperative->cooperative_id,
                 'legalStageId' => 1,                
+                'created_at' => Carbon::now(),
+                'updated_at'=> Carbon::now()
+            ]);
+
+            UserRole::insert([
+                'role_positionId' => 1, // Penanggung Jawab Koperasi
+                'userId' => $user->id,
+                'npak' => $npakId,
+                'cooperativeId' => $cooperative->cooperative_id,
                 'created_at' => Carbon::now(),
                 'updated_at'=> Carbon::now()
             ]);
